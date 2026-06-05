@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 支付合规 — Kinding Partners</title>
+<style>
+  :root {
+    --blue: #1a5cb8;
+    --blue-light: #2a6fd4;
+    --blue-pale: #e8f0fc;
+    --bg: #f5f4f0;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --border: #e2e1dd;
+    --red: #c0392b;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  .nav {
+    background: var(--blue);
+    color: white;
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; }
+  .nav-logo span { opacity: 0.6; font-weight: 400; margin-left: 6px; font-family: var(--mono); font-size: 11px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; opacity: 0.75; transition: opacity 0.15s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: white; color: var(--blue); font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 3px; transition: all 0.15s; }
+  .nav-cta:hover { background: var(--bg); }
+
+  /* HERO */
+  .hero {
+    background: var(--blue);
+    color: white;
+    padding: 100px 48px 90px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.12);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    opacity: 0.9;
+  }
+  .hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-title em { font-style: normal; opacity: 0.6; }
+  .hero-desc {
+    font-size: 17px;
+    opacity: 0.78;
+    line-height: 1.8;
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-white { background: white; color: var(--blue); font-size: 14px; font-weight: 700; padding: 13px 28px; border-radius: 4px; cursor: pointer; border: none; font-family: inherit; transition: all 0.15s; display: inline-block; }
+  .btn-white:hover { background: var(--bg); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .btn-outline { background: transparent; color: white; font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.4); cursor: pointer; font-family: inherit; transition: all 0.15s; display: inline-block; }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* STATS */
+  .stats {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--blue); letter-spacing: -0.03em; font-family: var(--mono); }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* SECTION COMMON */
+  .section { padding: 80px 48px; }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-eyebrow { font-size: 11px; font-family: var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+  .section-title { font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 16px; }
+  .section-desc { font-size: 15px; color: var(--text-muted); line-height: 1.8; max-width: 620px; }
+
+  /* WHAT IS AGENTIC */
+  .agentic-section { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .agentic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 48px; }
+  .agentic-flow { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 28px; }
+  .flow-title { font-size: 11px; font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+  .flow-step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+  .flow-step:last-child { margin-bottom: 0; }
+  .flow-num { width: 24px; height: 24px; background: var(--blue); color: white; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; font-family: var(--mono); flex-shrink: 0; margin-top: 1px; }
+  .flow-text { font-size: 13px; line-height: 1.6; }
+  .flow-text strong { display: block; font-weight: 700; margin-bottom: 2px; }
+  .flow-text span { color: var(--text-muted); font-size: 12px; }
+  .flow-arrow { text-align: center; color: var(--text-muted); font-size: 18px; margin: 4px 0 4px 38px; }
+
+  .compliance-points { margin-top: 0; }
+  .compliance-point { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .compliance-point:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .cp-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .cp-text { font-size: 14px; line-height: 1.6; }
+  .cp-text strong { display: block; font-weight: 700; margin-bottom: 3px; }
+  .cp-text span { color: var(--text-muted); font-size: 13px; }
+
+  /* WHO INVOLVED */
+  .who-section { background: var(--bg); }
+  .who-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+  .who-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 24px; }
+  .who-card-label { font-size: 10px; font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+  .who-card-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .who-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .who-card-eg { margin-top: 10px; font-size: 11px; font-family: var(--mono); color: var(--text-muted); }
+  .who-card-risk { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .risk-chip { font-size: 10px; background: var(--red); color: white; padding: 2px 7px; border-radius: 2px; font-family: var(--mono); opacity: 0.85; }
+
+  /* TOOLS */
+  .tools-section { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+  .tool-card { border: 2px solid var(--border); border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s, border-color 0.2s; }
+  .tool-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-color: var(--blue); }
+  .tool-card-header { background: var(--blue); color: white; padding: 24px 28px; }
+  .tool-card-tag { font-size: 10px; font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; }
+  .tool-card-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .tool-card-subtitle { font-size: 13px; opacity: 0.75; }
+  .tool-card-body { padding: 24px 28px; }
+  .tool-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+  .tool-card-covers { margin-bottom: 20px; }
+  .tool-cover-label { font-size: 11px; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .tool-cover-list { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tool-cover-item { font-size: 11px; background: var(--bg); color: var(--text); padding: 3px 8px; border-radius: 3px; border: 1px solid var(--border); font-family: var(--mono); }
+  .tool-card-eg { font-size: 11px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 20px; }
+  .tool-btn { display: block; width: 100%; padding: 11px; background: var(--blue); color: white; text-align: center; font-size: 13px; font-weight: 700; border-radius: 4px; transition: background 0.15s; }
+  .tool-btn:hover { background: var(--blue-light); }
+
+  /* CONTACT */
+  .contact-section { background: var(--bg); }
+  .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .contact-title { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .contact-desc { font-size: 15px; color: var(--text-muted); margin-bottom: 36px; line-height: 1.7; }
+  .contact-form { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; text-align: left; }
+  .form-group { margin-bottom: 16px; }
+  .form-label { font-size: 12px; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 6px; letter-spacing: 0.04em; }
+  .form-input { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 4px; font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text); transition: border-color 0.15s; outline: none; }
+  .form-input:focus { border-color: var(--blue); background: white; }
+  .form-textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 4px; font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text); transition: border-color 0.15s; outline: none; resize: vertical; min-height: 100px; }
+  .form-textarea:focus { border-color: var(--blue); background: white; }
+  .form-submit { width: 100%; padding: 12px; background: var(--blue); color: white; font-size: 14px; font-weight: 700; border: none; border-radius: 4px; cursor: pointer; font-family: inherit; transition: background 0.15s; margin-top: 8px; }
+  .form-submit:hover { background: var(--blue-light); }
+  .form-note { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 12px; }
+  .form-success { display: none; text-align: center; padding: 24px; }
+  .form-success-icon { font-size: 32px; margin-bottom: 12px; }
+  .form-success-text { font-size: 14px; color: var(--text-muted); }
+
+  /* FOOTER */
+  .footer { background: var(--blue); color: white; padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-left .firm { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .footer-left .tagline { font-size: 12px; opacity: 0.6; }
+  .footer-right { font-size: 12px; opacity: 0.6; font-family: var(--mono); text-align: right; }
+  .footer-right a { opacity: 1; transition: opacity 0.15s; }
+  .footer-right a:hover { opacity: 0.8; }
+
+  @media (max-width: 768px) {
+    .nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 64px 24px; }
+    .hero-title { font-size: 32px; }
+    .stats { gap: 32px; padding: 24px 20px; }
+    .section { padding: 56px 24px; }
+    .agentic-grid, .who-grid, .tools-grid { grid-template-columns: 1fr; gap: 24px; }
+    .footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    .footer-right { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Kinding Partners <span>// AI 支付合规</span></div>
+  <div class="nav-links">
+    <a href="#what">什么是 Agentic Commerce</a>
+    <a href="#who">适用对象</a>
+    <a href="#tools">评估工具</a>
+    <a href="#contact">联系我们</a>
+  </div>
+  <a href="#tools" class="nav-cta">开始评估 →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Kinding Partners · AI 支付合规研究</div>
+  <div class="hero-title">AI agent 开始替用户付钱了。<br><em>合规跟上了吗？</em></div>
+  <div class="hero-desc">
+    Agentic Commerce 正在发生。AI agent 调用 API、付款、完成交易——全程无需人类介入。<br>
+    但每一笔自动支付背后，都有一套法律义务还没人说清楚。
+  </div>
+  <div class="hero-actions">
+    <a href="#tools" class="btn-white">使用免费评估工具 →</a>
+    <a href="#what" class="btn-outline">了解更多</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">75M+</div>
+    <div class="stat-label">x402 累计交易笔数</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">22K+</div>
+    <div class="stat-label">x402 活跃卖家</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">$0</div>
+    <div class="stat-label">目前多数平台的合规投入</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">2026</div>
+    <div class="stat-label">监管开始追上来的年份</div>
+  </div>
+</div>
+
+<!-- WHAT IS AGENTIC -->
+<div class="agentic-section section" id="what">
+  <div class="section-inner">
+    <div class="section-eyebrow">什么是 Agentic Commerce</div>
+    <div class="section-title">AI agent 在替用户付钱，<br>但没有人告诉它怎么合规。</div>
+    <div class="section-desc">过去，支付需要人来点击确认。现在，AI agent 可以发现服务、调用 API、完成支付——全程自动，全程无人。这是效率革命，也是法律真空。</div>
+
+    <div class="agentic-grid">
+      <div>
+        <div class="agentic-flow">
+          <div class="flow-title">一笔 Agent 支付是怎么发生的</div>
+          <div class="flow-step">
+            <div class="flow-num">1</div>
+            <div class="flow-text"><strong>用户委托 Agent</strong><span>"帮我查一下这家公司的背景"</span></div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-num">2</div>
+            <div class="flow-text"><strong>Agent 发现 API</strong><span>找到一个公司数据 API，价格 $0.01/次</span></div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-num">3</div>
+            <div class="flow-text"><strong>Agent 自动付款</strong><span>用 USDC 通过 x402 协议完成支付</span></div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-num">4</div>
+            <div class="flow-text"><strong>API 返回数据</strong><span>链上交易完成，不可逆</span></div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-num">5</div>
+            <div class="flow-text"><strong>用户拿到结果</strong><span>可能根本不知道这中间发生了什么</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compliance-points">
+        <div class="compliance-point">
+          <div class="cp-icon">⚖️</div>
+          <div class="cp-text">
+            <strong>授权问题</strong>
+            <span>用户有没有真正授权这笔支付？技术上有钱包，不等于法律上有授权。PSD2 要求授权必须在用户和支付服务提供商之间达成。</span>
+          </div>
+        </div>
+        <div class="compliance-point">
+          <div class="cp-icon">🔄</div>
+          <div class="cp-text">
+            <strong>退款问题</strong>
+            <span>x402 链上支付不可逆，没有 chargeback。但消费者保护法的退款义务和支付协议无关——"技术上不可逆"不是拒绝退款的法律理由。</span>
+          </div>
+        </div>
+        <div class="compliance-point">
+          <div class="cp-icon">🔗</div>
+          <div class="cp-text">
+            <strong>责任链问题</strong>
+            <span>数据从用户流经 Agent、API 商户、上游数据提供商……每个节点都有法律义务，但没有一家说清楚。Tavily 的 ToS 把合规义务全部推给了接入的商户——你知道吗？</span>
+          </div>
+        </div>
+        <div class="compliance-point">
+          <div class="cp-icon">🌍</div>
+          <div class="cp-text">
+            <strong>监管正在追上来</strong>
+            <span>GENIUS Act 已将稳定币纳入 BSA 管辖。EU AI Act 2026 年 8 月全面生效。PIPL 执法全面强化。Agentic Commerce 的监管真空正在快速收窄。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO IS INVOLVED -->
+<div class="who-section section" id="who">
+  <div class="section-inner">
+    <div class="section-eyebrow">适用对象</div>
+    <div class="section-title">Agentic Commerce 的合规问题，<br>涉及四类主体。</div>
+    <div class="section-desc">每一类主体面对的法律问题不同。你在哪个位置，就有哪套义务。</div>
+
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-card-label">主体 A</div>
+        <div class="who-card-title">AI 支付基础设施公司</div>
+        <div class="who-card-desc">做 agent 支付的底层——像 aisa.one 这种，提供 API 让 agent 调用并完成支付。持有或需要持有支付牌照，面对平台监管。</div>
+        <div class="who-card-eg">eg: aisa.one · anyway.sh · Heurist</div>
+        <div class="who-card-risk">
+          <span class="risk-chip">SVF 牌照</span>
+          <span class="risk-chip">数据合规</span>
+          <span class="risk-chip">Credits 定性</span>
+          <span class="risk-chip">ToS 责任</span>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-card-label">主体 B · 直接 API 商户</div>
+        <div class="who-card-title">做了一个 API，<br>让 agent 调用后付钱</div>
+        <div class="who-card-desc">搜索、数据、LLM 推理……自己提供服务，直接收 agent 支付。授权有效性、退款机制、数据披露是核心问题。</div>
+        <div class="who-card-eg">eg: Exa · Tavily · agentsvc.io</div>
+        <div class="who-card-risk">
+          <span class="risk-chip">授权有效性</span>
+          <span class="risk-chip">退款机制</span>
+          <span class="risk-chip">数据披露</span>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-card-label">主体 C · 转售/聚合层</div>
+        <div class="who-card-title">把别人的 API 打包，<br>卖给 agent 用</div>
+        <div class="who-card-desc">从 Exa、Apollo、Firecrawl 拿数据，加工后卖出去。上游把合规义务推给你了，你可能不知道。</div>
+        <div class="who-card-eg">eg: StableEnrich · DevDrops</div>
+        <div class="who-card-risk">
+          <span class="risk-chip">责任链传导</span>
+          <span class="risk-chip">上游 ToS</span>
+          <span class="risk-chip">数据链路</span>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-card-label">主体 D · API Marketplace</div>
+        <div class="who-card-title">做了一个市场，<br>上面有很多第三方 API</div>
+        <div class="who-card-desc">聚合多个独立 API 商户。商户出了问题，用户来找你——平台对商户的监督义务和连带责任是关键。</div>
+        <div class="who-card-eg">eg: BlockRun · Orbis · agentic.market</div>
+        <div class="who-card-risk">
+          <span class="risk-chip">平台连带责任</span>
+          <span class="risk-chip">尽职调查</span>
+          <span class="risk-chip">DSA 合规</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="tools-section section" id="tools">
+  <div class="section-inner">
+    <div class="section-eyebrow">免费自评估工具</div>
+    <div class="section-title">两份问卷，十分钟，<br>拿到一份可打印的风险备忘录。</div>
+    <div class="section-desc">由 Kinding Partners 开发，基于真实案例和现行法规。填完问卷，直接生成针对你的风险分析和优先处理建议。</div>
+
+    <div class="tools-grid">
+      <!-- 工具 A -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-card-tag">工具 A · AI 支付基础设施</div>
+          <div class="tool-card-title">AI 支付公司<br>合规风险评估</div>
+          <div class="tool-card-subtitle">适合主体 A：aisa.one 这类平台</div>
+        </div>
+        <div class="tool-card-body">
+          <div class="tool-card-desc">如果你在做 AI agent 的支付基础设施，帮你判断资金托管怎么定性、ToS 有哪些致命漏洞、数据合规怎么处理。</div>
+          <div class="tool-card-covers">
+            <div class="tool-cover-label">覆盖判断维度</div>
+            <div class="tool-cover-list">
+              <span class="tool-cover-item">资金托管定性</span>
+              <span class="tool-cover-item">法币 vs 稳定币</span>
+              <span class="tool-cover-item">Credits 合规</span>
+              <span class="tool-cover-item">ToS 风险诊断</span>
+              <span class="tool-cover-item">退款机制</span>
+              <span class="tool-cover-item">责任上限</span>
+              <span class="tool-cover-item">GDPR / PIPL</span>
+              <span class="tool-cover-item">自动化决策</span>
+            </div>
+          </div>
+          <div class="tool-card-eg">参考案例：aisa.one ToS 深度拆解</div>
+          <a href="ai-payment-compliance-tool.html" class="tool-btn">开始评估 →</a>
+        </div>
+      </div>
+
+      <!-- 工具 B -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-card-tag">工具 B · AI 商户</div>
+          <div class="tool-card-title">API 商户 &<br>Marketplace 合规评估</div>
+          <div class="tool-card-subtitle">适合主体 B / C / D</div>
+        </div>
+        <div class="tool-card-body">
+          <div class="tool-card-desc">如果你的 API 开始接受 agent 付款，或者你在做 API 聚合/市场，帮你判断授权是否有效、退款谁来兜、上游义务有没有传导给你。</div>
+          <div class="tool-card-covers">
+            <div class="tool-cover-label">覆盖判断维度</div>
+            <div class="tool-cover-list">
+              <span class="tool-cover-item">授权有效性</span>
+              <span class="tool-cover-item">退款机制</span>
+              <span class="tool-cover-item">第三方责任传导</span>
+              <span class="tool-cover-item">数据合规</span>
+              <span class="tool-cover-item">欺诈归责</span>
+              <span class="tool-cover-item">协议选择</span>
+              <span class="tool-cover-item">平台连带责任</span>
+            </div>
+          </div>
+          <div class="tool-card-eg">参考案例：Exa · Tavily · StableEnrich · BlockRun</div>
+          <a href="ai-merchant-compliance-tool.html" class="tool-btn">开始评估 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section section" id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow" style="text-align:center">进一步咨询</div>
+    <div class="contact-title">自评估之后，<br>需要专业意见？</div>
+    <div class="contact-desc">自评估工具帮你识别风险点。如果你需要正式的法律分析、合规备忘录或条款起草，Kinding Partners 可以提供进一步支持。</div>
+
+    <div class="contact-form" id="contact-form">
+      <div class="form-group">
+        <label class="form-label">公司名称</label>
+        <input class="form-input" type="text" id="f-company" placeholder="你的公司 / 项目名称">
+      </div>
+      <div class="form-group">
+        <label class="form-label">联系邮箱</label>
+        <input class="form-input" type="email" id="f-email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">你的问题</label>
+        <textarea class="form-textarea" id="f-message" placeholder="简单描述你的业务和遇到的合规问题……"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">发送 →</button>
+      <div class="form-note">我们会在 1-2 个工作日内回复。所有咨询内容保密处理。</div>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <div class="form-success-icon">✓</div>
+      <div class="form-success-text">已收到你的信息，我们会尽快回复。</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">
+    <div class="firm">Kinding Partners</div>
+    <div class="tagline">AI 支付合规研究 · 数字资产法律服务</div>
+  </div>
+  <div class="footer-right">
+    <div style="margin-bottom:4px"><a href="mailto:wl@kindinglaw.com">wl@kindinglaw.com</a></div>
+    <div>© 2026 Kinding Partners · 本站内容不构成正式法律意见</div>
+  </div>
+</footer>
+
+<script>
+function submitForm() {
+  const company = document.getElementById('f-company').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const message = document.getElementById('f-message').value.trim();
+  if (!email || !message) { alert('请填写联系邮箱和问题描述'); return; }
+  const mailto = `mailto:wl@kindinglaw.com?subject=AI支付合规咨询 - ${encodeURIComponent(company||'未填写')}&body=${encodeURIComponent(`公司名称：${company||'未填写'}\n\n问题描述：\n${message}`)}`;
+  window.location.href = mailto;
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+</script>
+</body>
+</html>
