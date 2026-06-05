@@ -38,7 +38,7 @@
   .header {
     background: var(--blue);
     color: white;
-    padding: 28px 48px;
+    padding: 20px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,30 +49,287 @@
     text-transform: uppercase;
     opacity: 0.7;
     font-family: var(--mono);
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .header-left .doc-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
   .header-right {
-    font-size: 12px;
-    opacity: 0.7;
+    font-size: 11px;
+    opacity: 0.6;
     font-family: var(--mono);
     text-align: right;
   }
 
-  /* PROGRESS */
+  /* ==================== LANDING ==================== */
+  .landing {
+    display: block;
+  }
+
+  .hero {
+    background: var(--blue);
+    color: white;
+    padding: 80px 48px 72px;
+    text-align: center;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+  .hero-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-desc {
+    font-size: 16px;
+    opacity: 0.82;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .hero-btn {
+    display: inline-block;
+    background: white;
+    color: var(--blue);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.15s;
+    letter-spacing: -0.01em;
+  }
+  .hero-btn:hover {
+    background: var(--bg);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+  .hero-note {
+    margin-top: 16px;
+    font-size: 12px;
+    opacity: 0.55;
+    font-family: var(--mono);
+  }
+
+  /* MODULES */
+  .modules {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .module-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .module-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+  .module-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .module-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .module-tags {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+  }
+  .module-tag {
+    font-size: 10px;
+    font-family: var(--mono);
+    background: var(--bg);
+    color: var(--text-muted);
+    padding: 2px 7px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+  }
+
+  /* FOR WHO */
+  .for-who {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px;
+  }
+  .for-who-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .for-who-title {
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .for-who-headline {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .for-who-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .for-who-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .for-who-list li::before {
+    content: '→';
+    color: var(--blue);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .output-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px;
+  }
+  .output-box-title {
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .output-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .output-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .output-num {
+    width: 22px;
+    height: 22px;
+    background: var(--blue);
+    color: white;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--mono);
+    flex-shrink: 0;
+  }
+  .output-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .output-text strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .output-text span {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  /* CTA BOTTOM */
+  .cta-bottom {
+    text-align: center;
+    padding: 64px 48px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .cta-bottom-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .cta-bottom-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .cta-btn:hover {
+    background: var(--blue-light);
+    transform: translateY(-1px);
+  }
+
+  /* ==================== PROGRESS ==================== */
   .progress-bar {
     background: var(--card);
     border-bottom: 1px solid var(--border);
     padding: 0 48px;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 0;
     overflow-x: auto;
   }
+  .progress-bar.visible { display: flex; }
   .progress-step {
     display: flex;
     align-items: center;
@@ -85,297 +342,121 @@
   .progress-step.active { opacity: 1; }
   .progress-step.done { opacity: 0.7; }
   .progress-step-num {
-    width: 22px;
-    height: 22px;
+    width: 22px; height: 22px;
     border-radius: 50%;
     border: 2px solid var(--blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    font-family: var(--mono);
-    color: var(--blue);
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; font-family: var(--mono);
+    color: var(--blue); flex-shrink: 0;
   }
-  .progress-step.active .progress-step-num {
-    background: var(--blue);
-    color: white;
-  }
+  .progress-step.active .progress-step-num,
   .progress-step.done .progress-step-num {
-    background: var(--blue);
-    color: white;
+    background: var(--blue); color: white;
   }
-  .progress-step-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text);
-    white-space: nowrap;
-  }
-  .progress-divider {
-    width: 32px;
-    height: 1px;
-    background: var(--border);
-    flex-shrink: 0;
-    margin: 0 4px;
-  }
+  .progress-step-label { font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .progress-divider { width: 32px; height: 1px; background: var(--border); flex-shrink: 0; margin: 0 4px; }
 
-  /* FORM CONTAINER */
+  /* ==================== FORM ==================== */
   .form-wrap {
+    display: none;
     max-width: 720px;
     margin: 40px auto;
     padding: 0 24px;
   }
+  .form-wrap.visible { display: block; }
 
-  .step-panel {
-    display: none;
-  }
-  .step-panel.active {
-    display: block;
-    animation: fadeIn 0.2s ease;
-  }
+  .step-panel { display: none; }
+  .step-panel.active { display: block; animation: fadeIn 0.2s ease; }
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .step-title {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--blue);
-    font-family: var(--mono);
-    margin-bottom: 8px;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--blue); font-family: var(--mono); margin-bottom: 8px;
   }
   .step-question {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 6px;
-    line-height: 1.3;
+    font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 6px; line-height: 1.3;
   }
-  .step-hint {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-  }
+  .step-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
 
-  /* OPTIONS */
-  .option-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 24px;
-  }
+  .option-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
   .option-item {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 6px;
-    padding: 12px 16px;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    user-select: none;
+    background: var(--card); border: 2px solid var(--border); border-radius: 6px;
+    padding: 12px 16px; cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: flex-start; gap: 12px; user-select: none;
   }
-  .option-item:hover {
-    border-color: var(--blue-light);
-    background: var(--blue-pale);
-  }
-  .option-item.selected {
-    border-color: var(--blue);
-    background: var(--blue-pale);
-  }
+  .option-item:hover { border-color: var(--blue-light); background: var(--blue-pale); }
+  .option-item.selected { border-color: var(--blue); background: var(--blue-pale); }
   .option-check {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    flex-shrink: 0;
-    margin-top: 2px;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border);
+    flex-shrink: 0; margin-top: 2px; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
   }
-  .option-item.selected .option-check {
-    background: var(--blue);
-    border-color: var(--blue);
-  }
+  .option-item.selected .option-check { background: var(--blue); border-color: var(--blue); }
   .option-item.selected .option-check::after {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
+    content: ''; width: 6px; height: 6px; background: white; border-radius: 50%;
   }
-  /* multi-select style */
-  .multi .option-check {
-    border-radius: 3px;
-  }
+  .multi .option-check { border-radius: 3px; }
   .multi .option-item.selected .option-check::after {
-    content: '✓';
-    color: white;
-    font-size: 11px;
-    border-radius: 0;
-    width: auto;
-    height: auto;
-    background: none;
-    font-weight: 700;
+    content: '✓'; color: white; font-size: 11px; font-weight: 700;
+    width: auto; height: auto; background: none; border-radius: 0;
   }
-  .option-text {
-    flex: 1;
-  }
-  .option-label {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.4;
-  }
-  .option-desc {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
+  .option-text { flex: 1; }
+  .option-label { font-size: 14px; font-weight: 600; line-height: 1.4; }
+  .option-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
   .option-key {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-muted);
-    background: var(--bg);
-    padding: 1px 6px;
-    border-radius: 3px;
-    flex-shrink: 0;
-    margin-top: 2px;
+    font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+    background: var(--bg); padding: 1px 6px; border-radius: 3px;
+    flex-shrink: 0; margin-top: 2px;
   }
 
-  /* SUB QUESTION */
-  .sub-question {
-    background: var(--bg);
-    border-radius: 6px;
-    padding: 20px;
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
-  .sub-question .step-question {
-    font-size: 15px;
-  }
-
-  /* NAV BUTTONS */
-  .nav-row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-top: 8px;
-  }
+  .nav-row { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
   .btn {
-    padding: 10px 24px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-    font-family: inherit;
+    padding: 10px 24px; border-radius: 4px; font-size: 14px; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.15s; font-family: inherit;
   }
-  .btn-primary {
-    background: var(--blue);
-    color: white;
-  }
+  .btn-primary { background: var(--blue); color: white; }
   .btn-primary:hover { background: var(--blue-light); }
-  .btn-primary:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-  .btn-ghost {
-    background: transparent;
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-  }
-  .btn-danger {
-    background: var(--red);
-    color: white;
-  }
+  .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
 
   .note-box {
-    background: var(--blue-pale);
-    border-left: 3px solid var(--blue);
-    padding: 12px 16px;
-    border-radius: 0 4px 4px 0;
-    font-size: 13px;
-    color: var(--blue);
-    margin-bottom: 20px;
-    line-height: 1.6;
+    background: var(--blue-pale); border-left: 3px solid var(--blue);
+    padding: 12px 16px; border-radius: 0 4px 4px 0;
+    font-size: 13px; color: var(--blue); margin-bottom: 20px; line-height: 1.6;
   }
 
   /* ==================== MEMO ==================== */
-  .memo-wrap {
-    display: none;
-    max-width: 1060px;
-    margin: 0 auto;
-    padding: 0;
-  }
+  .memo-wrap { display: none; }
   .memo-wrap.visible { display: block; }
 
   .memo-profile {
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 48px;
-    display: flex;
-    gap: 28px;
-    flex-wrap: wrap;
-    align-items: center;
+    background: var(--card); border-bottom: 1px solid var(--border);
+    padding: 16px 48px; display: flex; gap: 28px; flex-wrap: wrap; align-items: center;
   }
-  .profile-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .profile-item { display: flex; align-items: center; gap: 8px; }
   .profile-label {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); font-family: var(--mono);
   }
-  .profile-value {
-    font-size: 13px;
-    font-weight: 600;
-  }
-  .profile-divider {
-    width: 1px;
-    height: 20px;
-    background: var(--border);
-  }
+  .profile-value { font-size: 13px; font-weight: 600; }
+  .profile-divider { width: 1px; height: 20px; background: var(--border); }
 
   .risk-summary-bar {
-    background: var(--card);
-    border-bottom: 2px solid var(--border);
-    padding: 16px 48px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    background: var(--card); border-bottom: 2px solid var(--border);
+    padding: 16px 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
   }
   .risk-summary-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); font-family: var(--mono);
   }
   .risk-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: var(--mono);
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 3px;
+    font-size: 12px; font-weight: 600; font-family: var(--mono);
   }
   .risk-badge.high { background: var(--red-pale); color: var(--red); border: 1px solid #f5c6c3; }
   .risk-badge.medium { background: var(--yellow-pale); color: var(--yellow); border: 1px solid #f6e0a8; }
@@ -386,54 +467,26 @@
   .risk-badge.ok .risk-dot { background: var(--green); }
 
   .memo-main {
-    max-width: 1060px;
-    margin: 0 auto;
-    padding: 40px 48px;
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 32px;
-    align-items: start;
+    max-width: 1060px; margin: 0 auto; padding: 40px 48px;
+    display: grid; grid-template-columns: 1fr 280px; gap: 32px; align-items: start;
   }
 
   .memo-section { margin-bottom: 32px; }
   .memo-section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border);
   }
   .section-num {
-    width: 28px;
-    height: 28px;
-    background: var(--blue);
-    color: white;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    font-family: var(--mono);
-    flex-shrink: 0;
+    width: 28px; height: 28px; background: var(--blue); color: white;
+    border-radius: 3px; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; font-family: var(--mono); flex-shrink: 0;
   }
   .section-title { font-size: 15px; font-weight: 700; }
-  .section-tag {
-    margin-left: auto;
-    font-size: 11px;
-    font-family: var(--mono);
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-  }
+  .section-tag { margin-left: auto; font-size: 11px; font-family: var(--mono); color: var(--text-muted); }
 
   .risk-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    transition: box-shadow 0.15s;
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+    margin-bottom: 10px; overflow: hidden; transition: box-shadow 0.15s;
   }
   .risk-item:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .risk-item.high { border-left: 3px solid var(--red); }
@@ -441,21 +494,12 @@
   .risk-item.ok { border-left: 3px solid var(--green); }
 
   .risk-item-hd {
-    padding: 13px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    user-select: none;
+    padding: 13px 16px; display: flex; align-items: center; gap: 10px;
+    cursor: pointer; user-select: none;
   }
   .risk-lvl {
-    font-size: 10px;
-    font-weight: 700;
-    font-family: var(--mono);
-    letter-spacing: 0.08em;
-    padding: 2px 7px;
-    border-radius: 2px;
-    flex-shrink: 0;
+    font-size: 10px; font-weight: 700; font-family: var(--mono);
+    letter-spacing: 0.08em; padding: 2px 7px; border-radius: 2px; flex-shrink: 0;
   }
   .high .risk-lvl { background: var(--red-pale); color: var(--red); }
   .medium .risk-lvl { background: var(--yellow-pale); color: var(--yellow); }
@@ -465,101 +509,60 @@
   .risk-item-mkt { font-size: 11px; color: var(--text-muted); font-family: var(--mono); flex-shrink: 0; }
   .expand-ic { color: var(--text-muted); font-size: 14px; flex-shrink: 0; transition: transform 0.2s; }
   .risk-item.open .expand-ic { transform: rotate(180deg); }
-
-  .risk-item-bd {
-    display: none;
-    padding: 0 16px 16px;
-    border-top: 1px solid var(--border);
-  }
+  .risk-item-bd { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
   .risk-item.open .risk-item-bd { display: block; }
 
   .rb-section { margin-top: 12px; }
   .rb-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-family: var(--mono);
-    margin-bottom: 5px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-muted); font-family: var(--mono); margin-bottom: 5px;
   }
   .rb-text { font-size: 13px; line-height: 1.7; }
   .rb-text ul { padding-left: 16px; }
   .rb-text li { margin-bottom: 4px; }
   .law-ref {
-    display: inline-block;
-    background: var(--blue-pale);
-    color: var(--blue);
-    font-size: 11px;
-    font-family: var(--mono);
-    padding: 1px 6px;
-    border-radius: 2px;
-    margin: 2px 2px 2px 0;
+    display: inline-block; background: var(--blue-pale); color: var(--blue);
+    font-size: 11px; font-family: var(--mono); padding: 1px 6px;
+    border-radius: 2px; margin: 2px 2px 2px 0;
   }
 
-  /* SIDEBAR */
   .sidebar { position: sticky; top: 24px; }
   .sidebar-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 18px;
-    margin-bottom: 14px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 4px; padding: 18px; margin-bottom: 14px;
   }
   .sidebar-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-family: var(--mono);
-    margin-bottom: 14px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted);
+    font-family: var(--mono); margin-bottom: 14px;
   }
   .priority-item {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: flex-start;
+    margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
   }
   .priority-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
   .priority-num {
-    width: 20px; height: 20px;
-    background: var(--blue); color: white;
-    border-radius: 2px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; font-family: var(--mono);
-    flex-shrink: 0; margin-top: 1px;
+    width: 20px; height: 20px; background: var(--blue); color: white;
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; font-family: var(--mono); flex-shrink: 0; margin-top: 1px;
   }
   .priority-text { font-size: 12px; line-height: 1.5; }
   .priority-text strong { display: block; font-weight: 600; margin-bottom: 1px; }
   .priority-text span { color: var(--text-muted); font-size: 11px; }
 
   .next-steps-card {
-    background: var(--blue-pale);
-    border: 1px solid #c5d8f5;
-    border-radius: 4px;
-    padding: 18px;
+    background: var(--blue-pale); border: 1px solid #c5d8f5; border-radius: 4px; padding: 18px;
   }
   .next-steps-title {
-    font-size: 11px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--blue); font-family: var(--mono);
-    margin-bottom: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue); font-family: var(--mono); margin-bottom: 12px;
   }
   .next-btn {
-    display: block; width: 100%;
-    padding: 9px 12px;
-    background: white;
-    border: 1px solid #c5d8f5;
-    border-radius: 3px;
-    font-size: 12px; font-weight: 600;
-    color: var(--blue);
-    cursor: pointer; text-align: left;
-    margin-bottom: 7px;
-    transition: all 0.15s;
-    font-family: inherit;
+    display: block; width: 100%; padding: 9px 12px; background: white;
+    border: 1px solid #c5d8f5; border-radius: 3px;
+    font-size: 12px; font-weight: 600; color: var(--blue);
+    cursor: pointer; text-align: left; margin-bottom: 7px;
+    transition: all 0.15s; font-family: inherit;
   }
   .next-btn:hover { background: var(--blue); color: white; border-color: var(--blue); }
   .next-btn:last-child { margin-bottom: 0; }
@@ -567,30 +570,33 @@
 
   /* DISCLAIMER */
   .disclaimer {
-    background: var(--card);
-    border-top: 1px solid var(--border);
-    padding: 18px 48px;
-    font-size: 11px;
-    color: var(--text-muted);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
+    background: var(--card); border-top: 1px solid var(--border);
+    padding: 18px 48px; font-size: 11px; color: var(--text-muted);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
   }
   .disclaimer-firm { font-family: var(--mono); color: var(--blue); font-weight: 600; white-space: nowrap; }
 
   @media (max-width: 768px) {
-    .header { padding: 20px 24px; }
+    .header { padding: 16px 20px; }
+    .hero { padding: 48px 24px; }
+    .hero-title { font-size: 26px; }
+    .modules { grid-template-columns: 1fr; padding: 40px 20px; gap: 16px; }
+    .for-who { padding: 40px 20px; }
+    .for-who-inner { grid-template-columns: 1fr; gap: 32px; }
+    .cta-bottom { padding: 48px 20px; }
     .form-wrap { padding: 0 16px; }
     .memo-main { grid-template-columns: 1fr; padding: 24px 20px; }
     .memo-profile, .risk-summary-bar, .disclaimer { padding: 14px 20px; }
     .sidebar { position: static; }
+    .progress-bar { padding: 0 16px; }
   }
 
   @media print {
-    .progress-bar, .form-wrap, .next-steps-card { display: none !important; }
+    .landing, .form-wrap, .progress-bar, .next-steps-card { display: none !important; }
     .risk-item-bd { display: block !important; }
     .expand-ic { display: none; }
+    .memo-main { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
   }
 </style>
 </head>
@@ -600,7 +606,7 @@
 <div class="header">
   <div class="header-left">
     <div class="firm">Kinding Partners // 合规法律服务</div>
-    <div class="doc-title">AI 支付公司合规风险评估</div>
+    <div class="doc-title">AI 支付合规评估</div>
   </div>
   <div class="header-right" id="header-date"></div>
 </div>
@@ -633,10 +639,121 @@
   </div>
 </div>
 
-<!-- FORM -->
+<!-- ==================== LANDING ==================== -->
+<div class="landing" id="landing">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">AI 支付基础设施 · 合规评估工具</div>
+    <div class="hero-title">AI 支付公司上线前，<br>先跑一遍合规。</div>
+    <div class="hero-desc">
+      你造了一套让 AI agent 收付款的基础设施。<br>
+      这份问卷帮你判断：资金托管、用户协议、数据合规，<br>
+      三条线上合规点在哪里，应该先处理什么。
+    </div>
+    <button class="hero-btn" onclick="startForm()">开始评估 →</button>
+    <div class="hero-note">约 10 分钟 · 完成后生成可打印的风险备忘录</div>
+  </div>
+
+  <!-- MODULES -->
+  <div class="modules">
+    <div class="module-card">
+      <div class="module-icon">💰</div>
+      <div class="module-title">资金托管</div>
+      <div class="module-desc">你的钱在谁手里？托管结构决定你需要什么牌照，以及出了问题谁来兜底。</div>
+      <div class="module-tags">
+        <span class="module-tag">SVF</span>
+        <span class="module-tag">EMI</span>
+        <span class="module-tag">MAS PSA</span>
+        <span class="module-tag">GENIUS Act</span>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">📄</div>
+      <div class="module-title">用户协议 ToS</div>
+      <div class="module-desc">你的条款在保护你，还是在给你埋坑？Credits 定性、退款机制、仲裁条款都有说道。</div>
+      <div class="module-tags">
+        <span class="module-tag">Credits 定性</span>
+        <span class="module-tag">退款机制</span>
+        <span class="module-tag">责任上限</span>
+        <span class="module-tag">仲裁条款</span>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">🔒</div>
+      <div class="module-title">数据合规</div>
+      <div class="module-desc">你的数据流向说得清楚吗？prompt 数据、跨境传输、AI 自动决策，每个都有对应义务。</div>
+      <div class="module-tags">
+        <span class="module-tag">GDPR</span>
+        <span class="module-tag">PIPL</span>
+        <span class="module-tag">DPIA</span>
+        <span class="module-tag">EU AI Act</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOR WHO -->
+  <div class="for-who">
+    <div class="for-who-inner">
+      <div>
+        <div class="for-who-title">适合你，如果你在做</div>
+        <div class="for-who-headline">AI 支付基础设施，<br>不是普通 SaaS。</div>
+        <ul class="for-who-list">
+          <li>AI agent 的支付 API 或 SDK</li>
+          <li>支持稳定币或法币的 agent 钱包</li>
+          <li>面向开发者的支付基础设施平台</li>
+          <li>让 AI 自动触发交易的底层服务</li>
+        </ul>
+      </div>
+      <div class="output-box">
+        <div class="output-box-title">评估完你会拿到</div>
+        <div class="output-item">
+          <div class="output-num">1</div>
+          <div class="output-text">
+            <strong>风险备忘录</strong>
+            <span>高风险 / 中风险分级，每项附建议方向</span>
+          </div>
+        </div>
+        <div class="output-item">
+          <div class="output-num">2</div>
+          <div class="output-text">
+            <strong>优先处理顺序</strong>
+            <span>告诉你先解决哪个，不用全部一起上</span>
+          </div>
+        </div>
+        <div class="output-item">
+          <div class="output-num">3</div>
+          <div class="output-text">
+            <strong>可打印文件</strong>
+            <span>直接发给团队或律师，无需二次整理</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BOTTOM -->
+  <div class="cta-bottom">
+    <div class="cta-bottom-title">准备好了吗？</div>
+    <div class="cta-bottom-desc">
+      问卷大约 10 分钟，不需要提前准备材料。<br>
+      回答完就能看到你的合规风险全貌。
+    </div>
+    <button class="cta-btn" onclick="startForm()">开始评估 →</button>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div>本工具由 Kinding Partners 开发，仅供参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。</div>
+    <div class="disclaimer-firm">KINDING PARTNERS © 2026</div>
+  </div>
+
+</div>
+
+<!-- ==================== FORM ==================== -->
 <div class="form-wrap" id="form-wrap">
 
-  <!-- STEP 1: 基础信息 -->
+  <!-- STEP 1 -->
   <div class="step-panel active" id="step-1">
     <div style="margin-bottom:32px">
       <div class="step-title">步骤 1 / 4 · 基础信息</div>
@@ -666,7 +783,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:32px">
       <div class="step-question">你的平台用户主要来自哪里？</div>
       <div class="step-hint">可多选。不确定可选"不清楚"，将按最宽泛范围评估</div>
@@ -703,9 +819,7 @@
         </div>
         <div class="option-item" data-val="global" onclick="selectMulti('q2',this)">
           <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">全球都有，无特别集中市场</div>
-          </div>
+          <div class="option-text"><div class="option-label">全球都有，无特别集中市场</div></div>
         </div>
         <div class="option-item" data-val="unclear" onclick="selectMulti('q2',this)">
           <div class="option-check"></div>
@@ -719,13 +833,13 @@
         选择"全球"或"不清楚"将按所有市场的合规要求评估，建议尽快完成用户地理分布审计。
       </div>
     </div>
-
     <div class="nav-row">
+      <button class="btn btn-ghost" onclick="backToLanding()">← 返回</button>
       <button class="btn btn-primary" onclick="goStep(2)">下一步 →</button>
     </div>
   </div>
 
-  <!-- STEP 2: 资金结构 -->
+  <!-- STEP 2 -->
   <div class="step-panel" id="step-2">
     <div style="margin-bottom:32px">
       <div class="step-title">步骤 2 / 4 · 资金结构</div>
@@ -755,7 +869,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:32px">
       <div class="step-question">用户通过什么方式充值？</div>
       <div class="step-hint">可多选</div>
@@ -783,7 +896,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:32px" id="q5-wrap">
       <div class="step-question">充值后的余额，在 ToS 里如何定义？</div>
       <div class="step-hint">定性方式直接影响监管适用性</div>
@@ -804,32 +916,26 @@
         </div>
         <div class="option-item" data-val="unclear" onclick="selectSingle('q5',this)">
           <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">没有明确定义</div>
-          </div>
+          <div class="option-text"><div class="option-label">没有明确定义</div></div>
         </div>
       </div>
     </div>
-
     <div class="nav-row">
       <button class="btn btn-ghost" onclick="goStep(1)">← 上一步</button>
       <button class="btn btn-primary" onclick="goStep(3)">下一步 →</button>
     </div>
   </div>
 
-  <!-- STEP 3: ToS 合规 -->
+  <!-- STEP 3 -->
   <div class="step-panel" id="step-3">
     <div class="step-title">步骤 3 / 4 · ToS 合规</div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">退款机制</div>
       <div class="step-hint">针对用户余额 / Credits 的退款安排</div>
       <div class="option-list" id="q6-list">
         <div class="option-item" data-val="no-refund" onclick="selectSingle('q6',this)">
           <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">不可退款，无任何例外条款</div>
-          </div>
+          <div class="option-text"><div class="option-label">不可退款，无任何例外条款</div></div>
         </div>
         <div class="option-item" data-val="partial" onclick="selectSingle('q6',this)">
           <div class="option-check"></div>
@@ -840,22 +946,17 @@
         </div>
         <div class="option-item" data-val="refund" onclick="selectSingle('q6',this)">
           <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">可以退款，有明确退款流程</div>
-          </div>
+          <div class="option-text"><div class="option-label">可以退款，有明确退款流程</div></div>
         </div>
         <div class="option-item" data-val="none" onclick="selectSingle('q6',this)">
           <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">ToS 里没有提到退款</div>
-          </div>
+          <div class="option-text"><div class="option-label">ToS 里没有提到退款</div></div>
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">账户暂停条款</div>
-      <div class="step-hint">平台触发暂停的条件</div>
+      <div class="step-hint">平台触发暂停的条件是否有客观标准</div>
       <div class="option-list" id="q7-list">
         <div class="option-item" data-val="objective" onclick="selectSingle('q7',this)">
           <div class="option-check"></div>
@@ -881,7 +982,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">暂停期间余额处理</div>
       <div class="option-list" id="q8-list">
@@ -902,7 +1002,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">责任上限与争议解决</div>
       <div class="option-list" id="q9-list">
@@ -915,15 +1014,11 @@
         </div>
         <div class="option-item" data-val="arb-exemption" onclick="selectSingle('q9',this)">
           <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">强制仲裁，但有消费者豁免条款</div>
-          </div>
+          <div class="option-text"><div class="option-label">强制仲裁，但有消费者豁免条款</div></div>
         </div>
         <div class="option-item" data-val="local-court" onclick="selectSingle('q9',this)">
           <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">允许用户在所在地法院起诉</div>
-          </div>
+          <div class="option-text"><div class="option-label">允许用户在所在地法院起诉</div></div>
         </div>
         <div class="option-item" data-val="none" onclick="selectSingle('q9',this)">
           <div class="option-check"></div>
@@ -931,10 +1026,8 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">第三方服务商披露</div>
-      <div class="step-hint">ToS 和 Privacy Policy 里的第三方信息</div>
       <div class="option-list" id="q10-list">
         <div class="option-item" data-val="full" onclick="selectSingle('q10',this)">
           <div class="option-check"></div>
@@ -950,17 +1043,15 @@
         </div>
       </div>
     </div>
-
     <div class="nav-row">
       <button class="btn btn-ghost" onclick="goStep(2)">← 上一步</button>
       <button class="btn btn-primary" onclick="goStep(4)">下一步 →</button>
     </div>
   </div>
 
-  <!-- STEP 4: 数据合规 -->
+  <!-- STEP 4 -->
   <div class="step-panel" id="step-4">
     <div class="step-title">步骤 4 / 4 · 数据合规</div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">平台有没有用 AI 做自动化决策？</div>
       <div class="step-hint">如自动触发支付、风控拦截、额度判断等</div>
@@ -979,7 +1070,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">Privacy Policy 里有没有告知用户 AI 在替他们做决策？</div>
       <div class="option-list" id="q12-list">
@@ -997,7 +1087,6 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:24px">
       <div class="step-question">数据出境披露情况</div>
       <div class="option-list" id="q13-list">
@@ -1021,10 +1110,9 @@
         </div>
       </div>
     </div>
-
     <div style="margin-bottom:24px">
-      <div class="step-question">第三方数据处理责任</div>
-      <div class="step-hint">如 LLM 提供商、支付处理商等</div>
+      <div class="step-question">与第三方数据处理商的合同安排</div>
+      <div class="step-hint">LLM 提供商、支付处理商等</div>
       <div class="option-list" id="q14-list">
         <div class="option-item" data-val="dpa" onclick="selectSingle('q14',this)">
           <div class="option-check"></div>
@@ -1046,85 +1134,78 @@
         </div>
       </div>
     </div>
-
     <div class="nav-row">
       <button class="btn btn-ghost" onclick="goStep(3)">← 上一步</button>
       <button class="btn btn-primary" onclick="generateMemo()">生成备忘录 →</button>
     </div>
   </div>
 
-</div><!-- /form-wrap -->
+</div>
 
-<!-- MEMO -->
+<!-- ==================== MEMO ==================== -->
 <div class="memo-wrap" id="memo-wrap">
-
   <div class="memo-profile" id="memo-profile"></div>
-
   <div class="risk-summary-bar" id="risk-summary-bar"></div>
-
   <div class="memo-main">
     <div id="memo-content"></div>
     <div class="sidebar" id="memo-sidebar"></div>
   </div>
-
   <div class="disclaimer">
-    <div>本备忘录由 Kinding Partners 基于客户提供的业务信息生成，仅供内部参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。法规信息截至 2026 年 6 月，如有变动以最新版本为准。</div>
+    <div>本备忘录由 Kinding Partners 基于客户提供的业务信息生成，仅供内部参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。法规信息截至 2026 年 6 月。</div>
     <div class="disclaimer-firm">KINDING PARTNERS © 2026</div>
   </div>
-
 </div>
 
 <script>
-// ===== STATE =====
 const answers = {
   q1: null, q2: [], q3: null, q4: [], q5: null,
   q6: null, q7: null, q8: null, q9: null, q10: null,
   q11: null, q12: null, q13: null, q14: null
 };
 
-// ===== DATE =====
 const today = new Date();
 const dateStr = today.getFullYear() + '.' +
   String(today.getMonth()+1).padStart(2,'0') + '.' +
   String(today.getDate()).padStart(2,'0');
-document.getElementById('header-date').innerHTML = dateStr + '<br>合规风险评估报告';
+document.getElementById('header-date').textContent = dateStr;
 
-// ===== SINGLE SELECT =====
+function startForm() {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('form-wrap').classList.add('visible');
+  document.getElementById('progress-bar').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToLanding() {
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('form-wrap').classList.remove('visible');
+  document.getElementById('progress-bar').classList.remove('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function selectSingle(q, el) {
-  const list = el.parentElement;
-  list.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
+  el.parentElement.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
   el.classList.add('selected');
   answers[q] = el.dataset.val;
   if (q === 'q4') updateQ5Visibility();
 }
 
-// ===== MULTI SELECT =====
 function selectMulti(q, el) {
   el.classList.toggle('selected');
-  const vals = [...el.parentElement.querySelectorAll('.selected')].map(i => i.dataset.val);
-  answers[q] = vals;
+  answers[q] = [...el.parentElement.querySelectorAll('.selected')].map(i => i.dataset.val);
   if (q === 'q2') {
     const note = document.getElementById('q2-note');
-    if (vals.includes('global') || vals.includes('unclear')) {
-      note.style.display = 'block';
-    } else {
-      note.style.display = 'none';
-    }
+    note.style.display = (answers.q2.includes('global') || answers.q2.includes('unclear')) ? 'block' : 'none';
   }
 }
 
-// ===== SHOW/HIDE Q5 =====
 function updateQ5Visibility() {
-  const wrap = document.getElementById('q5-wrap');
-  const hasNone = answers.q4.includes('none');
-  wrap.style.display = hasNone ? 'none' : 'block';
+  document.getElementById('q5-wrap').style.display = answers.q4.includes('none') ? 'none' : 'block';
 }
 
-// ===== NAVIGATION =====
 function goStep(n) {
   document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('step-' + n).classList.add('active');
-  // update progress
   for (let i = 1; i <= 5; i++) {
     const ps = document.getElementById('ps-' + i);
     ps.classList.remove('active', 'done');
@@ -1134,273 +1215,90 @@ function goStep(n) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ===== HELPERS =====
 function hasMarket(m) {
-  const q2 = answers.q2;
-  if (q2.includes('global') || q2.includes('unclear')) return true;
-  return q2.includes(m);
+  return answers.q2.includes('global') || answers.q2.includes('unclear') || answers.q2.includes(m);
 }
+function hasCustody() { return answers.q3 === 'custody' || answers.q3 === 'mixed'; }
+function hasC() { return answers.q1 === 'c' || answers.q1 === 'both'; }
 
-function hasCustody() {
-  return answers.q3 === 'custody' || answers.q3 === 'mixed';
-}
-
-function hasC() {
-  return answers.q1 === 'c' || answers.q1 === 'both';
-}
-
-// ===== GENERATE MEMO =====
 function generateMemo() {
-  // hide form, show memo
-  document.getElementById('form-wrap').style.display = 'none';
-  document.getElementById('progress-bar').style.display = 'none';
-  const memoWrap = document.getElementById('memo-wrap');
-  memoWrap.classList.add('visible');
-
-  // update progress
-  document.querySelectorAll('.progress-step').forEach(p => {
-    p.classList.remove('active');
-    p.classList.add('done');
-  });
-  const ps5 = document.getElementById('ps-5');
-  ps5.classList.remove('done');
-  ps5.classList.add('active');
-  document.getElementById('progress-bar').style.display = 'flex';
-
-  buildProfile();
+  document.getElementById('form-wrap').classList.remove('visible');
+  document.getElementById('memo-wrap').classList.add('visible');
+  for (let i = 1; i <= 5; i++) {
+    const ps = document.getElementById('ps-' + i);
+    ps.classList.remove('active');
+    ps.classList.add(i === 5 ? 'active' : 'done');
+  }
   const risks = buildRisks();
+  buildProfile();
   buildSummaryBar(risks);
   buildContent(risks);
   buildSidebar(risks);
-
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ===== PROFILE BAR =====
 function buildProfile() {
   const userMap = { c: 'C端（个人）', b: 'B端（企业）', both: 'C端 + B端' };
   const roleMap = { tech: '纯技术层', custody: '平台托管', mixed: '混合模式' };
-
-  const mkts = answers.q2.includes('global') || answers.q2.includes('unclear')
+  const mkts = (answers.q2.includes('global') || answers.q2.includes('unclear'))
     ? '全球（所有市场）'
     : answers.q2.map(v => ({cn:'中国大陆',hk:'香港',sg:'新加坡',eu:'欧盟',uk:'英国',us:'美国'})[v]).filter(Boolean).join(' · ');
-
-  const payMap = { fiat: '法币', stable: '稳定币', none: '不涉及充值' };
-  const pays = answers.q4.map(v => payMap[v]).filter(Boolean).join(' + ') || '—';
-
+  const pays = answers.q4.map(v => ({fiat:'法币',stable:'稳定币',none:'不涉及充值'})[v]).filter(Boolean).join(' + ') || '—';
   document.getElementById('memo-profile').innerHTML = `
-    <div class="profile-item">
-      <span class="profile-label">用户类型</span>
-      <span class="profile-value">${userMap[answers.q1] || '—'}</span>
-    </div>
+    <div class="profile-item"><span class="profile-label">用户类型</span><span class="profile-value">${userMap[answers.q1]||'—'}</span></div>
     <div class="profile-divider"></div>
-    <div class="profile-item">
-      <span class="profile-label">覆盖市场</span>
-      <span class="profile-value">${mkts || '—'}</span>
-    </div>
+    <div class="profile-item"><span class="profile-label">覆盖市场</span><span class="profile-value">${mkts||'—'}</span></div>
     <div class="profile-divider"></div>
-    <div class="profile-item">
-      <span class="profile-label">资金角色</span>
-      <span class="profile-value">${roleMap[answers.q3] || '—'}</span>
-    </div>
+    <div class="profile-item"><span class="profile-label">资金角色</span><span class="profile-value">${roleMap[answers.q3]||'—'}</span></div>
     <div class="profile-divider"></div>
-    <div class="profile-item">
-      <span class="profile-label">入金方式</span>
-      <span class="profile-value">${pays}</span>
-    </div>
+    <div class="profile-item"><span class="profile-label">入金方式</span><span class="profile-value">${pays}</span></div>
     <div class="profile-divider"></div>
-    <div class="profile-item">
-      <span class="profile-label">评估日期</span>
-      <span class="profile-value">${dateStr}</span>
-    </div>
+    <div class="profile-item"><span class="profile-label">评估日期</span><span class="profile-value">${dateStr}</span></div>
   `;
 }
 
-// ===== BUILD RISKS =====
 function buildRisks() {
   const risks = [];
-
-  // --- 模块一：资金托管 ---
   if (hasCustody() && (answers.q5 === 'credits' || answers.q5 === 'unclear')) {
-    risks.push({
-      level: 'high', module: '一', moduleTag: '资金托管',
-      title: '平台持有用户资金，余额定性试图规避监管',
-      markets: ['香港 SVF', '新加坡 MAS', '欧盟 EMI'].filter(() => true).join(' · '),
-      desc: '平台实际持有用户法币余额，但 ToS 将其定性为"Credits / 积分 / 非货币"，试图规避预付款监管义务。监管机构以经济实质而非名称判断，此定性在多数市场不成立。',
-      laws: ['香港 SVF 条例', '新加坡 MAS PSA', '欧盟 EMI 指令'],
-      suggestions: [
-        '明确余额的使用范围、有效期及到期处理方式',
-        '明确余额是平台负债还是信托资产（影响破产追偿权）',
-        '建议直接评估 SVF / EMI 牌照申请可行性，不要依赖定性条款规避'
-      ]
-    });
+    risks.push({ level:'high', module:'一', moduleTag:'资金托管', title:'平台持有用户资金，余额定性试图规避监管', markets:'HK · SG · EU', desc:'平台实际持有用户法币余额，但 ToS 将其定性为"Credits / 积分 / 非货币"，试图规避预付款监管义务。监管机构以经济实质而非名称判断，此定性在多数市场不成立。', laws:['香港 SVF 条例','新加坡 MAS PSA','欧盟 EMI 指令'], suggestions:['明确余额的使用范围、有效期及到期处理方式','明确余额是平台负债还是信托资产（影响破产追偿权）','建议直接评估 SVF / EMI 牌照申请可行性，不要依赖定性条款规避'] });
   }
-
   if (hasCustody() && answers.q4.includes('stable') && (hasMarket('us') || hasMarket('eu'))) {
-    risks.push({
-      level: 'medium', module: '一', moduleTag: '资金托管',
-      title: '稳定币入金托管定性待确认',
-      markets: 'US · EU',
-      desc: '平台支持稳定币入金且由平台自持链上钱包。GENIUS Act（2025年7月）已将支付稳定币纳入 BSA 管辖，MiCA 下稳定币托管属 CASP 持牌范畴。',
-      laws: ['US GENIUS Act 2025', 'EU MiCA', '香港 VASP 牌照'],
-      suggestions: [
-        '评估稳定币托管是否触发 MSB 登记（美国）',
-        '评估 CASP 申请必要性（欧盟）',
-        '考虑迁移至第三方持牌托管方以降低直接义务'
-      ]
-    });
+    risks.push({ level:'medium', module:'一', moduleTag:'资金托管', title:'稳定币入金托管定性待确认', markets:'US · EU', desc:'平台支持稳定币入金且由平台自持链上钱包。GENIUS Act（2025年7月）已将支付稳定币纳入 BSA 管辖，MiCA 下稳定币托管属 CASP 持牌范畴。', laws:['US GENIUS Act 2025','EU MiCA','香港 VASP 牌照'], suggestions:['评估稳定币托管是否触发 MSB 登记（美国）','评估 CASP 申请必要性（欧盟）','考虑迁移至第三方持牌托管方以降低直接义务'] });
   }
-
-  if (answers.q3 === 'tech' && answers.q5 !== null && answers.q5 !== 'unclear') {
-    // no custody risk
-  }
-
-  // --- 模块二：ToS ---
   if (hasC() && (answers.q6 === 'no-refund' || answers.q6 === 'none')) {
-    risks.push({
-      level: 'high', module: '二', moduleTag: 'ToS 合规',
-      title: 'C端用户退款条款无例外，大概率无效',
-      markets: 'HK · SG · EU · UK',
-      desc: 'ToS 设定"一经购买不可退款"且无任何例外条款。在 C 端场景下，消费者保护法对预付款退款有强制性规定，合同条款不能排除。',
-      laws: ['欧盟消费者权利指令', '香港《商品说明条例》', '新加坡《消费者保护法》'],
-      suggestions: [
-        'B端和C端分开处理退款条款',
-        'C端必须保留退款例外：平台单方面终止服务、服务严重故障、法律强制要求',
-        '不退款条款可保留，但必须有明确例外边界'
-      ]
-    });
+    risks.push({ level:'high', module:'二', moduleTag:'ToS 合规', title:'C端用户退款条款无例外，大概率无效', markets:'HK · SG · EU · UK', desc:'ToS 设定"一经购买不可退款"且无任何例外条款。在 C 端场景下，消费者保护法对预付款退款有强制性规定，合同条款不能排除。', laws:['欧盟消费者权利指令','香港《商品说明条例》','新加坡《消费者保护法》'], suggestions:['B端和C端分开处理退款条款','C端必须保留退款例外：平台单方面终止服务、服务严重故障、法律强制要求','不退款条款可保留，但必须有明确例外边界'] });
   }
-
   if ((hasMarket('eu') || hasMarket('uk')) && answers.q9 === 'low-cap-arb') {
-    risks.push({
-      level: 'high', module: '二', moduleTag: 'ToS 合规',
-      title: '覆盖欧盟/英国用户，仲裁条款无消费者豁免',
-      markets: 'EU · UK',
-      desc: '强制仲裁叠加集体诉讼豁免，实质切断用户救济路径。英国、欧盟用户在本地法院可能成功推翻仲裁条款。欧盟《集体诉讼指令》（2023）明确保护消费者集体诉讼权利。',
-      laws: ['EU 集体诉讼指令 2023', 'UK Consumer Rights Act 2015', 'UK CJJA s.15B'],
-      suggestions: [
-        '加入消费者豁免条款：C端用户可选择在所在地小额索赔法庭起诉',
-        '集体诉讼豁免条款对欧盟/英国用户不适用，建议加入地区例外'
-      ]
-    });
+    risks.push({ level:'high', module:'二', moduleTag:'ToS 合规', title:'覆盖欧盟/英国用户，仲裁条款无消费者豁免', markets:'EU · UK', desc:'强制仲裁叠加集体诉讼豁免，实质切断用户救济路径。英国、欧盟用户在本地法院可能成功推翻仲裁条款。欧盟《集体诉讼指令》（2023）明确保护消费者集体诉讼权利。', laws:['EU 集体诉讼指令 2023','UK Consumer Rights Act 2015','UK CJJA s.15B'], suggestions:['加入消费者豁免条款：C端用户可选择在所在地小额索赔法庭起诉','集体诉讼豁免对欧盟/英国用户不适用，建议加入地区例外'] });
   }
-
   if (answers.q7 === 'subjective' || answers.q7 === 'both' || answers.q8 === 'none' || answers.q8 === 'freeze') {
-    risks.push({
-      level: 'medium', module: '二', moduleTag: 'ToS 合规',
-      title: '暂停条款包含主观标准，余额处理机制不明',
-      markets: '全市场',
-      desc: '平台保留"认为存在风险即可暂停"的宽泛权利，且未规定账户冻结期间余额处理机制，用户资金被冻结后无明确追偿路径。',
-      laws: ['欧盟 PSD3', '香港 HKMA 指引'],
-      suggestions: [
-        '有因暂停：明确客观触发条件，加入申诉机制和处理时限',
-        '无因暂停：设定 30 天通知期，余额必须可提取或退还',
-        '明确冻结期间余额的法律地位（平台负债 vs 信托资产）'
-      ]
-    });
+    risks.push({ level:'medium', module:'二', moduleTag:'ToS 合规', title:'暂停条款包含主观标准，余额处理机制不明', markets:'全市场', desc:'平台保留"认为存在风险即可暂停"的宽泛权利，且未规定账户冻结期间余额处理机制，用户资金被冻结后无明确追偿路径。', laws:['欧盟 PSD3','香港 HKMA 指引'], suggestions:['有因暂停：明确客观触发条件，加入申诉机制和处理时限','无因暂停：设定 30 天通知期，余额必须可提取或退还','明确冻结期间余额的法律地位'] });
   }
-
   if (answers.q10 === 'none' || answers.q10 === 'partial') {
-    risks.push({
-      level: 'medium', module: '二', moduleTag: 'ToS 合规',
-      title: '第三方服务商披露不完整，责任链不透明',
-      markets: '全市场',
-      desc: '用户实际上受到平台从未完整披露的第三方条款约束（LLM 提供商、支付处理商等），用户对此没有知情权。',
-      laws: ['GDPR Art.13', '香港 PDPO'],
-      suggestions: [
-        '明确列出平台依赖的第三方服务商类别',
-        '说明第三方条款在哪些情形下直接影响用户权利',
-        '对数据处理类第三方：Privacy Policy 中必须完整披露'
-      ]
-    });
+    risks.push({ level:'medium', module:'二', moduleTag:'ToS 合规', title:'第三方服务商披露不完整，责任链不透明', markets:'全市场', desc:'用户实际上受到平台从未完整披露的第三方条款约束（LLM 提供商、支付处理商等），用户对此没有知情权。', laws:['GDPR Art.13','香港 PDPO'], suggestions:['明确列出平台依赖的第三方服务商类别','说明第三方条款在哪些情形下直接影响用户权利','数据处理类第三方须在 Privacy Policy 中完整披露'] });
   }
-
-  // --- 模块三：数据合规 ---
   if (answers.q14 === 'none' && (hasMarket('eu') || hasMarket('uk'))) {
-    risks.push({
-      level: 'high', module: '三', moduleTag: '数据合规',
-      title: '数据责任链断裂：第三方无 DPA，GDPR 连带责任未覆盖',
-      markets: 'EU · UK',
-      desc: 'Privacy Policy 写明"不对第三方数据行为负责"，但 GDPR 第28条要求数据控制者对处理者行为承担连带责任，此免责条款在 GDPR 框架下无效。',
-      laws: ['GDPR Art.28', 'UK GDPR'],
-      suggestions: [
-        '与每个数据处理类第三方签署 DPA',
-        'Privacy Policy 明确列出第三方类别及其在数据链路中的角色',
-        '说明用户如何行使针对第三方的数据权利'
-      ]
-    });
+    risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'数据责任链断裂：第三方无 DPA，GDPR 连带责任未覆盖', markets:'EU · UK', desc:'Privacy Policy 写明"不对第三方数据行为负责"，但 GDPR 第28条要求数据控制者对处理者行为承担连带责任，此免责条款在 GDPR 框架下无效。', laws:['GDPR Art.28','UK GDPR'], suggestions:['与每个数据处理类第三方签署 DPA','Privacy Policy 明确列出第三方类别及其在数据链路中的角色','说明用户如何行使针对第三方的数据权利'] });
   }
-
   if (hasMarket('cn') && answers.q13 === 'none') {
-    risks.push({
-      level: 'high', module: '三', moduleTag: '数据合规',
-      title: '有中国用户但无 PIPL 合规路径，2026 年执法风险高',
-      markets: 'CN',
-      desc: 'PIPL 第38条要求向境外传输个人信息需满足安全评估、专业认证或标准合同之一。2025年1月起，外国公司必须在中国指定本地代表。Privacy Policy 完全缺失 PIPL 内容。',
-      laws: ['PIPL 第38条', '网信办跨境传输规定 2025'],
-      suggestions: [
-        '完成 PIPL 第38条的出境合规路径选择（安全评估 / 标准合同 / 认证）',
-        '在中国指定本地代表（法律实体或自然人）',
-        'Privacy Policy 增加中文版本和 PIPL 专项条款'
-      ]
-    });
+    risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'有中国用户但无 PIPL 合规路径，2026 年执法风险高', markets:'CN', desc:'PIPL 第38条要求向境外传输个人信息需满足安全评估、专业认证或标准合同之一。2025年1月起，外国公司必须在中国指定本地代表。Privacy Policy 缺失 PIPL 内容。', laws:['PIPL 第38条','网信办跨境传输规定 2025'], suggestions:['完成 PIPL 第38条的出境合规路径选择','在中国指定本地代表（法律实体或自然人）','Privacy Policy 增加中文版本和 PIPL 专项条款'] });
   }
-
   if (answers.q12 === 'none' || answers.q12 === 'yes-no') {
-    risks.push({
-      level: 'medium', module: '三', moduleTag: '数据合规',
-      title: 'AI 自动化决策无完整披露，缺少人工复核机制',
-      markets: 'EU · UK · HK',
-      desc: 'AI agent 自动触发支付属于自动化决策，GDPR 第22条要求告知用户并提供人工复核权利。EU AI Act（2026年8月全面生效）对高风险 AI 系统有额外透明度要求。',
-      laws: ['GDPR Art.22', 'EU AI Act 2026', '香港 PCPD 指引'],
-      suggestions: [
-        'Privacy Policy 明确告知用户 AI agent 的决策范围',
-        '提供用户查看 agent 执行记录的机制',
-        '提供人工复核申请渠道和时限'
-      ]
-    });
+    risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'AI 自动化决策无完整披露，缺少人工复核机制', markets:'EU · UK · HK', desc:'AI agent 自动触发支付属于自动化决策，GDPR 第22条要求告知用户并提供人工复核权利。EU AI Act（2026年8月全面生效）对高风险 AI 系统有额外透明度要求。', laws:['GDPR Art.22','EU AI Act 2026','香港 PCPD 指引'], suggestions:['Privacy Policy 明确告知用户 AI agent 的决策范围','提供用户查看 agent 执行记录的机制','提供人工复核申请渠道和时限'] });
   }
-
   if (answers.q13 === 'mechanism-only' && (hasMarket('eu') || hasMarket('uk'))) {
-    risks.push({
-      level: 'medium', module: '三', moduleTag: '数据合规',
-      title: '数据出境只写机制名称，缺少目的地披露和 TIA',
-      markets: 'EU · UK',
-      desc: 'Privacy Policy 写了"使用 SCC"但未披露传输目的地国家和 TIA 评估结果。Schrems II 判决后 TIA 已成事实标准，光写机制名称视同未披露。',
-      laws: ['GDPR Art.46', 'Schrems II 判决', 'UK IDTA'],
-      suggestions: [
-        '列出数据传输的主要目的地国家',
-        '对每个非充分性决定国家补充传输机制说明',
-        '完成 TIA 并保留记录（内部文件，无需公开）'
-      ]
-    });
+    risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'数据出境只写机制名称，缺少目的地披露和 TIA', markets:'EU · UK', desc:'Privacy Policy 写了"使用 SCC"但未披露传输目的地国家和 TIA 评估结果。Schrems II 判决后 TIA 已成事实标准，光写机制名称视同未披露。', laws:['GDPR Art.46','Schrems II 判决','UK IDTA'], suggestions:['列出数据传输的主要目的地国家','对每个非充分性决定国家补充传输机制说明','完成 TIA 并保留记录（内部文件，无需公开）'] });
   }
-
-  // fallback: if no risks found
   if (risks.length === 0) {
-    risks.push({
-      level: 'ok', module: '综合', moduleTag: '评估结果',
-      title: '基于当前信息，暂未发现明显合规缺口',
-      markets: '—',
-      desc: '根据您提供的信息，暂未识别出高风险或中风险合规缺口。建议定期重新评估，尤其是在业务扩张、新市场进入或法规更新时。',
-      laws: [],
-      suggestions: [
-        '建议每半年重新进行一次合规评估',
-        '重点关注 EU AI Act（2026年8月）、PIPL 执法强化等新规动态',
-        '进入新市场前提前进行合规尽调'
-      ]
-    });
+    risks.push({ level:'ok', module:'综合', moduleTag:'评估结果', title:'基于当前信息，暂未发现明显合规缺口', markets:'—', desc:'根据您提供的信息，暂未识别出高风险或中风险合规缺口。建议定期重新评估，尤其是在业务扩张、新市场进入或法规更新时。', laws:[], suggestions:['建议每半年重新进行一次合规评估','重点关注 EU AI Act（2026年8月）、PIPL 执法强化等新规动态','进入新市场前提前进行合规尽调'] });
   }
-
   return risks;
 }
 
-// ===== SUMMARY BAR =====
 function buildSummaryBar(risks) {
   const high = risks.filter(r => r.level === 'high').length;
   const medium = risks.filter(r => r.level === 'medium').length;
   const ok = risks.filter(r => r.level === 'ok').length;
-
   document.getElementById('risk-summary-bar').innerHTML = `
     <span class="risk-summary-label">风险概览</span>
     <span class="risk-badge high"><span class="risk-dot"></span>高风险 <strong>${high}</strong> 项</span>
@@ -1409,139 +1307,86 @@ function buildSummaryBar(risks) {
   `;
 }
 
-// ===== BUILD CONTENT =====
 function buildContent(risks) {
-  const modules = ['一', '二', '三'];
-  const moduleTitles = { '一': '资金托管风险', '二': 'ToS 合规风险', '三': '数据合规风险' };
-  const moduleTags = { '一': 'FUND CUSTODY', '二': 'TERMS OF SERVICE', '三': 'PRIVACY & DATA' };
-
+  const moduleDefs = [
+    { id: '一', title: '资金托管风险', tag: 'FUND CUSTODY' },
+    { id: '二', title: 'ToS 合规风险', tag: 'TERMS OF SERVICE' },
+    { id: '三', title: '数据合规风险', tag: 'PRIVACY & DATA' }
+  ];
   let html = '';
-
-  modules.forEach(m => {
-    const moduleRisks = risks.filter(r => r.module === m);
-    if (moduleRisks.length === 0) return;
-
-    html += `
-      <div class="memo-section">
-        <div class="memo-section-header">
-          <div class="section-num">${m}</div>
-          <div class="section-title">${moduleTitles[m]}</div>
-          <div class="section-tag">${moduleTags[m]}</div>
+  moduleDefs.forEach(m => {
+    const mr = risks.filter(r => r.module === m.id);
+    if (!mr.length) return;
+    html += `<div class="memo-section"><div class="memo-section-header"><div class="section-num">${m.id}</div><div class="section-title">${m.title}</div><div class="section-tag">${m.tag}</div></div>`;
+    mr.forEach(r => {
+      const lvlLabel = {high:'高风险',medium:'中风险',ok:'暂无风险'}[r.level];
+      const laws = r.laws.map(l => `<span class="law-ref">${l}</span>`).join('');
+      const sugs = r.suggestions.map(s => `<li>${s}</li>`).join('');
+      html += `<div class="risk-item ${r.level}" onclick="this.classList.toggle('open')">
+        <div class="risk-item-hd">
+          <span class="risk-lvl">${lvlLabel}</span>
+          <span class="risk-item-title">${r.title}</span>
+          <span class="risk-item-mkt">${r.markets}</span>
+          <span class="expand-ic">▾</span>
         </div>
-    `;
-
-    moduleRisks.forEach((r, i) => {
-      const lawRefs = r.laws.map(l => `<span class="law-ref">${l}</span>`).join('');
-      const suggestions = r.suggestions.map(s => `<li>${s}</li>`).join('');
-
-      html += `
-        <div class="risk-item ${r.level}" onclick="toggleRisk(this)">
-          <div class="risk-item-hd">
-            <span class="risk-lvl">${{high:'高风险',medium:'中风险',ok:'暂无风险'}[r.level]}</span>
-            <span class="risk-item-title">${r.title}</span>
-            <span class="risk-item-mkt">${r.markets}</span>
-            <span class="expand-ic">▾</span>
-          </div>
-          <div class="risk-item-bd">
-            <div class="rb-section">
-              <div class="rb-label">风险描述</div>
-              <div class="rb-text">${r.desc}</div>
-            </div>
-            ${r.laws.length > 0 ? `
-            <div class="rb-section">
-              <div class="rb-label">适用法规</div>
-              <div class="rb-text">${lawRefs}</div>
-            </div>` : ''}
-            <div class="rb-section">
-              <div class="rb-label">建议方向</div>
-              <div class="rb-text"><ul>${suggestions}</ul></div>
-            </div>
-          </div>
+        <div class="risk-item-bd">
+          <div class="rb-section"><div class="rb-label">风险描述</div><div class="rb-text">${r.desc}</div></div>
+          ${r.laws.length ? `<div class="rb-section"><div class="rb-label">适用法规</div><div class="rb-text">${laws}</div></div>` : ''}
+          <div class="rb-section"><div class="rb-label">建议方向</div><div class="rb-text"><ul>${sugs}</ul></div></div>
         </div>
-      `;
+      </div>`;
     });
-
     html += `</div>`;
   });
-
-  // catch-all module
-  const otherRisks = risks.filter(r => !['一','二','三'].includes(r.module));
-  if (otherRisks.length > 0) {
+  const other = risks.filter(r => !['一','二','三'].includes(r.module));
+  if (other.length) {
     html += `<div class="memo-section">`;
-    otherRisks.forEach(r => {
-      const suggestions = r.suggestions.map(s => `<li>${s}</li>`).join('');
-      html += `
-        <div class="risk-item ${r.level}" onclick="toggleRisk(this)">
-          <div class="risk-item-hd">
-            <span class="risk-lvl">${{high:'高风险',medium:'中风险',ok:'暂无风险'}[r.level]}</span>
-            <span class="risk-item-title">${r.title}</span>
-            <span class="risk-item-mkt">${r.markets}</span>
-            <span class="expand-ic">▾</span>
-          </div>
-          <div class="risk-item-bd">
-            <div class="rb-section">
-              <div class="rb-label">风险描述</div>
-              <div class="rb-text">${r.desc}</div>
-            </div>
-            <div class="rb-section">
-              <div class="rb-label">建议方向</div>
-              <div class="rb-text"><ul>${suggestions}</ul></div>
-            </div>
-          </div>
+    other.forEach(r => {
+      const lvlLabel = {high:'高风险',medium:'中风险',ok:'暂无风险'}[r.level];
+      const sugs = r.suggestions.map(s => `<li>${s}</li>`).join('');
+      html += `<div class="risk-item ${r.level}" onclick="this.classList.toggle('open')">
+        <div class="risk-item-hd"><span class="risk-lvl">${lvlLabel}</span><span class="risk-item-title">${r.title}</span><span class="expand-ic">▾</span></div>
+        <div class="risk-item-bd">
+          <div class="rb-section"><div class="rb-label">风险描述</div><div class="rb-text">${r.desc}</div></div>
+          <div class="rb-section"><div class="rb-label">建议方向</div><div class="rb-text"><ul>${sugs}</ul></div></div>
         </div>
-      `;
+      </div>`;
     });
     html += `</div>`;
   }
-
   document.getElementById('memo-content').innerHTML = html;
 }
 
-// ===== BUILD SIDEBAR =====
 function buildSidebar(risks) {
-  const highRisks = risks.filter(r => r.level === 'high');
-  const medRisks = risks.filter(r => r.level === 'medium');
-  const priorities = [...highRisks, ...medRisks].slice(0, 7);
-
-  const priorityItems = priorities.map((r, i) => `
+  const priorities = [...risks.filter(r=>r.level==='high'), ...risks.filter(r=>r.level==='medium')].slice(0,7);
+  const items = priorities.map((r,i) => `
     <div class="priority-item">
       <div class="priority-num">${i+1}</div>
       <div class="priority-text">
         <strong>${r.title.length > 22 ? r.title.substring(0,22)+'…' : r.title}</strong>
         <span>${r.moduleTag} · ${r.markets}</span>
       </div>
-    </div>
-  `).join('');
-
-  const sidebarHtml = `
+    </div>`).join('');
+  document.getElementById('memo-sidebar').innerHTML = `
     <div class="sidebar-card">
       <div class="sidebar-title">优先处理顺序</div>
-      ${priorityItems || '<div style="font-size:13px;color:var(--text-muted)">暂无需要优先处理的风险项</div>'}
+      ${items || '<div style="font-size:13px;color:var(--text-muted)">暂无需要优先处理的风险项</div>'}
     </div>
     <div class="next-steps-card">
       <div class="next-steps-title">下一步</div>
       <button class="next-btn" onclick="window.print()">打印 / 导出备忘录 <span class="arr">→</span></button>
       <button class="next-btn" onclick="restartForm()">重新评估 <span class="arr">→</span></button>
-    </div>
-  `;
-
-  document.getElementById('memo-sidebar').innerHTML = sidebarHtml;
+    </div>`;
 }
 
-// ===== TOGGLE RISK ITEM =====
-function toggleRisk(el) {
-  el.classList.toggle('open');
-}
-
-// ===== RESTART =====
 function restartForm() {
   document.getElementById('memo-wrap').classList.remove('visible');
-  document.getElementById('form-wrap').style.display = 'block';
-  goStep(1);
-  // reset answers
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('progress-bar').classList.remove('visible');
   Object.keys(answers).forEach(k => { answers[k] = Array.isArray(answers[k]) ? [] : null; });
   document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
   document.getElementById('q2-note').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 </body>
