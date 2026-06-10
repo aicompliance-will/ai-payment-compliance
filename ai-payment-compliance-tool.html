@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 支付合规评估 — Kinding Partners</title>
+<title>AI 支付合规评估 — Money in Motion</title>
 <style>
   :root {
     --blue: #1a5cb8;
@@ -804,14 +804,189 @@
     margin-bottom: 20px;
   }
   .ai-worker-url-note strong { color: var(--text); }
+
+  /* ===== CROSS-CHECK SECTION ===== */
+  .cross-check-section {
+    border-top: 2px solid var(--blue-pale);
+    margin-top: 32px;
+    padding-top: 28px;
+  }
+  .cross-check-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: #fef9ec;
+    color: #b7791f;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+    border: 1px solid #f6e09a;
+  }
+  .cross-check-title {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .cross-check-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 520px;
+  }
+  .cross-check-textarea {
+    width: 100%;
+    height: 160px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .cross-check-textarea:focus { border-color: var(--blue); background: white; }
+  .cross-check-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    margin: 8px 0 16px;
+  }
+  .cross-check-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #b7791f;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .cross-check-btn:hover:not(:disabled) { background: #975f14; transform: translateY(-1px); }
+  .cross-check-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+  .cross-check-spinner {
+    width: 13px; height: 13px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  .cross-check-status {
+    margin-top: 12px;
+    font-size: 13px;
+    min-height: 18px;
+  }
+  .cross-check-status.error { color: var(--red); }
+  .cross-check-status.loading { color: var(--text-muted); }
+  .cross-check-result {
+    display: none;
+    margin-top: 20px;
+    border: 1px solid #f6e09a;
+    border-radius: 4px;
+    background: #fef9ec;
+    padding: 0;
+    overflow: hidden;
+  }
+  .cross-check-result.visible { display: block; }
+  .cross-check-result-hd {
+    background: #faeeda;
+    padding: 12px 18px;
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #854f0b;
+    font-weight: 700;
+    border-bottom: 1px solid #f6e09a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cross-check-result-body {
+    padding: 18px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+    white-space: pre-wrap;
+    font-family: inherit;
+  }
+  .gap-item {
+    border-left: 3px solid #ef9f27;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    background: white;
+    border-radius: 0 4px 4px 0;
+  }
+  .gap-item.high { border-left-color: var(--red); }
+  .gap-item.medium { border-left-color: #b7791f; }
+  .gap-item-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .gap-item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .gap-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 1px 7px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .gap-badge.high { background: var(--red-pale); color: var(--red); }
+  .gap-badge.medium { background: var(--yellow-pale); color: var(--yellow); }
+  .upgrade-note {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: var(--blue-pale);
+    border: 1px solid #c5d8f5;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .upgrade-note strong { color: var(--blue); }
+
+  .home-btn {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    color: var(--blue);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .home-btn:hover { background: var(--blue); color: white; border-color: var(--blue); }
+  .home-btn.visible { display: block; }
+  @media print { .home-btn { display: none !important; } }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
+<button class="home-btn" id="home-btn" onclick="goHome()">← 返回首页</button>
 <div class="header">
   <div class="header-left">
-    <div class="firm">Kinding Partners // 合规法律服务</div>
+    <div class="firm">Money in Motion // AI 支付合规</div>
     <div class="doc-title">AI 支付合规评估</div>
   </div>
   <div class="header-right" id="header-date"></div>
@@ -1006,8 +1181,8 @@
 
   <!-- DISCLAIMER -->
   <div class="disclaimer">
-    <div>本工具由 Kinding Partners 开发，仅供参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。</div>
-    <div class="disclaimer-firm">KINDING PARTNERS © 2026</div>
+    <div>本工具由 Money in Motion 开发，仅供参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。</div>
+    <div class="disclaimer-firm">MONEY IN MOTION © 2026</div>
   </div>
 
 </div>
@@ -1885,20 +2060,6 @@
 
 </div>
 
-<!-- ==================== MEMO ==================== -->
-<div class="memo-wrap" id="memo-wrap">
-  <div class="memo-profile" id="memo-profile"></div>
-  <div class="risk-summary-bar" id="risk-summary-bar"></div>
-  <div class="memo-main">
-    <div id="memo-content"></div>
-    <div class="sidebar" id="memo-sidebar"></div>
-  </div>
-  <div class="disclaimer">
-    <div>本备忘录由 Kinding Partners 基于客户提供的业务信息生成，仅供内部参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。法规信息截至 2026 年 6 月。</div>
-    <div class="disclaimer-firm">KINDING PARTNERS © 2026</div>
-  </div>
-</div>
-
 
 <!-- ==================== MEMO ==================== -->
 <div class="memo-wrap" id="memo-wrap">
@@ -1909,8 +2070,40 @@
     <div class="sidebar" id="memo-sidebar"></div>
   </div>
   <div class="disclaimer">
-    <div>本备忘录由 Kinding Partners 基于客户提供的业务信息生成，仅供内部参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。法规信息截至 2026 年 6 月。</div>
-    <div class="disclaimer-firm">KINDING PARTNERS © 2026</div>
+    <div>本备忘录由 Money in Motion 基于客户提供的业务信息生成，仅供内部参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。法规信息截至 2026 年 6 月。</div>
+    <div class="disclaimer-firm">MONEY IN MOTION © 2026</div>
+  </div>
+
+  <!-- CROSS-CHECK SECTION -->
+  <div style="max-width:900px;margin:0 auto;padding:0 48px 64px">
+    <div class="cross-check-section" id="cross-check-section">
+      <div class="cross-check-tag">阶段二 · 付费功能</div>
+      <div class="cross-check-title">交叉检查：ToS 写的 vs 你实际在做的</div>
+      <div class="cross-check-desc">
+        粘贴你的用户协议或隐私政策，AI 会对比刚才你手填的问卷答案，找出书面表述和实际操作之间的 gap——这些 gap 才是监管最先看到的漏洞。
+      </div>
+      <textarea
+        class="cross-check-textarea"
+        id="cc-text-input"
+        placeholder="粘贴用户协议或隐私政策文本…（建议 1000 字以上）"
+      ></textarea>
+      <div class="cross-check-hint">AI 将对比你手填的问卷答案与 ToS 表述，输出差异分析报告</div>
+      <button class="cross-check-btn" id="cc-btn" onclick="runCrossCheck()">
+        <span id="cc-spinner" class="cross-check-spinner"></span>
+        <span id="cc-btn-text">开始交叉检查 →</span>
+      </button>
+      <div class="cross-check-status" id="cc-status"></div>
+      <div class="cross-check-result" id="cc-result">
+        <div class="cross-check-result-hd">
+          <span>交叉检查报告</span>
+          <span id="cc-gap-count" style="font-size:11px"></span>
+        </div>
+        <div class="cross-check-result-body" id="cc-result-body"></div>
+        <div class="upgrade-note">
+          需要针对以上 gap 修改条款？<strong>阶段三：AI 优化建议</strong>可以逐条重写，生成可直接使用的条款草稿。如需最终定稿，欢迎联系 <strong>Money in Motion</strong>（wl@kindinglaw.com）。
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1937,6 +2130,7 @@ function startForm() {
   document.getElementById('landing').style.display = 'none';
   document.getElementById('form-wrap').classList.add('visible');
   document.getElementById('progress-bar').classList.add('visible');
+  document.getElementById('home-btn').classList.add('visible');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2054,6 +2248,7 @@ function hasC() { return answers.q1 === 'c' || answers.q1 === 'both'; }
 function generateMemo() {
   document.getElementById('form-wrap').classList.remove('visible');
   document.getElementById('memo-wrap').classList.add('visible');
+  document.getElementById('home-btn').classList.add('visible');
   for (let i = 1; i <= 5; i++) {
     const ps = document.getElementById('ps-' + i);
     ps.classList.remove('active');
@@ -2425,6 +2620,7 @@ function buildSidebar(risks) {
     <div class="next-steps-card">
       <div class="next-steps-title">下一步</div>
       <button class="next-btn" onclick="window.print()">打印 / 导出备忘录 <span class="arr">→</span></button>
+      <button class="next-btn" onclick="scrollToCrossCheck()" style="background:#fef9ec;border-color:#f6e09a;color:#854f0b">交叉检查（阶段二）<span class="arr">→</span></button>
       <button class="next-btn" onclick="restartForm()">重新评估 <span class="arr">→</span></button>
     </div>`;
 }
@@ -2561,6 +2757,196 @@ function applyAIAnswers() {
 if (WORKER_URL) {
   const note = document.getElementById('ai-worker-note');
   if (note) note.style.display = 'none';
+}
+
+// ===== CROSS-CHECK (阶段二) =====
+const CC_SYSTEM_PROMPT = `你是一位专注于 AI 支付合规的资深律师助理。
+
+你的任务是：对比两组数据，找出"ToS/隐私政策书面表述"与"平台实际操作"之间的差异（gap），并分析每个 gap 的合规风险。
+
+【输入说明】
+- 问卷答案（实际操作）：用户手填，描述平台实际在做什么
+- ToS 分析答案：AI 读完 ToS/隐私政策后填写，描述条款里写了什么
+
+【输出格式】
+返回 JSON，不要任何其他文字或 Markdown 代码块：
+{
+  "gaps": [
+    {
+      "question": "题目名称（简短）",
+      "actual": "实际操作的描述",
+      "tos_says": "ToS 里写的描述",
+      "risk_level": "high|medium",
+      "risk_desc": "这个 gap 的合规风险（50字以内）"
+    }
+  ],
+  "summary": "整体评估（100字以内）",
+  "consistent_count": 若干（两组答案一致的题目数量）
+}
+
+规则：
+1. 只报告真正不一致的题目，一致的不需要列出
+2. 两个答案都是 unclear/none 的不算 gap
+3. risk_level=high：监管可直接认定违规；medium：存在争议或模糊地带
+4. 如果没有 gap，返回 gaps:[] 并在 summary 里说明`;
+
+function scrollToCrossCheck() {
+  const el = document.getElementById('cross-check-section');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function runCrossCheck() {
+  const text = document.getElementById('cc-text-input').value.trim();
+  const statusEl = document.getElementById('cc-status');
+  const resultEl = document.getElementById('cc-result');
+  const btn = document.getElementById('cc-btn');
+  const spinner = document.getElementById('cc-spinner');
+  const btnText = document.getElementById('cc-btn-text');
+
+  if (!WORKER_URL) {
+    statusEl.className = 'cross-check-status error';
+    statusEl.textContent = '⚠️ 尚未配置后端服务地址。';
+    return;
+  }
+  if (text.length < 100) {
+    statusEl.className = 'cross-check-status error';
+    statusEl.textContent = '文本太短，请粘贴完整的用户协议或隐私政策（建议 1000 字以上）。';
+    return;
+  }
+
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+  btnText.textContent = '分析中…';
+  statusEl.className = 'cross-check-status loading';
+  statusEl.textContent = '正在对比两组答案，通常需要 15–25 秒…';
+  resultEl.classList.remove('visible');
+
+  const userAnswerDesc = buildAnswerDescription(answers);
+  const prompt = `【用户手填的问卷答案（实际操作）】
+${userAnswerDesc}
+
+【需要分析的 ToS / 隐私政策文本】
+${text.substring(0, 60000)}`;
+
+  fetch(WORKER_URL + '?mode=crosscheck', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: prompt, mode: 'crosscheck', system: CC_SYSTEM_PROMPT }),
+  })
+  .then(res => res.json())
+  .then(data => {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    btnText.textContent = '开始交叉检查 →';
+    statusEl.className = 'cross-check-status';
+    statusEl.textContent = '';
+
+    if (data.error) {
+      statusEl.className = 'cross-check-status error';
+      statusEl.textContent = '分析失败：' + data.error;
+      return;
+    }
+
+    renderCrossCheckResult(data);
+  })
+  .catch(err => {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    btnText.textContent = '开始交叉检查 →';
+    statusEl.className = 'cross-check-status error';
+    statusEl.textContent = '网络错误，请检查连接后重试。';
+    console.error(err);
+  });
+}
+
+function buildAnswerDescription(a) {
+  const lines = [];
+  const q1map = {b:'企业用户(B2B)',c:'个人用户(B2C)',both:'两者都有'};
+  const q3map = {custody:'平台托管',mixed:'混合',tech:'纯技术通道'};
+  if (a.q1) lines.push(`用户类型: ${q1map[a.q1]||a.q1}`);
+  if (a.q2?.length) lines.push(`市场覆盖: ${a.q2.join(', ')}`);
+  if (a.q3) lines.push(`资金角色: ${q3map[a.q3]||a.q3}`);
+  if (a.q4?.length) lines.push(`充值方式: ${a.q4.join(', ')}`);
+  if (a.q5) lines.push(`余额定义: ${a.q5}`);
+  if (a.q6) lines.push(`法币资金流向: ${a.q6}`);
+  if (a.q7) lines.push(`稳定币托管: ${a.q7}`);
+  if (a.q9?.length) lines.push(`Agent消费方式: ${a.q9.join(', ')}`);
+  if (a.q10) lines.push(`用户授权机制: ${a.q10}`);
+  if (a.q11) lines.push(`消费限额控制: ${a.q11}`);
+  if (a.q12) lines.push(`交易记录: ${a.q12}`);
+  if (a.qkya) lines.push(`Agent身份验证: ${a.qkya}`);
+  if (a.q13g) lines.push(`Agent免责条款: ${a.q13g}`);
+  if (a.q14g) lines.push(`责任上限: ${a.q14g}`);
+  if (a.q15) lines.push(`服务终止条款: ${a.q15}`);
+  if (a.q15g) lines.push(`适用法律管辖: ${a.q15g}`);
+  if (a.q16g) lines.push(`争议处理机制: ${a.q16g}`);
+  if (a.q16g2?.length) lines.push(`平台责任边界: ${a.q16g2.join(', ')}`);
+  if (a.q19) lines.push(`用户注销条款: ${a.q19}`);
+  if (a.qd1) lines.push(`数据用于训练: ${a.qd1}`);
+  if (a.qd2) lines.push(`第三方数据共享: ${a.qd2}`);
+  if (a.qd3) lines.push(`跨境数据传输: ${a.qd3}`);
+  if (a.qd4) lines.push(`AI自动决策披露: ${a.qd4}`);
+  if (a.qd5) lines.push(`用户数据权利: ${a.qd5}`);
+  return lines.join('\n') || '（未填写问卷答案）';
+}
+
+function renderCrossCheckResult(data) {
+  const resultEl = document.getElementById('cc-result');
+  const bodyEl = document.getElementById('cc-result-body');
+  const countEl = document.getElementById('cc-gap-count');
+
+  const gaps = data.gaps || [];
+  const summary = data.summary || '';
+  const consistentCount = data.consistent_count || 0;
+
+  countEl.textContent = `发现 ${gaps.length} 个 gap · ${consistentCount} 项一致`;
+
+  let html = '';
+
+  if (summary) {
+    html += `<div style="margin-bottom:16px;font-size:13px;color:var(--text-muted);line-height:1.7;font-style:italic">${summary}</div>`;
+  }
+
+  if (gaps.length === 0) {
+    html += `<div style="padding:16px;text-align:center;color:var(--text-muted);font-size:13px">未发现明显 gap，ToS 表述与实际操作基本一致。</div>`;
+  } else {
+    gaps.forEach(g => {
+      const lvl = g.risk_level || 'medium';
+      const lvlLabel = lvl === 'high' ? '高风险' : '中风险';
+      html += `<div class="gap-item ${lvl}">
+        <div class="gap-badge ${lvl}">${lvlLabel}</div>
+        <div class="gap-item-title">${g.question}</div>
+        <div class="gap-item-desc">
+          <strong>实际操作：</strong>${g.actual}<br>
+          <strong>ToS 表述：</strong>${g.tos_says}<br>
+          <strong>风险：</strong>${g.risk_desc}
+        </div>
+      </div>`;
+    });
+  }
+
+  bodyEl.innerHTML = html;
+  resultEl.classList.add('visible');
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function goHome() {
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('form-wrap').classList.remove('visible');
+  document.getElementById('progress-bar').classList.remove('visible');
+  if (document.getElementById('memo-wrap')) {
+    document.getElementById('memo-wrap').classList.remove('visible');
+  }
+  document.getElementById('home-btn').classList.remove('visible');
+  Object.keys(answers).forEach(k => { answers[k] = Array.isArray(answers[k]) ? [] : (typeof answers[k] === 'string' ? '' : null); });
+  document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.other-input').forEach(el => { el.value = ''; });
+  document.querySelectorAll('[id$="-other-wrap"]').forEach(el => { el.style.display = 'none'; });
+  const q2note = document.getElementById('q2-note');
+  if (q2note) q2note.style.display = 'none';
+  const tosCredits = document.getElementById('tos-credits');
+  if (tosCredits) tosCredits.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function restartForm() {
