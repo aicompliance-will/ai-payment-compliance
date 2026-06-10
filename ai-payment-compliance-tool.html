@@ -632,6 +632,178 @@
     .memo-main { grid-template-columns: 1fr; }
     .sidebar { position: static; }
   }
+
+  /* ===== AI ANALYSIS SECTION ===== */
+  .ai-section {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 48px;
+  }
+  .ai-section-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .ai-section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--blue-pale);
+    color: var(--blue);
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    border: 1px solid #c5d8f5;
+  }
+  .ai-section-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .ai-section-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+  .ai-textarea-wrap {
+    position: relative;
+  }
+  .ai-textarea {
+    width: 100%;
+    height: 200px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    resize: vertical;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  .ai-textarea:focus {
+    border-color: var(--blue);
+    background: white;
+  }
+  .ai-textarea-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+  .ai-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.15s;
+    letter-spacing: -0.01em;
+  }
+  .ai-btn:hover:not(:disabled) {
+    background: var(--blue-light);
+    transform: translateY(-1px);
+  }
+  .ai-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .ai-spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .ai-status {
+    margin-top: 14px;
+    font-size: 13px;
+    min-height: 20px;
+    display: none;
+  }
+  .ai-status.error { color: var(--red); display: block; }
+  .ai-status.success { color: var(--green); display: block; }
+  .ai-status.loading { color: var(--text-muted); display: block; }
+  .ai-result-box {
+    display: none;
+    margin-top: 20px;
+    background: var(--blue-pale);
+    border: 1px solid #c5d8f5;
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+  .ai-result-box.visible { display: block; }
+  .ai-result-title {
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .ai-result-notes {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .ai-confidence {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .ai-confidence.high { background: var(--green-pale); color: var(--green); }
+  .ai-confidence.medium { background: var(--yellow-pale); color: var(--yellow); }
+  .ai-confidence.low { background: var(--red-pale); color: var(--red); }
+  .ai-apply-btn {
+    background: var(--blue);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .ai-apply-btn:hover { background: var(--blue-light); }
+  .ai-worker-url-note {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--text-muted);
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  .ai-worker-url-note strong { color: var(--text); }
 </style>
 </head>
 <body>
@@ -778,6 +950,46 @@
             <span>直接发给团队或律师，无需二次整理</span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI ANALYSIS SECTION -->
+  <div class="ai-section" id="ai-section">
+    <div class="ai-section-inner">
+      <div class="ai-section-tag">AI 辅助 · 自动分析</div>
+      <div class="ai-section-title">已有用户协议或隐私政策？<br>让 AI 帮你自动填写问卷。</div>
+      <div class="ai-section-desc">
+        把你平台的用户协议或隐私政策文本粘贴进来，AI 会阅读分析，自动推断每道题的答案，然后直接带入问卷——你只需要核对、补充，不用从头填。
+      </div>
+
+      <div class="ai-worker-url-note" id="ai-worker-note">
+        ⚠️ 功能配置中：需要先部署后端服务并填写 Worker 地址。详见 <strong>worker.js</strong> 部署说明。
+      </div>
+
+      <div class="ai-textarea-wrap">
+        <textarea
+          class="ai-textarea"
+          id="ai-text-input"
+          placeholder="粘贴用户协议（Terms of Service）或隐私政策（Privacy Policy）文本…
+
+支持中英文，建议粘贴完整原文。字数越多分析越准确。"
+        ></textarea>
+      </div>
+      <div class="ai-textarea-hint">建议字数：1,000 – 20,000 字 · 超长文本会自动截断处理</div>
+
+      <button class="ai-btn" id="ai-analyze-btn" onclick="runAIAnalysis()">
+        <span id="ai-btn-spinner" class="ai-spinner"></span>
+        <span id="ai-btn-text">AI 自动分析 →</span>
+      </button>
+
+      <div class="ai-status" id="ai-status"></div>
+
+      <div class="ai-result-box" id="ai-result-box">
+        <div class="ai-result-title">分析完成</div>
+        <div id="ai-confidence-badge" class="ai-confidence"></div>
+        <div class="ai-result-notes" id="ai-result-notes"></div>
+        <button class="ai-apply-btn" onclick="applyAIAnswers()">将结果填入问卷，开始评估 →</button>
       </div>
     </div>
   </div>
@@ -2215,6 +2427,140 @@ function buildSidebar(risks) {
       <button class="next-btn" onclick="window.print()">打印 / 导出备忘录 <span class="arr">→</span></button>
       <button class="next-btn" onclick="restartForm()">重新评估 <span class="arr">→</span></button>
     </div>`;
+}
+
+// ===== AI ANALYSIS =====
+// 部署 worker.js 到 Cloudflare Workers 后，把地址填在这里
+// 例如: const WORKER_URL = 'https://kinding-compliance.your-name.workers.dev';
+const WORKER_URL = 'https://flat-darkness-f022.liaowang5252.workers.dev';
+
+let aiParsedAnswers = null;
+
+function runAIAnalysis() {
+  const text = document.getElementById('ai-text-input').value.trim();
+  const statusEl = document.getElementById('ai-status');
+  const resultBox = document.getElementById('ai-result-box');
+  const btn = document.getElementById('ai-analyze-btn');
+  const spinner = document.getElementById('ai-btn-spinner');
+  const btnText = document.getElementById('ai-btn-text');
+
+  // Check worker URL configured
+  if (!WORKER_URL) {
+    statusEl.className = 'ai-status error';
+    statusEl.textContent = '⚠️ 尚未配置后端服务地址（WORKER_URL）。请先部署 worker.js 并填写地址。';
+    return;
+  }
+
+  if (text.length < 100) {
+    statusEl.className = 'ai-status error';
+    statusEl.textContent = '文本太短，请粘贴完整的用户协议或隐私政策内容（建议 1000 字以上）。';
+    return;
+  }
+
+  // Loading state
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+  btnText.textContent = '分析中…';
+  statusEl.className = 'ai-status loading';
+  statusEl.textContent = '正在调用 AI 分析，通常需要 10–20 秒…';
+  resultBox.classList.remove('visible');
+  aiParsedAnswers = null;
+
+  fetch(WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+  })
+  .then(res => res.json())
+  .then(data => {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    btnText.textContent = 'AI 自动分析 →';
+
+    if (data.error) {
+      statusEl.className = 'ai-status error';
+      statusEl.textContent = '分析失败：' + data.error;
+      return;
+    }
+
+    aiParsedAnswers = data.answers;
+    const conf = data.confidence || 'medium';
+    const confLabels = { high: '置信度：高', medium: '置信度：中', low: '置信度：低（建议人工核对）' };
+
+    const badge = document.getElementById('ai-confidence-badge');
+    badge.className = 'ai-confidence ' + conf;
+    badge.textContent = confLabels[conf] || conf;
+
+    document.getElementById('ai-result-notes').textContent = data.notes || '';
+    resultBox.classList.add('visible');
+    statusEl.className = 'ai-status';
+    statusEl.style.display = 'none';
+  })
+  .catch(err => {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    btnText.textContent = 'AI 自动分析 →';
+    statusEl.className = 'ai-status error';
+    statusEl.textContent = '网络错误，请检查连接后重试。';
+    console.error(err);
+  });
+}
+
+function applyAIAnswers() {
+  if (!aiParsedAnswers) return;
+  const a = aiParsedAnswers;
+
+  // Apply single-select answers — find container by id="${q}-list"
+  const singles = ['q1','q3','q5','q6','q7','q10','q11','q12','qkya',
+                   'q13g','q14g','q15','q16g','q17','q19',
+                   'qd1','qd2','qd3','qd4','qd5'];
+  singles.forEach(q => {
+    if (!a[q]) return;
+    answers[q] = a[q];
+    const container = document.getElementById(q + '-list');
+    if (!container) return;
+    container.querySelectorAll('.option-item').forEach(el => {
+      if (el.dataset.val === a[q]) {
+        el.classList.add('selected');
+      } else {
+        el.classList.remove('selected');
+      }
+    });
+  });
+
+  // Apply multi-select answers
+  const multis = ['q2','q4','q9','q16g2'];
+  multis.forEach(q => {
+    if (!a[q] || !Array.isArray(a[q])) return;
+    answers[q] = a[q];
+    const container = document.getElementById(q + '-list');
+    if (!container) return;
+    container.querySelectorAll('.option-item').forEach(el => {
+      if (a[q].includes(el.dataset.val)) {
+        el.classList.add('selected');
+      } else {
+        el.classList.remove('selected');
+      }
+    });
+  });
+
+  // Trigger visibility updates
+  updateQ6Q7Visibility();
+  if (answers.q2) {
+    const note = document.getElementById('q2-note');
+    if (note) note.style.display = answers.q2.includes('global') ? 'block' : 'none';
+  }
+  updateToSVersion();
+
+  // Hide AI section note, start form
+  startForm();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Hide worker URL note if already configured
+if (WORKER_URL) {
+  const note = document.getElementById('ai-worker-note');
+  if (note) note.style.display = 'none';
 }
 
 function restartForm() {
