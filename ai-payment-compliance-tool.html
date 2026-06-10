@@ -131,11 +131,11 @@
 
   /* MODULES */
   .modules {
-    max-width: 900px;
+    max-width: 820px;
     margin: 0 auto;
     padding: 64px 48px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
   .module-card {
@@ -381,6 +381,40 @@
     margin-bottom: 6px; line-height: 1.3;
   }
   .step-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+  .step-intro {
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--blue-pale);
+    border-left: 3px solid var(--blue);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .required-hint {
+    display: none;
+    color: #c62828;
+    font-size: 12px;
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: #ffebee;
+    border-radius: 4px;
+    border-left: 3px solid #c62828;
+  }
+  .required-hint.show { display: block; }
+  .option-list.required-error .option-item { border-color: #ef9a9a; }
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--card);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .other-input:focus { border-color: var(--blue); }
 
   .option-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
   .option-item {
@@ -620,22 +654,22 @@
   <div class="progress-divider"></div>
   <div class="progress-step" id="ps-2">
     <div class="progress-step-num">2</div>
-    <div class="progress-step-label">资金结构</div>
+    <div class="progress-step-label">资金入口</div>
   </div>
   <div class="progress-divider"></div>
   <div class="progress-step" id="ps-3">
     <div class="progress-step-num">3</div>
-    <div class="progress-step-label">ToS 合规</div>
+    <div class="progress-step-label">消费结构</div>
   </div>
   <div class="progress-divider"></div>
   <div class="progress-step" id="ps-4">
     <div class="progress-step-num">4</div>
-    <div class="progress-step-label">数据合规</div>
+    <div class="progress-step-label">用户协议</div>
   </div>
   <div class="progress-divider"></div>
   <div class="progress-step" id="ps-5">
     <div class="progress-step-num">5</div>
-    <div class="progress-step-label">生成备忘录</div>
+    <div class="progress-step-label">数据合规</div>
   </div>
 </div>
 
@@ -648,45 +682,60 @@
     <div class="hero-title">AI 支付公司上线前，<br>先跑一遍合规。</div>
     <div class="hero-desc">
       你造了一套让 AI agent 收付款的基础设施。<br>
-      这份问卷帮你判断：资金托管、用户协议、数据合规，<br>
-      三条线上合规点在哪里，应该先处理什么。
+      这份问卷沿着资金的完整链路——钱怎么进来、agent 怎么花、<br>
+      条款怎么写、数据去哪了——帮你找出合规风险，告诉你先处理什么。
     </div>
     <button class="hero-btn" onclick="startForm()">开始评估 →</button>
-    <div class="hero-note">约 10 分钟 · 完成后生成可打印的风险备忘录</div>
+    <div class="hero-note">约 12 分钟 · 完成后生成可打印的风险备忘录</div>
   </div>
 
   <!-- MODULES -->
   <div class="modules">
     <div class="module-card">
       <div class="module-icon">💰</div>
-      <div class="module-title">资金托管</div>
-      <div class="module-desc">你的钱在谁手里？托管结构决定你需要什么牌照，以及出了问题谁来兜底。</div>
+      <div class="module-title">资金入口</div>
+      <div class="module-desc">用户的钱怎么进来、由谁控制？托管结构决定你需要什么支付、托管牌照，以及出了问题谁来兜底。</div>
       <div class="module-tags">
         <span class="module-tag">SVF</span>
         <span class="module-tag">EMI</span>
         <span class="module-tag">MAS PSA</span>
         <span class="module-tag">GENIUS Act</span>
+        <span class="module-tag">非托管钱包</span>
+      </div>
+    </div>
+    <div class="module-card">
+      <div class="module-icon">🤖</div>
+      <div class="module-title">Agent 消费与授权</div>
+      <div class="module-desc">agent 怎么替用户花钱？授权边界、身份验证、限额、交易记录——这是 agentic payment 区别于普通支付的核心。</div>
+      <div class="module-tags">
+        <span class="module-tag">授权边界</span>
+        <span class="module-tag">KYA</span>
+        <span class="module-tag">PCI DSS</span>
+        <span class="module-tag">3DS / SCA</span>
+        <span class="module-tag">协议层</span>
       </div>
     </div>
     <div class="module-card">
       <div class="module-icon">📄</div>
-      <div class="module-title">用户协议 ToS</div>
-      <div class="module-desc">你的条款在保护你，还是在给你埋坑？Credits 定性、退款机制、仲裁条款都有说道。</div>
+      <div class="module-title">用户协议</div>
+      <div class="module-desc">你的条款在保护你，还是在给你埋坑？agent 责任归属、Credits 定性、平台边界都有说道。</div>
       <div class="module-tags">
+        <span class="module-tag">Agent 责任</span>
         <span class="module-tag">Credits 定性</span>
-        <span class="module-tag">退款机制</span>
+        <span class="module-tag">第三方切割</span>
         <span class="module-tag">责任上限</span>
-        <span class="module-tag">仲裁条款</span>
+        <span class="module-tag">Agent 代签</span>
       </div>
     </div>
     <div class="module-card">
       <div class="module-icon">🔒</div>
       <div class="module-title">数据合规</div>
-      <div class="module-desc">你的数据流向说得清楚吗？prompt 数据、跨境传输、AI 自动决策，每个都有对应义务。</div>
+      <div class="module-desc">你的数据流向说得清楚吗？prompt 数据是否用于训练、跨境传输、AI 自动决策，每个都有对应义务。</div>
       <div class="module-tags">
         <span class="module-tag">GDPR</span>
         <span class="module-tag">PIPL</span>
-        <span class="module-tag">DPIA</span>
+        <span class="module-tag">模型训练</span>
+        <span class="module-tag">数据出境</span>
         <span class="module-tag">EU AI Act</span>
       </div>
     </div>
@@ -701,7 +750,8 @@
         <ul class="for-who-list">
           <li>AI agent 的支付 API 或 SDK</li>
           <li>支持稳定币或法币的 agent 钱包</li>
-          <li>面向开发者的支付基础设施平台</li>
+          <li>为 agent 发行虚拟卡 / 实体卡的平台</li>
+          <li>自建或接入支付协议（x402、ACP、MPP 等）</li>
           <li>让 AI 自动触发交易的底层服务</li>
         </ul>
       </div>
@@ -736,7 +786,7 @@
   <div class="cta-bottom">
     <div class="cta-bottom-title">准备好了吗？</div>
     <div class="cta-bottom-desc">
-      问卷大约 10 分钟，不需要提前准备材料。<br>
+      问卷大约 12 分钟，不需要提前准备材料。<br>
       回答完就能看到你的合规风险全貌。
     </div>
     <button class="cta-btn" onclick="startForm()">开始评估 →</button>
@@ -755,37 +805,39 @@
 
   <!-- STEP 1 -->
   <div class="step-panel active" id="step-1">
+    <div class="step-title">步骤 1 / 5 · 基础信息</div>
+    <div class="step-intro">确定平台受哪些司法管辖区监管、用户群体决定哪些消费者保护法强制适用。这两个维度是后续所有风险判断的前提。</div>
     <div style="margin-bottom:32px">
-      <div class="step-title">步骤 1 / 4 · 基础信息</div>
       <div class="step-question">你的平台主要服务哪类用户？</div>
-      <div class="step-hint">用户类型决定消费者保护法的适用范围</div>
+      <div class="step-hint">用户类型决定你要遵守哪些消费者保护规定</div>
       <div class="option-list" id="q1-list">
         <div class="option-item" data-val="c" onclick="selectSingle('q1',this)">
           <div class="option-check"></div>
           <div class="option-text">
             <div class="option-label">个人用户（C端）</div>
-            <div class="option-desc">直接面向消费者，消费者保护法强制适用</div>
+            <div class="option-desc">直接面向消费者，退款权、信息披露、不公平条款规制均强制适用</div>
           </div>
         </div>
         <div class="option-item" data-val="b" onclick="selectSingle('q1',this)">
           <div class="option-check"></div>
           <div class="option-text">
             <div class="option-label">企业用户（B端）</div>
-            <div class="option-desc">面向企业客户，合同自由度较高</div>
+            <div class="option-desc">面向企业客户，合同自由度较高，企业身份核验（KYB）和反洗钱合规是主要义务</div>
           </div>
         </div>
         <div class="option-item" data-val="both" onclick="selectSingle('q1',this)">
           <div class="option-check"></div>
           <div class="option-text">
             <div class="option-label">两者都有</div>
-            <div class="option-desc">需要分别处理两套合规义务</div>
+            <div class="option-desc">C端和B端合规义务不能混用同一套用户协议，需分别处理消费者保护和企业合规两套要求</div>
           </div>
         </div>
       </div>
+      <div class="required-hint" id="q1-hint">请选择平台服务的用户类型</div>
     </div>
     <div style="margin-bottom:32px">
       <div class="step-question">你的平台用户主要来自哪里？</div>
-      <div class="step-hint">可多选。不确定可选"不清楚"，将按最宽泛范围评估</div>
+      <div class="step-hint">可多选，决定哪些地区的法律对你有约束力</div>
       <div class="option-list multi" id="q2-list">
         <div class="option-item" data-val="cn" onclick="selectMulti('q2',this)">
           <div class="option-check"></div>
@@ -819,19 +871,16 @@
         </div>
         <div class="option-item" data-val="global" onclick="selectMulti('q2',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">全球都有，无特别集中市场</div></div>
-        </div>
-        <div class="option-item" data-val="unclear" onclick="selectMulti('q2',this)">
-          <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">不清楚，暂无用户地理分布数据</div>
-            <div class="option-desc">将按最宽泛范围（所有市场）评估</div>
+            <div class="option-label">全球都有，无特别集中市场</div>
+            <div class="option-desc">将按所有主要市场的合规要求评估</div>
           </div>
         </div>
       </div>
       <div class="note-box" id="q2-note" style="display:none">
-        选择"全球"或"不清楚"将按所有市场的合规要求评估，建议尽快完成用户地理分布审计。
+        选择"全球"将按所有市场的合规要求评估，建议尽快完成用户地理分布审计。
       </div>
+      <div class="required-hint" id="q2-hint">请至少选择一个用户市场</div>
     </div>
     <div class="nav-row">
       <button class="btn btn-ghost" onclick="backToLanding()">← 返回</button>
@@ -841,77 +890,90 @@
 
   <!-- STEP 2 -->
   <div class="step-panel" id="step-2">
+    <div class="step-title">步骤 2 / 5 · 资金入口</div>
+    <div class="step-intro">判断用户的钱如何进入平台、由谁控制。这决定平台是否需要支付、托管牌照以及资金隔离义务，是整个合规评估最核心的一步。</div>
     <div style="margin-bottom:32px">
-      <div class="step-title">步骤 2 / 4 · 资金结构</div>
-      <div class="step-question">平台在资金流转中扮演什么角色？</div>
-      <div class="step-hint">这决定平台的托管义务和牌照门槛</div>
-      <div class="option-list" id="q3-list">
-        <div class="option-item" data-val="tech" onclick="selectSingle('q3',this)">
-          <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">纯技术层</div>
-            <div class="option-desc">平台不接触资金，由第三方持牌机构执行支付</div>
-          </div>
-        </div>
-        <div class="option-item" data-val="custody" onclick="selectSingle('q3',this)">
-          <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">平台直接持有用户资金</div>
-            <div class="option-desc">法币余额、Credits 或稳定币由平台账户托管</div>
-          </div>
-        </div>
-        <div class="option-item" data-val="mixed" onclick="selectSingle('q3',this)">
-          <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">混合模式</div>
-            <div class="option-desc">部分业务是技术层，部分业务持有资金</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-bottom:32px">
-      <div class="step-question">用户通过什么方式充值？</div>
+      <div class="step-question">用户通过什么方式为 Agent 提供资金？</div>
       <div class="step-hint">可多选</div>
       <div class="option-list multi" id="q4-list">
         <div class="option-item" data-val="fiat" onclick="selectMulti('q4',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">法币</div>
-            <div class="option-desc">信用卡 / 银行转账</div>
+            <div class="option-label">法币充值</div>
+            <div class="option-desc">用户预先充值，资金进入平台账户或第三方机构账户变成余额——如通过 Stripe 收单</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="card" onclick="selectMulti('q4',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">绑卡直刷</div>
+            <div class="option-desc">用户绑定信用卡或借记卡，agent 消费时直接扣款，无需预先充值</div>
           </div>
         </div>
         <div class="option-item" data-val="stable" onclick="selectMulti('q4',this)">
           <div class="option-check"></div>
           <div class="option-text">
             <div class="option-label">稳定币</div>
-            <div class="option-desc">USDC / USDT 等</div>
+            <div class="option-desc">用户转入 USDC / USDT 等稳定币</div>
           </div>
         </div>
         <div class="option-item" data-val="none" onclick="selectMulti('q4',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">不涉及充值</div>
-            <div class="option-desc">纯技术层，用户无需预存资金</div>
+            <div class="option-label">不涉及</div>
+            <div class="option-desc">纯技术层，平台不参与资金安排，每次交易由用户或第三方直接发起</div>
           </div>
+        </div>
+      </div>
+      <div class="required-hint" id="q4-hint">请至少选择一种资金方式</div>
+    </div>
+    <div style="margin-bottom:32px" id="q6-fiat-wrap" style="display:none">
+      <div class="step-question">法币充值后，资金流向哪里？</div>
+      <div class="step-hint">决定平台是否直接持有用户的钱</div>
+      <div class="option-list" id="q6-list">
+        <div class="option-item" data-val="platform-custody" onclick="selectSingle('q6',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">进入平台账户，变成余额 / Credits</div>
+            <div class="option-desc">平台直接持有用户资金，用户充值后在平台账本上产生余额——可能触发资金托管义务（资金隔离、储值监管等）</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="third-party-hold" onclick="selectSingle('q6',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">由第三方代为收款，平台不直接持有</div>
+            <div class="option-desc">如 Stripe 作为收单方，资金停留在 Stripe 账户——需在用户协议里说明这个安排</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="unclear" onclick="selectSingle('q6',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有明确定义</div></div>
         </div>
       </div>
     </div>
     <div style="margin-bottom:32px" id="q5-wrap">
-      <div class="step-question">充值后的余额，在 ToS 里如何定义？</div>
-      <div class="step-hint">定性方式直接影响监管适用性</div>
+      <div class="step-question">充值后的余额，在用户协议里如何定义？</div>
+      <div class="step-hint">法币充值后的余额性质决定监管适用性——名称叫什么不重要，用户协议怎么定义才重要</div>
       <div class="option-list" id="q5-list">
-        <div class="option-item" data-val="credits" onclick="selectSingle('q5',this)">
+        <div class="option-item" data-val="no-cash" onclick="selectSingle('q5',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">积分 / Credits / 非货币</div>
-            <div class="option-desc">ToS 声明不是法币，无现金价值</div>
+            <div class="option-label">用户协议明确写明：余额不是真钱，不能提现</div>
+            <div class="option-desc">明确限定只能在平台内使用，不能换成现金</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="service-quota" onclick="selectSingle('q5',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">定义为：购买平台服务的使用额度</div>
+            <div class="option-desc">只能用于购买平台自己的服务，不能在其他地方使用</div>
           </div>
         </div>
         <div class="option-item" data-val="prepaid" onclick="selectSingle('q5',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">预付款 / 储值</div>
-            <div class="option-desc">明确定性为预付款，接受对应监管</div>
+            <div class="option-label">定义为预付款 / 储值</div>
+            <div class="option-desc">接受预付款或储值相关的监管要求</div>
           </div>
         </div>
         <div class="option-item" data-val="unclear" onclick="selectSingle('q5',this)">
@@ -919,6 +981,58 @@
           <div class="option-text"><div class="option-label">没有明确定义</div></div>
         </div>
       </div>
+    </div>
+    <div style="margin-bottom:32px" id="q7-stable-wrap" style="display:none">
+      <div class="step-question">稳定币由谁托管？</div>
+      <div class="step-hint">决定平台是否控制用户的资金</div>
+      <div class="option-list" id="q7-list">
+        <div class="option-item" data-val="noncustodial" onclick="selectSingle('q7',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">用户自托管</div>
+            <div class="option-desc">用户自己持有钱包私钥，平台无法动用——如使用 Privy 嵌入式钱包</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="platform-wallet" onclick="selectSingle('q7',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">平台托管</div>
+            <div class="option-desc">平台控制私钥，代为保管用户资金——可能需要相关托管牌照</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="unclear" onclick="selectSingle('q7',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有明确定义</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:32px">
+      <div class="step-question">平台在资金流转中扮演什么角色？</div>
+      <div class="step-hint">综合以上回答，确定平台的资金合规义务</div>
+      <div class="option-list" id="q3-list">
+        <div class="option-item" data-val="tech" onclick="selectSingle('q3',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">纯技术层</div>
+            <div class="option-desc">平台不接触资金，由第三方持牌机构（如 Stripe）执行实际收付款</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="custody" onclick="selectSingle('q3',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">平台直接持有用户资金</div>
+            <div class="option-desc">法币余额或稳定币由平台账户/钱包托管，平台控制资金</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="mixed" onclick="selectSingle('q3',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">混合模式</div>
+            <div class="option-desc">部分业务不接触资金（如链上直接结算），部分业务持有用户余额</div>
+          </div>
+        </div>
+      </div>
+      <div class="required-hint" id="q3-hint">请选择平台在资金流转中的角色</div>
     </div>
     <div class="nav-row">
       <button class="btn btn-ghost" onclick="goStep(1)">← 上一步</button>
@@ -928,106 +1042,419 @@
 
   <!-- STEP 3 -->
   <div class="step-panel" id="step-3">
-    <div class="step-title">步骤 3 / 4 · ToS 合规</div>
+    <div class="step-title">步骤 3 / 5 · 消费结构</div>
+    <div class="step-intro">判断 AI agent 如何代替用户消费、用户是否有实质性授权、出了问题是否有证据可用。授权链路和可审计性是 agentic payment 特有的合规风险点。</div>
     <div style="margin-bottom:24px">
-      <div class="step-question">退款机制</div>
-      <div class="step-hint">针对用户余额 / Credits 的退款安排</div>
-      <div class="option-list" id="q6-list">
-        <div class="option-item" data-val="no-refund" onclick="selectSingle('q6',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">不可退款，无任何例外条款</div></div>
-        </div>
-        <div class="option-item" data-val="partial" onclick="selectSingle('q6',this)">
+      <div class="step-question">Agent 通过什么方式消费？</div>
+      <div class="step-hint">可多选</div>
+      <div class="option-list multi" id="q9-list">
+        <div class="option-item" data-val="card" onclick="selectMulti('q9',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">不可退款，但有部分例外情形</div>
-            <div class="option-desc">如平台终止服务、严重故障等</div>
+            <div class="option-label">卡产品</div>
+            <div class="option-desc">平台为 agent 发行虚拟卡或实体卡，走 Visa/Mastercard 轨道消费——如 Proxy、Nekuda、FluxA AgentCard</div>
+          </div>
+          <div class="option-key">PCI DSS · BIN</div>
+        </div>
+        <div class="option-item" data-val="protocol" onclick="selectMulti('q9',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">支付协议</div>
+            <div class="option-desc">通过 MPP、x402、ACP、AP2 等协议发起链上微支付——如 Skyfire KYAPay、Nevermined x402</div>
+          </div>
+          <div class="option-key">协议层合规</div>
+        </div>
+        <div class="option-item" data-val="onchain" onclick="selectMulti('q9',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">直接链上转账</div>
+            <div class="option-desc">Agent 钱包直接向商户地址转账，不经过协议层</div>
           </div>
         </div>
-        <div class="option-item" data-val="refund" onclick="selectSingle('q6',this)">
+        <div class="option-item" data-val="thirdparty" onclick="selectMulti('q9',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">可以退款，有明确退款流程</div></div>
+          <div class="option-text">
+            <div class="option-label">接入第三方标准支付</div>
+            <div class="option-desc">通过 Stripe、PayPal 等标准支付处理商发起支付</div>
+          </div>
         </div>
-        <div class="option-item" data-val="none" onclick="selectSingle('q6',this)">
+        <div class="option-item" data-val="other-consume" onclick="selectMulti('q9',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">ToS 里没有提到退款</div></div>
+          <div class="option-text">
+            <div class="option-label">其他</div>
+          </div>
+        </div>
+      </div>
+      <div id="q9-other-wrap" style="display:none; margin-top:12px">
+        <input type="text" id="q9-other-text" class="other-input" placeholder="请描述消费方式..." oninput="answers.q9other=this.value">
+      </div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="step-question">用户如何授权 Agent 代其消费？</div>
+      <div class="step-hint">授权机制的完整程度决定争议时的责任归属和举证能力</div>
+      <div class="option-list" id="q10-list">
+        <div class="option-item" data-val="structured" onclick="selectSingle('q10',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有明确授权边界</div>
+            <div class="option-desc">用户设定了金额上限、有效期、可消费范围等约束，agent 只能在边界内行动——授权链路可追溯，争议时举证最强</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="partial" onclick="selectSingle('q10',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有部分约束</div>
+            <div class="option-desc">有金额上限或全局限额，但没有商户范围或有效期约束——如 Skyfire 的 Access Authorization、Payman 的 spending limits</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="natural" onclick="selectSingle('q10',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">只有模糊指令</div>
+            <div class="option-desc">如"帮我完成这个任务"，没有金额或范围约束，出了问题责任难以界定</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="api-key" onclick="selectSingle('q10',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">API key 即授权</div>
+            <div class="option-desc">平台将 API key 的使用视为用户的全权授权，agent 的所有行为均视为用户授权——无授权边界，责任全归用户</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('q10',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有明确授权机制</div></div>
+        </div>
+        <div class="option-item" data-val="other-mandate" onclick="selectSingle('q10',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">其他</div></div>
+        </div>
+      </div>
+      <div id="q10-other-wrap" style="display:none; margin-top:12px">
+        <input type="text" id="q10-other-text" class="other-input" placeholder="请描述授权机制..." oninput="answers.q10other=this.value">
+      </div>
+      <div class="required-hint" id="q10-hint">请选择平台的 agent 授权机制</div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="step-question">平台有没有消费限额控制？</div>
+      <div class="step-hint">技术层面的限额，比用户协议条款更有力的保护</div>
+      <div class="option-list" id="q11-list">
+        <div class="option-item" data-val="mandate-bound" onclick="selectSingle('q11',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有限额，绑定每次授权约束</div>
+            <div class="option-desc">每笔消费受用户设定的授权约束限制，超出即拒绝——如 Proxy 的"$50 硬上限：钱不在那里，就花不出去"</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="global" onclick="selectSingle('q11',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有全局限额，但不绑定每次具体授权</div>
+            <div class="option-desc">平台层面有总量控制，但单笔无约束</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('q11',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有限额控制</div></div>
+        </div>
+        <div class="option-item" data-val="other-limit" onclick="selectSingle('q11',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">其他</div></div>
+        </div>
+      </div>
+      <div id="q11-other-wrap" style="display:none; margin-top:12px">
+        <input type="text" id="q11-other-text" class="other-input" placeholder="请描述限额控制方式..." oninput="answers.q11other=this.value">
+      </div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="step-question">Agent 消费后有没有可追溯的交易记录？</div>
+      <div class="step-hint">出了问题，记录就是证据</div>
+      <div class="option-list" id="q12-list">
+        <div class="option-item" data-val="full" onclick="selectSingle('q12',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">完整记录</div>
+            <div class="option-desc">交易哈希/ID、时间、金额、商户、对应的授权记录均有记录，可作为争议举证材料</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="partial" onclick="selectSingle('q12',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">部分记录</div>
+            <div class="option-desc">有基础流水，但缺少授权记录引用或商户身份信息</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('q12',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有记录</div></div>
+        </div>
+        <div class="option-item" data-val="other-record" onclick="selectSingle('q12',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">其他</div></div>
+        </div>
+      </div>
+      <div id="q12-other-wrap" style="display:none; margin-top:12px">
+        <input type="text" id="q12-other-text" class="other-input" placeholder="请描述交易记录方式..." oninput="answers.q12other=this.value">
+      </div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="step-question">平台如何验证发起支付的 Agent 身份？</div>
+      <div class="step-hint">确认发起支付的 agent 是真实授权的，而不是被冒充或盗用的——agent 身份伪造是真实威胁</div>
+      <div class="option-list" id="qkya-list">
+        <div class="option-item" data-val="crypto" onclick="selectSingle('qkya',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有密码学 / token 验证机制</div>
+            <div class="option-desc">通过签名、token 等技术手段验证 agent 身份是否合法</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="human-review" onclick="selectSingle('qkya',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">靠人工复核</div>
+            <div class="option-desc">高风险或大额交易转人工确认 agent 合法性——务实的过渡方案</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="credential-only" onclick="selectSingle('qkya',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">只靠 API key 或授权凭证</div>
+            <div class="option-desc">没有独立的 agent 身份验证，凭证持有即视为合法——凭证泄露或 agent 被操控时无保护</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('qkya',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有任何 agent 身份验证机制</div></div>
+        </div>
+        <div class="option-item" data-val="other-kya" onclick="selectSingle('qkya',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">其他</div></div>
+        </div>
+      </div>
+      <div id="qkya-other-wrap" style="display:none; margin-top:12px">
+        <input type="text" id="qkya-other-text" class="other-input" placeholder="请描述 agent 身份验证方式..." oninput="answers.qkyaother=this.value">
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-ghost" onclick="goStep(2)">← 上一步</button>
+      <button class="btn btn-primary" onclick="goStep(4)">下一步 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-panel" id="step-4">
+    <div class="step-title">步骤 4 / 5 · 用户协议合规</div>
+    <div class="step-intro">逐项检查平台用户协议是否覆盖了 agentic payment 场景下的关键条款。用户协议写不清楚，出了问题平台承担全部风险。</div>
+
+    <!-- ===== Agent 相关三题（所有平台）===== -->
+    <div style="margin-bottom:24px">
+      <div class="step-question">AI agent 出了问题，用户协议怎么分配责任？</div>
+      <div class="step-hint">agent 越权消费或执行错误，责任在平台还是用户，用户协议需要说清楚</div>
+      <div class="option-list" id="q14g-list">
+        <div class="option-item" data-val="user-full-indemnify" onclick="selectSingle('q14g',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">用户负完整责任，且需赔偿平台因此受到的损失</div>
+            <div class="option-desc">行业主流做法——持有 API key 就视为授权，用户还需赔偿平台因此产生的第三方损失</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="user-full-no-indemnify" onclick="selectSingle('q14g',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">用户负完整责任，但无赔偿义务</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="platform-limited" onclick="selectSingle('q14g',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">平台对自身系统缺陷导致的 agent 异常承担有限责任</div>
+            <div class="option-desc">区分平台缺陷 vs 用户授权范围内的 agent 行为</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('q14g',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">用户协议对此没有说明</div></div>
+        </div>
+      </div>
+      <div class="required-hint" id="q14g-hint">请选择用户协议对 agent 行为责任的处理方式</div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="step-question">AI agent 会不会替用户自动接受条款？</div>
+      <div class="step-hint">有些平台让 agent 自动同意用户协议，用户根本不知道——这在法律上效力很不确定</div>
+      <div class="option-list" id="q15-list">
+        <div class="option-item" data-val="no" onclick="selectSingle('q15',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">不涉及，合同均由用户本人签署</div></div>
+        </div>
+        <div class="option-item" data-val="user-authorized" onclick="selectSingle('q15',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有，但用户事先明确授权 agent 代签</div>
+            <div class="option-desc">用户主动勾选或签署了 agent 代理授权协议，授权链路有记录</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="auto" onclick="selectSingle('q15',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有，agent 自动接受条款，用户不感知</div>
+            <div class="option-desc">agent 自动同意用户协议，用户完全不知情——这类做法在法律上效力高度不确定</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="unclear" onclick="selectSingle('q15',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">不确定 / 用户协议未说明</div></div>
         </div>
       </div>
     </div>
     <div style="margin-bottom:24px">
-      <div class="step-question">账户暂停条款</div>
-      <div class="step-hint">平台触发暂停的条件是否有客观标准</div>
-      <div class="option-list" id="q7-list">
-        <div class="option-item" data-val="objective" onclick="selectSingle('q7',this)">
+      <div class="step-question">agent 越权或出错了，用户有没有申诉路径？</div>
+      <div class="step-hint">用户协议有没有说明出了问题如何申诉或退款</div>
+      <div class="option-list" id="q16g-list">
+        <div class="option-item" data-val="mechanism" onclick="selectSingle('q16g',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">有客观标准</div>
-            <div class="option-desc">明确列出违规情形，条件清晰</div>
+            <div class="option-label">有明确机制</div>
+            <div class="option-desc">区分平台系统缺陷和 agent 正常执行两种情形，有明确申诉路径</div>
           </div>
         </div>
-        <div class="option-item" data-val="subjective" onclick="selectSingle('q7',this)">
+        <div class="option-item" data-val="user-risk" onclick="selectSingle('q16g',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">包含主观条款</div>
-            <div class="option-desc">如"平台认为存在风险"等表述</div>
+            <div class="option-label">统一归为用户风险，无补救路径</div>
+            <div class="option-desc">所有 agent 行为都归为用户责任，平台不承担</div>
           </div>
         </div>
-        <div class="option-item" data-val="both" onclick="selectSingle('q7',this)">
+        <div class="option-item" data-val="none" onclick="selectSingle('q16g',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">两者都有</div></div>
+          <div class="option-text"><div class="option-label">用户协议完全没有涉及</div></div>
         </div>
-        <div class="option-item" data-val="unclear" onclick="selectSingle('q7',this)">
+      </div>
+    </div>
+
+    <!-- ===== Credits 专项（有余额/托管平台额外显示）===== -->
+    <div id="tos-credits">
+      <div style="margin-bottom:24px">
+        <div class="step-question">用户对余额 / Credits 有哪些处置权？</div>
+        <div class="step-hint">退款条件、账户暂停处理、争议解决三项合并判断</div>
+        <div class="option-list" id="q14c-list">
+          <div class="option-item" data-val="protected" onclick="selectSingle('q14c',this)">
+            <div class="option-check"></div>
+            <div class="option-text">
+              <div class="option-label">完整保护</div>
+              <div class="option-desc">有退款条件（如平台终止服务）、暂停期间余额有明确处理条款、有争议解决路径</div>
+            </div>
+          </div>
+          <div class="option-item" data-val="partial" onclick="selectSingle('q14c',this)">
+            <div class="option-check"></div>
+            <div class="option-text">
+              <div class="option-label">部分保护</div>
+              <div class="option-desc">三项中有一两项，但不完整</div>
+            </div>
+          </div>
+          <div class="option-item" data-val="none" onclick="selectSingle('q14c',this)">
+            <div class="option-check"></div>
+            <div class="option-text">
+              <div class="option-label">没有保护</div>
+              <div class="option-desc">不可退款无例外、暂停不说明、无争议机制</div>
+            </div>
+          </div>
+          <div class="option-item" data-val="unclear" onclick="selectSingle('q14c',this)">
+            <div class="option-check"></div>
+            <div class="option-text"><div class="option-label">用户协议未说明</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 平台层面三题（所有平台）===== -->
+    <div style="margin-bottom:24px">
+      <div class="step-question">服务中断时，用户协议说了平台承担什么责任吗？</div>
+      <div class="step-hint">决定出了问题用户能不能向平台追责</div>
+      <div class="option-list" id="q13g-list">
+        <div class="option-item" data-val="sla" onclick="selectSingle('q13g',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">ToS 里没有说明</div></div>
+          <div class="option-text">
+            <div class="option-label">有明确承诺，说明了故障时的补偿或通知机制</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="limited" onclick="selectSingle('q13g',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有免责条款，但平台自己的严重过失不能免责</div>
+            <div class="option-desc">行业常见做法，相对合理</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="full-disclaimer" onclick="selectSingle('q13g',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">全面免责，包括平台自己的问题导致的中断</div>
+            <div class="option-desc">如随时可以停服且不赔偿——在欧盟/英国可能被认定为不公平条款</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('q13g',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">用户协议里没有相关条款</div></div>
         </div>
       </div>
     </div>
     <div style="margin-bottom:24px">
-      <div class="step-question">暂停期间余额处理</div>
-      <div class="option-list" id="q8-list">
-        <div class="option-item" data-val="clear" onclick="selectSingle('q8',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">ToS 有明确余额处理条款</div></div>
-        </div>
-        <div class="option-item" data-val="freeze" onclick="selectSingle('q8',this)">
+      <div class="step-question">第三方服务出了问题，用户协议划清了平台的责任边界吗？</div>
+      <div class="step-hint">平台使用的 AI 模型、支付处理商等第三方出故障，用户协议有没有说清楚不是平台的责任</div>
+      <div class="option-list" id="q15g-list">
+        <div class="option-item" data-val="clear" onclick="selectSingle('q15g',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">余额冻结，暂停解除后恢复</div>
-            <div class="option-desc">无明确退还或处理条款</div>
+            <div class="option-label">明确说了：第三方出问题是第三方的事，平台不担责</div>
+            <div class="option-desc">行业标杆做法，用户协议中明确说明平台不为第三方服务背书</div>
           </div>
         </div>
-        <div class="option-item" data-val="none" onclick="selectSingle('q8',this)">
+        <div class="option-item" data-val="vague" onclick="selectSingle('q15g',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">ToS 里没有说明</div></div>
+          <div class="option-text">
+            <div class="option-label">有提及，但边界模糊</div>
+            <div class="option-desc">未明确说明第三方出了问题平台是否负责</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('q15g',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有相关说明</div></div>
         </div>
       </div>
     </div>
     <div style="margin-bottom:24px">
-      <div class="step-question">责任上限与争议解决</div>
-      <div class="option-list" id="q9-list">
-        <div class="option-item" data-val="low-cap-arb" onclick="selectSingle('q9',this)">
+      <div class="step-question">平台边界条款完整性</div>
+      <div class="step-hint">可多选</div>
+      <div class="option-list multi" id="q16g2-list">
+        <div class="option-item" data-val="sanctions" onclick="selectMulti('q16g2',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">极低责任上限 + 强制仲裁，无消费者豁免</div>
-            <div class="option-desc">如 $500 上限，禁止集体诉讼</div>
+            <div class="option-label">有制裁合规条款（禁止向受制裁地区/个人提供服务）</div>
+            <div class="option-desc">明确写明平台不为受制裁国家或个人提供服务</div>
           </div>
         </div>
-        <div class="option-item" data-val="arb-exemption" onclick="selectSingle('q9',this)">
+        <div class="option-item" data-val="force-majeure" onclick="selectMulti('q16g2',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">强制仲裁，但有消费者豁免条款</div></div>
+          <div class="option-text">
+            <div class="option-label">有不可抗力条款</div>
+            <div class="option-desc">覆盖网络中断、监管政策变化、自然灾害等超出控制的情形</div>
+          </div>
         </div>
-        <div class="option-item" data-val="local-court" onclick="selectSingle('q9',this)">
+        <div class="option-item" data-val="liability-cap" onclick="selectSingle('q16g2',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">允许用户在所在地法院起诉</div></div>
+          <div class="option-text">
+            <div class="option-label">有明确责任上限金额</div>
+            <div class="option-desc">用户协议写明了平台最多赔多少钱，如"不超过用户过去12个月支付费用"</div>
+          </div>
         </div>
-        <div class="option-item" data-val="none" onclick="selectSingle('q9',this)">
+        <div class="option-item" data-val="none" onclick="selectMulti('q16g2',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">没有争议解决条款</div></div>
+          <div class="option-text"><div class="option-label">以上均无</div></div>
         </div>
       </div>
     </div>
     <div style="margin-bottom:24px">
       <div class="step-question">第三方服务商披露</div>
+      <div class="step-hint">用户协议有没有告知用户平台依赖哪些第三方服务（AI 模型、支付处理商等）</div>
       <div class="option-list" id="q10-list">
         <div class="option-item" data-val="full" onclick="selectSingle('q10',this)">
           <div class="option-check"></div>
@@ -1043,99 +1470,203 @@
         </div>
       </div>
     </div>
-    <div class="nav-row">
-      <button class="btn btn-ghost" onclick="goStep(2)">← 上一步</button>
-      <button class="btn btn-primary" onclick="goStep(4)">下一步 →</button>
-    </div>
-  </div>
-
-  <!-- STEP 4 -->
-  <div class="step-panel" id="step-4">
-    <div class="step-title">步骤 4 / 4 · 数据合规</div>
     <div style="margin-bottom:24px">
-      <div class="step-question">平台有没有用 AI 做自动化决策？</div>
-      <div class="step-hint">如自动触发支付、风控拦截、额度判断等</div>
-      <div class="option-list" id="q11-list">
-        <div class="option-item" data-val="yes" onclick="selectSingle('q11',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">有</div></div>
-        </div>
-        <div class="option-item" data-val="no" onclick="selectSingle('q11',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">没有</div></div>
-        </div>
-        <div class="option-item" data-val="planned" onclick="selectSingle('q11',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">计划加入</div></div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-bottom:24px">
-      <div class="step-question">Privacy Policy 里有没有告知用户 AI 在替他们做决策？</div>
-      <div class="option-list" id="q12-list">
-        <div class="option-item" data-val="yes-both" onclick="selectSingle('q12',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">有披露，有人工复核机制</div></div>
-        </div>
-        <div class="option-item" data-val="yes-no" onclick="selectSingle('q12',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">有披露，无人工复核机制</div></div>
-        </div>
-        <div class="option-item" data-val="none" onclick="selectSingle('q12',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">没有披露</div></div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-bottom:24px">
-      <div class="step-question">数据出境披露情况</div>
-      <div class="option-list" id="q13-list">
-        <div class="option-item" data-val="full" onclick="selectSingle('q13',this)">
+      <div class="step-question">用户终止与账户注销</div>
+      <div class="step-hint">用户离开平台时的权利保障</div>
+      <div class="option-list" id="q19-list">
+        <div class="option-item" data-val="full" onclick="selectSingle('q19',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">完整披露</div>
-            <div class="option-desc">包含目的地国家、传输机制、TIA 说明</div>
+            <div class="option-label">完整保护</div>
+            <div class="option-desc">用户可随时注销，用户协议说明了注销后数据怎么处理、余额怎么退还</div>
           </div>
         </div>
-        <div class="option-item" data-val="mechanism-only" onclick="selectSingle('q13',this)">
+        <div class="option-item" data-val="partial" onclick="selectSingle('q19',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">只写了机制名称</div>
-            <div class="option-desc">如"使用 SCC"，未披露具体目的地</div>
+            <div class="option-label">部分保护</div>
+            <div class="option-desc">可以注销，但数据处理或余额安排未说明清楚</div>
           </div>
         </div>
-        <div class="option-item" data-val="none" onclick="selectSingle('q13',this)">
-          <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">没有披露</div></div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-bottom:24px">
-      <div class="step-question">与第三方数据处理商的合同安排</div>
-      <div class="step-hint">LLM 提供商、支付处理商等</div>
-      <div class="option-list" id="q14-list">
-        <div class="option-item" data-val="dpa" onclick="selectSingle('q14',this)">
+        <div class="option-item" data-val="no-exit" onclick="selectSingle('q19',this)">
           <div class="option-check"></div>
           <div class="option-text">
-            <div class="option-label">已与第三方签署 DPA</div>
-            <div class="option-desc">Data Processing Agreement</div>
+            <div class="option-label">平台保留单方面终止权，用户无主动注销路径</div>
           </div>
         </div>
-        <div class="option-item" data-val="partial" onclick="selectSingle('q14',this)">
+        <div class="option-item" data-val="unclear" onclick="selectSingle('q19',this)">
           <div class="option-check"></div>
-          <div class="option-text"><div class="option-label">部分第三方有 DPA，部分没有</div></div>
-        </div>
-        <div class="option-item" data-val="none" onclick="selectSingle('q14',this)">
-          <div class="option-check"></div>
-          <div class="option-text">
-            <div class="option-label">没有签署 DPA</div>
-            <div class="option-desc">Privacy Policy 写明不对第三方行为负责</div>
-          </div>
+          <div class="option-text"><div class="option-label">用户协议未说明</div></div>
         </div>
       </div>
     </div>
     <div class="nav-row">
       <button class="btn btn-ghost" onclick="goStep(3)">← 上一步</button>
+      <button class="btn btn-primary" onclick="goStep(5)">下一步 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-panel" id="step-5">
+    <div class="step-title">步骤 5 / 5 · 数据合规</div>
+    <div class="step-intro">AI 支付平台处理的不只是用户的姓名和邮箱，还包括消费意图（用户给 agent 的指令）、财务行为（agent 代执行的交易记录）和授权边界（用户给 agent 设定的消费约束）。这五个问题检查平台有没有对这些敏感数据做出必要的说明和保护。</div>
+
+    <div style="margin-bottom:24px">
+      <div class="step-question">用户给 Agent 的指令和交易数据，有没有被用于训练 AI 模型？</div>
+      <div class="step-hint">用户的指令内容、消费行为、授权约束属于高度敏感数据，用于模型训练必须明确告知</div>
+      <div class="option-list" id="qd1-list">
+        <div class="option-item" data-val="disclosed-no" onclick="selectSingle('qd1',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">Privacy Policy 明确说明不用于模型训练</div>
+            <div class="option-desc">用户数据仅用于提供服务，不用于改善或训练 AI 模型</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="disclosed-yes" onclick="selectSingle('qd1',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有使用，已披露并提供退出选项</div>
+            <div class="option-desc">用于反欺诈等目的，用户可以选择退出</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="disclosed-no-optout" onclick="selectSingle('qd1',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有使用，已披露但没有退出选项</div>
+            <div class="option-desc">Privacy Policy 说明用于产品改善或欺诈控制，但用户无法退出——如 Skyfire 的做法</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="undisclosed" onclick="selectSingle('qd1',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有使用，但 Privacy Policy 未说明</div>
+            <div class="option-desc">用户不知情，违反 GDPR、PIPL 的知情同意原则</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="unclear" onclick="selectSingle('qd1',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">Privacy Policy 未说明是否用于训练</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px">
+      <div class="step-question">用户数据传给了哪些第三方，有没有合同约束？</div>
+      <div class="step-hint">使用 AI 模型（如 OpenAI）、支付处理商（如 Stripe）等第三方时，这些服务商都会接触用户数据，需要签合同约束他们怎么用</div>
+      <div class="option-list" id="qd2-list">
+        <div class="option-item" data-val="full-dpa" onclick="selectSingle('qd2',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">列出了所有接触用户数据的第三方，且都签了数据处理合同</div>
+            <div class="option-desc">用户知道数据去了哪里，每个第三方都有合同约束</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="partial-dpa" onclick="selectSingle('qd2',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有披露，但部分第三方没有 DPA</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="no-dpa" onclick="selectSingle('qd2',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">提到了第三方，但没有签数据处理合同</div>
+            <div class="option-desc">Privacy Policy 免责声明不对第三方负责，但没有合同约束第三方的行为</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('qd2',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">没有披露用了哪些第三方，也没有签数据处理合同</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px">
+      <div class="step-question">数据出境披露情况</div>
+      <div class="step-hint">AI 模型、支付处理商大多在境外，用户数据几乎必然跨境传输——没有说明就是违规</div>
+      <div class="option-list" id="qd3-list">
+        <div class="option-item" data-val="full" onclick="selectSingle('qd3',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">完整披露</div>
+            <div class="option-desc">明确说明了数据传到哪些国家、用什么合规方式保障（如标准合同条款等）</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="partial" onclick="selectSingle('qd3',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">只提到了传输机制，没有说具体目的地国家</div>
+            <div class="option-desc">写了用某种合规机制，但没有说具体传到哪个国家</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('qd3',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">没有披露</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px">
+      <div class="step-question">平台用 AI 自动做了哪些影响用户的决定，有没有告知用户？</div>
+      <div class="step-hint">如 AI 自动拦截交易、冻结账户等影响用户权益的决定，法规要求必须告知用户并提供申诉途径</div>
+      <div class="option-list" id="qd4-list">
+        <div class="option-item" data-val="disclosed-appeal" onclick="selectSingle('qd4',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有告知，且提供人工申诉途径</div>
+            <div class="option-desc">用户知道哪些决定是 AI 自动做的，可以申请人工复核</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="disclosed-no-appeal" onclick="selectSingle('qd4',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有告知，但没有申诉途径</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="no-ai-decision" onclick="selectSingle('qd4',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">平台不使用 AI 做影响用户的自动决策</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="undisclosed" onclick="selectSingle('qd4',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有 AI 自动做影响用户的决定，但 Privacy Policy 没有提及</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px">
+      <div class="step-question">用户能不能查看、更正或删除自己的数据？</div>
+      <div class="step-hint">GDPR、PIPL 等法规要求平台提供明确的数据权利实现路径，不能只在 Privacy Policy 里写"用户有权利"但没有说怎么操作</div>
+      <div class="option-list" id="qd5-list">
+        <div class="option-item" data-val="full" onclick="selectSingle('qd5',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">有明确操作路径</div>
+            <div class="option-desc">Privacy Policy 说明了用户如何提交请求（如联系邮箱、账户设置），并承诺响应时限</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="stated-no-path" onclick="selectSingle('qd5',this)">
+          <div class="option-check"></div>
+          <div class="option-text">
+            <div class="option-label">写了用户有这些权利，但没说怎么操作</div>
+            <div class="option-desc">形式合规，实质上用户无法行使</div>
+          </div>
+        </div>
+        <div class="option-item" data-val="none" onclick="selectSingle('qd5',this)">
+          <div class="option-check"></div>
+          <div class="option-text"><div class="option-label">Privacy Policy 没有提及用户数据权利</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-ghost" onclick="goStep(4)">← 上一步</button>
       <button class="btn btn-primary" onclick="generateMemo()">生成备忘录 →</button>
     </div>
   </div>
@@ -1156,11 +1687,32 @@
   </div>
 </div>
 
+
+<!-- ==================== MEMO ==================== -->
+<div class="memo-wrap" id="memo-wrap">
+  <div class="memo-profile" id="memo-profile"></div>
+  <div class="risk-summary-bar" id="risk-summary-bar"></div>
+  <div class="memo-main">
+    <div id="memo-content"></div>
+    <div class="sidebar" id="memo-sidebar"></div>
+  </div>
+  <div class="disclaimer">
+    <div>本备忘录由 Kinding Partners 基于客户提供的业务信息生成，仅供内部参考，不构成正式法律意见。具体合规决策请结合当地律师意见及最新监管动态。法规信息截至 2026 年 6 月。</div>
+    <div class="disclaimer-firm">KINDING PARTNERS © 2026</div>
+  </div>
+</div>
+
 <script>
 const answers = {
   q1: null, q2: [], q3: null, q4: [], q5: null,
-  q6: null, q7: null, q8: null, q9: null, q10: null,
-  q11: null, q12: null, q13: null, q14: null
+  q6: null, q7: null,
+  q9: [], q9other: '', q10: null, q10other: '',
+  q11: null, q11other: '', q12: null, q12other: '',
+  qkya: null, qkyaother: '',
+  q13c: null, q14c: null,
+  q13g: null, q14g: null, q15: null, q15g: null, q16g: null, q16g2: [],
+  q17: null, q19: null,
+  qd1: null, qd2: null, qd3: null, qd4: null, qd5: null
 };
 
 const today = new Date();
@@ -1187,7 +1739,10 @@ function selectSingle(q, el) {
   el.parentElement.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
   el.classList.add('selected');
   answers[q] = el.dataset.val;
-  if (q === 'q4') updateQ5Visibility();
+  if (q === 'q4') updateQ6Q7Visibility();
+  // other 文本框
+  const otherWrap = document.getElementById(q + '-other-wrap');
+  if (otherWrap) otherWrap.style.display = (el.dataset.val && el.dataset.val.startsWith('other')) ? 'block' : 'none';
 }
 
 function selectMulti(q, el) {
@@ -1195,15 +1750,77 @@ function selectMulti(q, el) {
   answers[q] = [...el.parentElement.querySelectorAll('.selected')].map(i => i.dataset.val);
   if (q === 'q2') {
     const note = document.getElementById('q2-note');
-    note.style.display = (answers.q2.includes('global') || answers.q2.includes('unclear')) ? 'block' : 'none';
+    note.style.display = answers.q2.includes('global') ? 'block' : 'none';
+  }
+  // other 文本框
+  const otherWrap = document.getElementById(q + '-other-wrap');
+  if (otherWrap) {
+    const hasOther = answers[q].some(v => v && v.startsWith('other'));
+    otherWrap.style.display = hasOther ? 'block' : 'none';
   }
 }
 
+function updateQ6Q7Visibility() {
+  const hasFiat = answers.q4.includes('fiat');
+  const hasStable = answers.q4.includes('stable');
+  const fiatWrap = document.getElementById('q6-fiat-wrap');
+  const stableWrap = document.getElementById('q7-stable-wrap');
+  const q5wrap = document.getElementById('q5-wrap');
+  if (fiatWrap) fiatWrap.style.display = hasFiat ? 'block' : 'none';
+  if (stableWrap) stableWrap.style.display = hasStable ? 'block' : 'none';
+  if (q5wrap) q5wrap.style.display = hasFiat ? 'block' : 'none';
+}
+
 function updateQ5Visibility() {
-  document.getElementById('q5-wrap').style.display = answers.q4.includes('none') ? 'none' : 'block';
+  updateQ6Q7Visibility();
+}
+
+function isTechOnly() {
+  return answers.q3 === 'tech' && !answers.q4.includes('fiat') && !answers.q4.includes('stable');
+}
+
+function updateToSVersion() {
+  const hasCredits = (answers.q3 === 'custody' || answers.q3 === 'mixed') ||
+                     answers.q4.includes('fiat') || answers.q4.includes('stable');
+  document.getElementById('tos-credits').style.display = hasCredits ? 'block' : 'none';
+}
+
+// 必答验证配置：每步跳转前检查哪些题必须有答案
+const requiredByStep = {
+  1: [{ q: 'q1', id: 'q1-list', hint: 'q1-hint' }, { q: 'q2', id: 'q2-list', hint: 'q2-hint', isArray: true }],
+  2: [{ q: 'q3', id: 'q3-list', hint: 'q3-hint' }, { q: 'q4', id: 'q4-list', hint: 'q4-hint', isArray: true }],
+  3: [{ q: 'q10', id: 'q10-list', hint: 'q10-hint' }],
+  4: [{ q: 'q14g', id: 'q14g-list', hint: 'q14g-hint' }],
+};
+
+function validateStep(fromStep) {
+  const reqs = requiredByStep[fromStep];
+  if (!reqs) return true;
+  let valid = true;
+  reqs.forEach(r => {
+    const answered = r.isArray ? (answers[r.q] && answers[r.q].length > 0) : answers[r.q] !== null;
+    const list = document.getElementById(r.id);
+    const hint = document.getElementById(r.hint);
+    if (!answered) {
+      valid = false;
+      if (list) list.classList.add('required-error');
+      if (hint) hint.classList.add('show');
+    } else {
+      if (list) list.classList.remove('required-error');
+      if (hint) hint.classList.remove('show');
+    }
+  });
+  return valid;
 }
 
 function goStep(n) {
+  const fromStep = n - 1;
+  if (fromStep >= 1 && !validateStep(fromStep)) {
+    // 滚动到第一个未答的题
+    const firstError = document.querySelector('.required-error');
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
   document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('step-' + n).classList.add('active');
   for (let i = 1; i <= 5; i++) {
@@ -1212,6 +1829,7 @@ function goStep(n) {
     if (i < n) ps.classList.add('done');
     else if (i === n) ps.classList.add('active');
   }
+  if (n === 4) updateToSVersion();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1243,7 +1861,7 @@ function buildProfile() {
   const mkts = (answers.q2.includes('global') || answers.q2.includes('unclear'))
     ? '全球（所有市场）'
     : answers.q2.map(v => ({cn:'中国大陆',hk:'香港',sg:'新加坡',eu:'欧盟',uk:'英国',us:'美国'})[v]).filter(Boolean).join(' · ');
-  const pays = answers.q4.map(v => ({fiat:'法币',stable:'稳定币',none:'不涉及充值'})[v]).filter(Boolean).join(' + ') || '—';
+  const pays = answers.q4.map(v => ({fiat:'法币',stable:'稳定币',card:'卡产品',protocol:'自有协议',none:'不涉及充值'})[v]).filter(Boolean).join(' + ') || '—';
   document.getElementById('memo-profile').innerHTML = `
     <div class="profile-item"><span class="profile-label">用户类型</span><span class="profile-value">${userMap[answers.q1]||'—'}</span></div>
     <div class="profile-divider"></div>
@@ -1259,36 +1877,256 @@ function buildProfile() {
 
 function buildRisks() {
   const risks = [];
-  if (hasCustody() && (answers.q5 === 'credits' || answers.q5 === 'unclear')) {
-    risks.push({ level:'high', module:'一', moduleTag:'资金托管', title:'平台持有用户资金，余额定性试图规避监管', markets:'HK · SG · EU', desc:'平台实际持有用户法币余额，但 ToS 将其定性为"Credits / 积分 / 非货币"，试图规避预付款监管义务。监管机构以经济实质而非名称判断，此定性在多数市场不成立。', laws:['香港 SVF 条例','新加坡 MAS PSA','欧盟 EMI 指令'], suggestions:['明确余额的使用范围、有效期及到期处理方式','明确余额是平台负债还是信托资产（影响破产追偿权）','建议直接评估 SVF / EMI 牌照申请可行性，不要依赖定性条款规避'] });
+  // 方案B：核心题未填时按最坏情况处理
+  const q10eff = answers.q10 || 'none';
+  const qkyaeff = answers.qkya || 'none';
+  const q14geff = answers.q14g || 'none';
+  const q15eff = answers.q15 || 'unclear';
+  if (hasCustody() && (answers.q5 === 'no-cash' || answers.q5 === 'service-quota' || answers.q5 === 'unclear')) {
+    const isQuota = answers.q5 === 'service-quota';
+    risks.push({ level: isQuota ? 'medium' : 'high', module:'一', moduleTag:'资金托管', title: isQuota ? '余额定性为服务配额，需确保单一服务商闭环成立' : '平台持有用户资金，余额定性可能无法规避监管', markets:'HK · SG · EU', desc: isQuota ? '平台将余额定义为"购买服务的配额"（AWS Credits 模式）。这个定性成立的前提是真正的单一服务商闭环——余额只能用于平台自营服务，不能用于第三方商户。一旦余额可用于第三方，定性立刻变为通用储值，触发监管。' : '平台实际持有用户法币余额，但用户协议将其定性为非货币 Credits 或未明确定义，试图规避预付款监管义务。监管机构以经济实质而非名称判断，此定性在多数市场不成立。', laws:['香港 SVF 条例','新加坡 MAS PSA','欧盟 EMI 指令'], suggestions: isQuota ? ['确保余额仅能用于平台自营服务，绝不扩展到第三方商户','明确余额的有效期及到期处理方式','将用户预付款与公司运营资金隔离存放'] : ['明确余额的使用范围、有效期及到期处理方式','明确余额是平台负债还是信托资产（影响破产追偿权）','建议直接评估托管 / 储值牌照申请可行性，不要依赖定性条款规避'] });
   }
   if (hasCustody() && answers.q4.includes('stable') && (hasMarket('us') || hasMarket('eu'))) {
     risks.push({ level:'medium', module:'一', moduleTag:'资金托管', title:'稳定币入金托管定性待确认', markets:'US · EU', desc:'平台支持稳定币入金且由平台自持链上钱包。GENIUS Act（2025年7月）已将支付稳定币纳入 BSA 管辖，MiCA 下稳定币托管属 CASP 持牌范畴。', laws:['US GENIUS Act 2025','EU MiCA','香港 VASP 牌照'], suggestions:['评估稳定币托管是否触发 MSB 登记（美国）','评估 CASP 申请必要性（欧盟）','考虑迁移至第三方持牌托管方以降低直接义务'] });
   }
-  if (hasC() && (answers.q6 === 'no-refund' || answers.q6 === 'none')) {
-    risks.push({ level:'high', module:'二', moduleTag:'ToS 合规', title:'C端用户退款条款无例外，大概率无效', markets:'HK · SG · EU · UK', desc:'ToS 设定"一经购买不可退款"且无任何例外条款。在 C 端场景下，消费者保护法对预付款退款有强制性规定，合同条款不能排除。', laws:['欧盟消费者权利指令','香港《商品说明条例》','新加坡《消费者保护法》'], suggestions:['B端和C端分开处理退款条款','C端必须保留退款例外：平台单方面终止服务、服务严重故障、法律强制要求','不退款条款可保留，但必须有明确例外边界'] });
+  if (hasCustody() && (answers.q14c === 'none' || answers.q14c === 'partial')) {
+    const noneCase = answers.q14c === 'none' && hasC();
+    risks.push({ level: noneCase ? 'high' : 'medium', module:'二', moduleTag:'用户协议合规', title: noneCase ? '用户对余额几乎没有处置权，C端场景下条款大概率无效' : '用户对余额的处置权不完整', markets:'HK · SG · EU · UK', desc: noneCase ? '平台持有用户余额，但用户协议没有给用户任何实质保护——不可退款无例外、账户暂停期间余额处理不明、无争议解决路径。在 C 端场景下，消费者保护法对预付款退款有强制性规定，这类条款不能排除。' : '用户对余额有部分保护，但退款条件、暂停期间余额处理、争议解决三项中有缺失，存在合规缺口。', laws:['欧盟消费者权利指令','香港《商品说明条例》','新加坡《消费者保护法》'], suggestions:['C端必须保留退款例外：平台单方面终止服务、服务严重故障、法律强制要求','明确账户暂停/冻结期间余额的处理机制和追偿路径','提供争议解决路径，B端和C端分开处理'] });
   }
-  if ((hasMarket('eu') || hasMarket('uk')) && answers.q9 === 'low-cap-arb') {
-    risks.push({ level:'high', module:'二', moduleTag:'ToS 合规', title:'覆盖欧盟/英国用户，仲裁条款无消费者豁免', markets:'EU · UK', desc:'强制仲裁叠加集体诉讼豁免，实质切断用户救济路径。英国、欧盟用户在本地法院可能成功推翻仲裁条款。欧盟《集体诉讼指令》（2023）明确保护消费者集体诉讼权利。', laws:['EU 集体诉讼指令 2023','UK Consumer Rights Act 2015','UK CJJA s.15B'], suggestions:['加入消费者豁免条款：C端用户可选择在所在地小额索赔法庭起诉','集体诉讼豁免对欧盟/英国用户不适用，建议加入地区例外'] });
+  if ((hasMarket('eu') || hasMarket('uk')) && hasC()) {
+    risks.push({ level:'medium', module:'二', moduleTag:'用户协议合规', title:'覆盖欧盟/英国 C 端用户，需确认仲裁条款有消费者豁免', markets:'EU · UK', desc:'若用户协议含强制仲裁叠加集体诉讼豁免，会实质切断用户救济路径。欧盟/英国用户在本地法院可能成功推翻这类仲裁条款。欧盟《集体诉讼指令》（2023）明确保护消费者集体诉讼权利。', laws:['EU 集体诉讼指令 2023','UK Consumer Rights Act 2015'], suggestions:['加入消费者豁免条款：C端用户可选择在所在地法院起诉','集体诉讼豁免对欧盟/英国用户不适用，建议加入地区例外'] });
   }
-  if (answers.q7 === 'subjective' || answers.q7 === 'both' || answers.q8 === 'none' || answers.q8 === 'freeze') {
-    risks.push({ level:'medium', module:'二', moduleTag:'ToS 合规', title:'暂停条款包含主观标准，余额处理机制不明', markets:'全市场', desc:'平台保留"认为存在风险即可暂停"的宽泛权利，且未规定账户冻结期间余额处理机制，用户资金被冻结后无明确追偿路径。', laws:['欧盟 PSD3','香港 HKMA 指引'], suggestions:['有因暂停：明确客观触发条件，加入申诉机制和处理时限','无因暂停：设定 30 天通知期，余额必须可提取或退还','明确冻结期间余额的法律地位'] });
+  if (answers.q17 === 'none' || answers.q17 === 'partial') {
+    risks.push({ level:'medium', module:'二', moduleTag:'用户协议合规', title:'第三方服务商披露不完整，责任链不透明', markets:'全市场', desc:'用户实际上受到平台从未完整披露的第三方条款约束（LLM 提供商、支付处理商等），用户对此没有知情权。', laws:['GDPR Art.13','香港 PDPO'], suggestions:['明确列出平台依赖的第三方服务商类别','说明第三方条款在哪些情形下直接影响用户权利','数据处理类第三方须在 Privacy Policy 中完整披露'] });
   }
-  if (answers.q10 === 'none' || answers.q10 === 'partial') {
-    risks.push({ level:'medium', module:'二', moduleTag:'ToS 合规', title:'第三方服务商披露不完整，责任链不透明', markets:'全市场', desc:'用户实际上受到平台从未完整披露的第三方条款约束（LLM 提供商、支付处理商等），用户对此没有知情权。', laws:['GDPR Art.13','香港 PDPO'], suggestions:['明确列出平台依赖的第三方服务商类别','说明第三方条款在哪些情形下直接影响用户权利','数据处理类第三方须在 Privacy Policy 中完整披露'] });
+  // Q10 授权机制风险
+  if (q10eff === 'none') {
+    risks.push({ level:'high', module:'一', moduleTag:'消费结构', title:'没有任何授权机制，agent 消费无边界', markets:'全市场', desc:'平台允许 AI agent 代替用户消费，但没有任何授权机制——用户无法设定金额上限或消费范围，agent 出现越权消费时用户缺乏法律保护。', laws:['合同法（意思自治原则）','EU PSD3'], suggestions:['建立最低限度的授权机制，至少让用户设定消费上限','记录每次 agent 消费的授权依据'] });
   }
-  if (answers.q14 === 'none' && (hasMarket('eu') || hasMarket('uk'))) {
-    risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'数据责任链断裂：第三方无 DPA，GDPR 连带责任未覆盖', markets:'EU · UK', desc:'Privacy Policy 写明"不对第三方数据行为负责"，但 GDPR 第28条要求数据控制者对处理者行为承担连带责任，此免责条款在 GDPR 框架下无效。', laws:['GDPR Art.28','UK GDPR'], suggestions:['与每个数据处理类第三方签署 DPA','Privacy Policy 明确列出第三方类别及其在数据链路中的角色','说明用户如何行使针对第三方的数据权利'] });
+  if (q10eff === 'natural') {
+    risks.push({ level:'medium', module:'一', moduleTag:'消费结构', title:'授权仅凭模糊指令，争议时举证困难', markets:'全市场', desc:'用户只给了自然语言指令，没有金额或范围约束。一旦 agent 产生超出用户预期的消费，平台难以证明 agent 的行为在授权范围内。', laws:['合同法（代理制度）'], suggestions:['在自然语言指令基础上增加金额上限约束','记录用户指令原文作为授权凭证'] });
   }
-  if (hasMarket('cn') && answers.q13 === 'none') {
-    risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'有中国用户但无 PIPL 合规路径，2026 年执法风险高', markets:'CN', desc:'PIPL 第38条要求向境外传输个人信息需满足安全评估、专业认证或标准合同之一。2025年1月起，外国公司必须在中国指定本地代表。Privacy Policy 缺失 PIPL 内容。', laws:['PIPL 第38条','网信办跨境传输规定 2025'], suggestions:['完成 PIPL 第38条的出境合规路径选择','在中国指定本地代表（法律实体或自然人）','Privacy Policy 增加中文版本和 PIPL 专项条款'] });
+  if (q10eff === 'api-key') {
+    risks.push({ level:'medium', module:'一', moduleTag:'消费结构', title:'API key 即授权的逻辑过于宽泛，agent 越权无法追责', markets:'全市场', desc:'平台将 API key 使用视为用户全权授权，agent 的所有行为均视为授权行为。这是行业普遍做法，但当 API key 泄露或 agent 被操控时，用户面临完全无保护的局面。', laws:['合同法','FATF 指引'], suggestions:['在 API key 授权基础上增加额外的消费约束层','区分 API key 泄露场景和用户主动授权场景的责任归属','建议加入 spending limits 作为技术层面的兜底保护'] });
   }
-  if (answers.q12 === 'none' || answers.q12 === 'yes-no') {
-    risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'AI 自动化决策无完整披露，缺少人工复核机制', markets:'EU · UK · HK', desc:'AI agent 自动触发支付属于自动化决策，GDPR 第22条要求告知用户并提供人工复核权利。EU AI Act（2026年8月全面生效）对高风险 AI 系统有额外透明度要求。', laws:['GDPR Art.22','EU AI Act 2026','香港 PCPD 指引'], suggestions:['Privacy Policy 明确告知用户 AI agent 的决策范围','提供用户查看 agent 执行记录的机制','提供人工复核申请渠道和时限'] });
+  // Q16g2 平台边界条款缺失风险
+  if (answers.q16g2 && answers.q16g2.includes('none')) {
+    risks.push({ level:'medium', module:'二', moduleTag:'用户协议合规', title:'平台边界条款缺失：无制裁合规、无不可抗力、无责任上限', markets:'全市场', desc:'用户协议没有出口管制与制裁条款、不可抗力条款，也没有明确的责任上限金额。这三项是支付平台用户协议的标配——Prava 三项全覆盖，Payman 三项全无。缺失这些条款在极端情形下（监管介入、服务中断、系统故障）会导致平台面临无上限赔偿责任。', laws:['OFAC 制裁规则','EU 不可抗力原则','新加坡合同法'], suggestions:['加入 OFAC 和联合国制裁名单合规条款（用户承诺不在制裁名单内）','加入不可抗力条款，覆盖网络中断、监管行动、自然灾害','加入明确责任上限金额，参照 Prava §15：USD 1,000 或过去 12 个月费用取高者'] });
   }
-  if (answers.q13 === 'mechanism-only' && (hasMarket('eu') || hasMarket('uk'))) {
-    risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'数据出境只写机制名称，缺少目的地披露和 TIA', markets:'EU · UK', desc:'Privacy Policy 写了"使用 SCC"但未披露传输目的地国家和 TIA 评估结果。Schrems II 判决后 TIA 已成事实标准，光写机制名称视同未披露。', laws:['GDPR Art.46','Schrems II 判决','UK IDTA'], suggestions:['列出数据传输的主要目的地国家','对每个非充分性决定国家补充传输机制说明','完成 TIA 并保留记录（内部文件，无需公开）'] });
+  // ---- 数据合规风险（Step 5）----
+  if (answers.qd1 === 'undisclosed') {
+    risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'用户数据被用于模型训练，但未向用户披露', markets:'全市场', desc:'平台将用户的消费行为、agent 指令等数据用于改善 AI 模型，但 Privacy Policy 未作任何披露。这违反 GDPR、PIPL 的知情同意原则，用户无法知情也无法退出。', laws:['GDPR Art.13','PIPL 第17条'], suggestions:['在 Privacy Policy 中明确说明数据是否用于模型训练','如确实用于训练，提供用户退出选项','明确 agent 指令内容（Prompt）的数据处理方式'] });
   }
+  if (answers.qd1 === 'disclosed-no-optout' && (hasMarket('eu') || hasMarket('uk'))) {
+    risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'数据用于模型训练无退出选项，EU/UK 用户权利受限', markets:'EU · UK', desc:'Privacy Policy 已披露数据用于产品改善，但没有提供退出选项。在 EU/UK，用户对非合同必要性的数据处理有权拒绝（GDPR Art.21 反对权）。', laws:['GDPR Art.21','UK GDPR'], suggestions:['提供用户退出数据用于模型训练的选项','或论证此处理是合同履行的必要条件（需法律意见支持）'] });
+  }
+  if (answers.qd2 === 'no-dpa' || answers.qd2 === 'none') {
+    if (hasMarket('eu') || hasMarket('uk')) {
+      risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'第三方数据处理商无 DPA，GDPR 连带责任未覆盖', markets:'EU · UK', desc:'GDPR 第28条要求数据控制者对所有数据处理商签署 DPA，否则数据控制者须对处理商行为承担连带责任。Privacy Policy 写明"不对第三方行为负责"在 GDPR 下无效。', laws:['GDPR Art.28','UK GDPR'], suggestions:['与每个接触用户数据的第三方（LLM 提供商、支付处理商、钱包服务商）签署 DPA','Privacy Policy 列出第三方清单及其角色'] });
+    } else {
+      risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'第三方数据处理商无合同约束，数据安全责任链断裂', markets:'全市场', desc:'平台使用的 LLM 提供商、支付处理商等第三方均接触用户敏感数据，但没有任何合同约束其数据处理行为。一旦第三方发生数据泄露，平台面临连带责任。', laws:['合同法','数据安全法'], suggestions:['与接触用户数据的第三方签署数据处理协议','明确第三方的数据使用范围和安全义务'] });
+    }
+  }
+  if (answers.qd3 === 'none') {
+    if (hasMarket('cn')) {
+      risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'有中国用户但无数据出境披露，PIPL 违规风险高', markets:'CN', desc:'PIPL 第38条要求向境外传输个人信息需满足安全评估、专业认证或标准合同之一。AI 支付平台的数据几乎必然跨境（LLM 在美国、支付处理在新加坡等），未披露即违规。', laws:['PIPL 第38条','网信办跨境传输规定 2025'], suggestions:['完成 PIPL 出境合规路径选择（安全评估/专业认证/标准合同）','Privacy Policy 增加中文版本和 PIPL 专项条款','在中国指定本地代表'] });
+    }
+    if (hasMarket('eu') || hasMarket('uk')) {
+      risks.push({ level:'high', module:'三', moduleTag:'数据合规', title:'有 EU/UK 用户但无数据出境披露，GDPR 违规', markets:'EU · UK', desc:'AI 支付平台通常使用美国 LLM 服务商、支付处理商等第三方，数据极可能跨境传输。GDPR 要求披露传输目的地和传输机制，未披露是 GDPR 下的严重违规。', laws:['GDPR Art.46','Schrems II 判决'], suggestions:['列出数据传输的目的地国家','说明适用的传输机制（SCC、充分性决定等）','对非充分性决定国家完成 TIA'] });
+    }
+  }
+  if (answers.qd3 === 'partial' && (hasMarket('eu') || hasMarket('uk'))) {
+    risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'数据出境只写机制名称，缺少目的地披露和 TIA', markets:'EU · UK', desc:'Privacy Policy 写了"使用 SCC"但未披露传输目的地国家。Schrems II 判决后 TIA 已成事实标准，光写机制名称视同未披露。', laws:['GDPR Art.46','Schrems II 判决','UK IDTA'], suggestions:['列出数据传输的主要目的地国家','完成 TIA 并保留记录'] });
+  }
+  if (answers.qd4 === 'undisclosed') {
+    risks.push({ level:'medium', module:'三', moduleTag:'数据合规', title:'AI 自动决策未披露，用户无申诉途径', markets:'EU · UK · HK', desc:'平台用 AI 自动拦截交易、冻结账户或调整限额，但 Privacy Policy 未说明，用户不知道哪些决定是 AI 做的，也无法申诉。GDPR Art.22 和 EU AI Act 要求明确披露并提供人工复核。', laws:['GDPR Art.22','EU AI Act 2026','香港 PCPD 指引'], suggestions:['Privacy Policy 说明 AI 自动决策的范围（哪些决定由 AI 做）','提供人工复核申请渠道和响应时限','账户异常时向用户发送通知'] });
+  }
+  // ---- General 用户协议风险（纯技术层平台）----
+  if (isTechOnly()) {
+    if (answers.q6g === 'full-disclaimer' || answers.q6g === 'none') {
+      risks.push({
+        level: answers.q6g === 'none' ? 'high' : 'medium',
+        module: '二', moduleTag: '用户协议合规',
+        title: answers.q6g === 'none' ? '缺失服务可用性条款，故障责任边界完全不明' : '全面免责条款过宽，含平台自身过失',
+        markets: '全市场',
+        desc: answers.q6g === 'none'
+          ? '用户协议没有任何关于服务可用性、故障处理或中断补偿的条款。一旦 API 中断影响用户业务，平台责任边界完全模糊，极易引发争议。'
+          : '平台对服务中断的免责条款覆盖了自身过失导致的情形（如"with or without notice"停服不赔偿）。在多数司法管辖区，免责条款不能排除因故意行为或重大过失造成的损失。参见 Payman 的做法——这是行业普遍现状，但存在法律风险。',
+        laws: ['欧盟不公平合同条款指令', '英国 UCTA 1977', '新加坡 UCTA'],
+        suggestions: [
+          '明确免责条款不覆盖平台的故意行为和重大过失',
+          '即便不承诺服务可用性指标，也应说明故障时的通知机制和处理流程',
+          '建议参照 Skyfire §2.5 的做法：承诺对 material adverse changes 提前通知'
+        ]
+      });
+    }
+    if (q14geff === 'none') {
+      risks.push({
+        level: 'high', module: '二', moduleTag: '用户协议合规',
+        title: '用户协议对 agent 行为责任归属完全空白',
+        markets: '全市场',
+        desc: 'agentic payment 基础设施的核心法律风险之一是 agent 执行错误交易时的责任归属。用户协议没有对此做出任何说明，一旦发生争议，平台将面临举证困难。Skyfire 和 Payman 均通过"API key = 用户授权"逻辑将责任转移给用户——即便这个逻辑不完美，也比完全空白强。',
+        laws: ['合同法（过失责任）', 'EU PSD3 Art.73', 'UK PSR 2017'],
+        suggestions: [
+          '明确说明 agent 行为的责任归属规则，推荐"API key / 授权凭证产生的行为视为用户授权行为"',
+          '区分两类场景：(1) 平台系统缺陷导致的 agent 异常，(2) 用户授权范围内的 agent 行为',
+          '参照 Skyfire §2.2 和 Payman API key 条款的表述方式'
+        ]
+      });
+    }
+    if (answers.q8g === 'no-notice') {
+      risks.push({
+        level: 'medium', module: '二', moduleTag: '用户协议合规',
+        title: '用户协议可随时修改且无通知义务，用户保护不足',
+        markets: 'EU · UK',
+        desc: '平台保留随时修改用户协议且无通知义务的权利。在欧盟和英国，这类条款面向消费者时可能被认定为不公平合同条款。即便是纯 B 端平台，完全没有通知机制也会损害客户信任，增加争议风险。',
+        laws: ['欧盟不公平合同条款指令 93/13', 'UK Consumer Rights Act 2015'],
+        suggestions: [
+          '至少承诺对"重大变更"提前通知（建议 14-30 天）',
+          '参照 Skyfire §3.4 的做法：费用变更提前 30 天通知',
+          '通知方式可以是邮件、Dashboard 弹窗或平台公告，无需复杂机制'
+        ]
+      });
+    }
+    if (answers.q9g === 'vague' || answers.q9g === 'none') {
+      risks.push({
+        level: answers.q9g === 'none' ? 'high' : 'medium',
+        module: '二', moduleTag: '用户协议合规',
+        title: answers.q9g === 'none' ? '缺失第三方服务责任切割条款，连带风险敞口大' : '第三方服务责任边界模糊，连带风险未有效隔离',
+        markets: '全市场',
+        desc: answers.q9g === 'none'
+          ? '用户协议没有说明平台与第三方接入服务的责任边界。当第三方服务出现问题时，用户可能将责任归咎于平台。Skyfire §2.4 是行业标杆——完整说明第三方服务不受平台用户协议约束，平台不背书不担责。'
+          : '用户协议有提及第三方服务但边界模糊，未明确说明平台是否为第三方服务背书或承担连带责任。这给平台留下了不必要的法律敞口。',
+        laws: ['合同法（代理责任）', 'GDPR Art.28（数据处理链）'],
+        suggestions: [
+          '参照 Skyfire §2.4：明确声明第三方服务不受本用户协议约束，用户使用第三方服务受其各自协议约束',
+          '明确平台不对第三方服务的质量、安全性或合规性做出背书',
+          '数据处理类第三方另需在 Privacy Policy 中单独披露'
+        ]
+      });
+    }
+    if (answers.q10g === 'user-risk' || answers.q10g === 'none') {
+      risks.push({
+        level: 'medium', module: '二', moduleTag: '用户协议合规',
+        title: answers.q10g === 'none' ? '缺失 agent 越权/异常交易处理条款，行业空白但风险真实' : 'Agent 越权交易统归用户风险，缺少任何补救路径',
+        markets: '全市场',
+        desc: answers.q10g === 'none'
+          ? '用户协议完全没有涉及 AI agent 越权执行交易或 prompt injection 导致非预期支付的处理机制。这是行业共性空白——Payman、Skyfire 都没有完整覆盖——但随着监管关注增加，缺乏任何说明将成为合规风险点。'
+          : '平台将所有 agent 异常交易风险归为用户责任，没有提供任何补救路径。Skyfire 的 Verified Service Guarantee（§3.6）虽然很窄（5天内提交，仅限 Verified Service），但提供了最低限度的用户保护，是目前行业中少见的正向实践。',
+        laws: ['EU PSD3（争议处理义务）', 'UK PSR 2017'],
+        suggestions: [
+          '即便不承担实质责任，也应在用户协议中说明 agent 异常交易的申诉入口和处理时限',
+          '参照 Skyfire §3.6 设计一个窄口径的争议保障：限定场景（服务未交付）、限定时间（如 7 天内）',
+          '产品层面的消费限额和审批流程是有效控制手段，建议在用户协议中引用'
+        ]
+      });
+    }
+  }
+
+  // ---- 卡产品（平台发卡）风险：PCI DSS + BIN Sponsor ----
+  if (answers.q9.includes('card')) {
+    risks.push({
+      level: 'medium', module: '一', moduleTag: '消费结构',
+      title: '发行卡产品须完成 PCI DSS 合规及 BIN Sponsor 披露',
+      markets: '全市场',
+      desc: '平台为 agent 发行虚拟卡或实体卡，直接触发 PCI DSS 合规义务（卡数据存储、传输、处理均需满足 PCI DSS Level 要求）。卡产品须依托持牌 BIN Sponsor（发卡银行），若用户协议未披露 BIN Sponsor 身份，将导致用户无法判断最终责任主体。',
+      laws: ['PCI DSS v4.0', 'Visa/Mastercard 发卡规则', '香港 HKMA 支付卡指引'],
+      suggestions: [
+        '在用户协议和产品页面明确披露底层发卡银行身份',
+        '完成 PCI DSS 自评（SAQ）或第三方审计，根据交易量确定适用等级',
+        '卡数据（PAN、CVV、有效期）不得在平台侧存储，必须经过令牌化处理',
+        '虚拟卡注销后的退款路径须有明确合同安排（与 BIN Sponsor 协议中约定）'
+      ]
+    });
+  }
+  // ---- 3DS/SCA 风险：平台发卡 或 绑卡直刷 都涉及 ----
+  if (answers.q9.includes('card') || answers.q4.includes('card')) {
+    const euuk = hasMarket('eu') || hasMarket('uk');
+    risks.push({
+      level: euuk ? 'high' : 'medium', module: '一', moduleTag: '消费结构',
+      title: 'Agent 走卡组织轨道，3DS/SCA 认证机制需确认合规路径',
+      markets: euuk ? 'EU · UK' : '全市场',
+      desc: 'AI agent 无法像真人一样完成 3DS 挑战（解 CAPTCHA、收短信验证码、生物识别）。接入 Visa Intelligent Commerce 等方案后，3DS 通常从"每笔交易认证"变为"授权 agent 时认证一次"——但这要求初始授权时的强认证真实有效，且后续交易须走合规的委托认证（Delegated Authentication）或商业卡豁免路径，而非绕过 SCA。卡组织默认将 agent 流量归类为 card-not-present 无责任转移，拒付风险会转嫁给平台或商户。',
+      laws: ['EU PSD3', 'UK FCA PSR 2017', 'Visa Delegated Authentication Program', 'Mastercard 商业卡 SCP 豁免'],
+      suggestions: [
+        '确认初始授权 agent 时由真人完成了有效的强客户认证（SCA）',
+        '走合规的委托认证或商业卡豁免路径，并保留豁免依据（BIN 范围、TRA 指标等）',
+        euuk ? 'EU/UK 市场：与发卡行/收单行确认 agent 交易的豁免归属，避免被批量拒付' : '与收单行确认 agent 交易的 SCA 处理方式',
+        '在用户协议中说明 agent 触发支付时认证处理方式和用户权利'
+      ]
+    });
+  }
+  // ---- KYA（Agent 身份验证）风险 ----
+  if (qkyaeff === 'none' || qkyaeff === 'credential-only') {
+    risks.push({
+      level: qkyaeff === 'none' ? 'high' : 'medium',
+      module: '一', moduleTag: '消费结构',
+      title: qkyaeff === 'none' ? '没有 Agent 身份验证机制，无法防范 agent 冒充' : 'Agent 身份仅靠凭证，凭证泄露即失守',
+      markets: '全市场',
+      desc: qkyaeff === 'none'
+        ? '平台没有任何验证 agent 身份的机制。Visa 报告 2026 年初暗网提及"AI Agent"的帖子半年增长 450%，agent 冒充、凭证盗用、伪造商户网络是真实威胁。无 KYA 机制意味着平台无法区分合法授权的 agent 和冒充的攻击者。'
+        : '平台仅靠 API key 或授权凭证识别 agent，凭证持有即视为合法。当凭证泄露或 agent 被 prompt injection 操控时，平台无法识别异常——攻击者可在被发现前以机器速度发起大量交易。',
+      laws: ['KYA 行业标准（Linux Foundation Agentic AI Foundation）', 'FATF 虚拟资产指引', 'EU AI Act'],
+      suggestions: [
+        '引入 agent 身份验证机制：密码学签名、可验证凭证、token 或 DID 任选其一',
+        '参照行业方案：Mastercard Agent Pay token、Visa Trusted Agent、Google AP2 可验证凭证',
+        '高风险或大额交易增加人工复核作为过渡兜底',
+        '维护 agent 行为审计追踪，争议时可举证'
+      ]
+    });
+  }
+
+  // ---- 自有/开放协议风险 ----
+  if (answers.q9.includes('protocol')) {
+    risks.push({
+      level: 'medium', module: '二', moduleTag: '用户协议合规',
+      title: '自有/开放支付协议的协议层合规责任归属不明',
+      markets: '全市场',
+      desc: '平台设计并运营自有支付协议，任何接入方均可使用。目前监管机构对"协议层"的合规责任归属尚无明确规定——协议的设计方、实现方和使用方之间的责任边界模糊。若协议被滥用或出现系统性问题，监管机构可能追溯协议设计方的责任。',
+      laws: ['FATF 虚拟资产服务提供商指引', 'EU MiCA', '新加坡 MAS PSA'],
+      suggestions: [
+        '在协议文档和用户协议中明确：平台仅提供协议规范，不对第三方实现层的合规行为负责',
+        '设定协议接入的合规前提条件（如接入方须持牌或满足 KYC 要求）',
+        '建议咨询律师评估协议设计方在监管框架下的潜在义务边界',
+        '保留协议版本记录和变更日志，作为责任隔离的证据'
+      ]
+    });
+  }
+
+  // ---- Agent 代签合同风险 ----
+  if (q15eff === 'auto') {
+    risks.push({
+      level: 'high', module: '二', moduleTag: '用户协议合规',
+      title: 'Agent 自动代签合同，法律效力存疑',
+      markets: '全市场',
+      desc: '平台允许 AI agent 在用户不感知的情况下自动接受第三方用户协议或服务条款。在绝大多数司法管辖区，合同的成立要求有行为能力的自然人或法人的意思表示——AI agent 不是法律主体，其"签署"行为的法律效力高度不确定。若用户主张对某项条款不知情，平台可能无法以"agent 已接受"为由抗辩。',
+      laws: ['合同法（意思自治原则）', 'EU eIDAS 条例', '新加坡《电子交易法》'],
+      suggestions: [
+        '要求用户在授权 agent 前明确知悉并同意 agent 可能代其接受的条款范围',
+        '在授权文件中明确 agent 的代理权限边界，包括可接受哪些类型的合同',
+        '对于重要合同（如金融服务条款、数据处理协议），设计用户二次确认机制',
+        '在用户协议中明确说明 agent 代签行为的法律基础和用户的知情同意路径'
+      ]
+    });
+  }
+  if (q15eff === 'unclear') {
+    risks.push({ level:'medium', module:'二', moduleTag:'用户协议合规', title:'用户协议未说明 agent 代签的处理方式，法律关系不清晰', markets:'全市场', desc:'用户协议没有说明 AI agent 是否可以代替用户接受条款，授权边界模糊。一旦 agent 代签了某项用户事后不认可的条款，平台缺乏法律依据抗辩。', laws:['合同法（代理制度）','新加坡《电子交易法》'], suggestions:['明确说明平台是否支持 agent 代签，以及代签的法律基础','如不支持代签，在用户协议中明确说明'] });
+  }
+  if (answers.q15 === 'user-authorized') {
+    risks.push({
+      level: 'medium', module: '二', moduleTag: '用户协议合规',
+      title: 'Agent 代签授权链路需显性记录，争议时须可举证',
+      markets: '全市场',
+      desc: '用户已授权 agent 代签，合规方向正确。但授权链路（用户签署授权 → agent 执行 → 合同成立）需要可追溯的记录，否则争议发生时举证困难。代理授权的范围也应明确边界，避免 agent 在授权范围外代签条款。',
+      laws: ['合同法（代理制度）', '新加坡《电子交易法》'],
+      suggestions: [
+        '保存用户授权记录（时间戳、授权内容、签名哈希），可追溯每次授权',
+        '在授权文件中明确代理权限的边界（可代签的合同类型、金额范围、有效期）',
+        '定期向用户发送 agent 代签记录汇总，让用户保持知情'
+      ]
+    });
+  }
+
   if (risks.length === 0) {
     risks.push({ level:'ok', module:'综合', moduleTag:'评估结果', title:'基于当前信息，暂未发现明显合规缺口', markets:'—', desc:'根据您提供的信息，暂未识别出高风险或中风险合规缺口。建议定期重新评估，尤其是在业务扩张、新市场进入或法规更新时。', laws:[], suggestions:['建议每半年重新进行一次合规评估','重点关注 EU AI Act（2026年8月）、PIPL 执法强化等新规动态','进入新市场前提前进行合规尽调'] });
   }
@@ -1310,7 +2148,7 @@ function buildSummaryBar(risks) {
 function buildContent(risks) {
   const moduleDefs = [
     { id: '一', title: '资金托管风险', tag: 'FUND CUSTODY' },
-    { id: '二', title: 'ToS 合规风险', tag: 'TERMS OF SERVICE' },
+    { id: '二', title: '用户协议合规风险', tag: 'TERMS OF SERVICE' },
     { id: '三', title: '数据合规风险', tag: 'PRIVACY & DATA' }
   ];
   let html = '';
@@ -1383,9 +2221,12 @@ function restartForm() {
   document.getElementById('memo-wrap').classList.remove('visible');
   document.getElementById('landing').style.display = 'block';
   document.getElementById('progress-bar').classList.remove('visible');
-  Object.keys(answers).forEach(k => { answers[k] = Array.isArray(answers[k]) ? [] : null; });
+  Object.keys(answers).forEach(k => { answers[k] = Array.isArray(answers[k]) ? [] : (typeof answers[k] === 'string' ? '' : null); });
   document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.other-input').forEach(el => { el.value = ''; });
+  document.querySelectorAll('[id$="-other-wrap"]').forEach(el => { el.style.display = 'none'; });
   document.getElementById('q2-note').style.display = 'none';
+  document.getElementById('tos-credits').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
