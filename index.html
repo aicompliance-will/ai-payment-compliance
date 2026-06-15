@@ -42,7 +42,7 @@
 
   /* ===== HERO : COLOR-BLOCK CONFRONTATION ===== */
   .hero{position:relative;border-bottom:2px solid var(--ink);overflow:hidden}
-  .hero-grid{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;min-height:560px;position:relative}
   .hero-left{background:var(--navy);color:var(--paper);padding:var(--s8) var(--s7) var(--s7) 0;position:relative}
   .hero-right{background:var(--brick);color:var(--paper);padding:var(--s8) 0 var(--s7) var(--s7);position:relative}
   /* the rupture seam: a jagged broken line down the middle */
@@ -69,6 +69,19 @@
   .btn-ghost:hover{background:var(--paper-2)}
   .btn .ar{transition:transform .2s}.btn:hover .ar{transform:translateX(3px)}
   .hero-sub{max-width:54ch;font-size:16px;color:var(--ink-soft);margin-left:auto}
+
+  /* ===== AGENT 模式安装窗 ===== */
+  .agent-install{max-width:var(--maxw);margin:0 auto;padding:0 28px var(--s5);display:block}
+  .ai-card{border:2px solid var(--ink);border-left:6px solid var(--brick);background:var(--paper-2);padding:var(--s4) var(--s5);max-width:720px}
+  .ai-lbl{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brick);margin-bottom:10px}
+  .ai-h{font-size:20px;letter-spacing:-.02em;margin-bottom:6px}
+  .ai-p{font-size:14px;color:var(--ink-soft);margin-bottom:16px;line-height:1.6}
+  .ai-cmd{display:flex;border:1px solid var(--ink)}
+  .ai-cmd code{flex:1;min-width:0;padding:12px 14px;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12.5px;line-height:1.5;background:var(--ink);color:var(--paper);white-space:normal;overflow-wrap:anywhere;word-break:break-all}
+  .ai-cmd button{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border:0;background:var(--brick);color:var(--paper);padding:0 18px;cursor:pointer}
+  .ai-cmd button:hover{background:var(--brick-700)}
+  .ai-hint{margin-top:12px;font-size:13px;color:var(--ink-soft)}
+  .ai-hint b{color:var(--ink)}
 
   /* ===== SECTION ===== */
   section{padding:var(--s8) 0;border-bottom:1px solid var(--ink)}
@@ -260,6 +273,18 @@
       <a href="ai-payment-compliance-tool.html" class="btn btn-primary">评估你的链路 <span class="ar">→</span></a>
       <a href="#framework" class="btn btn-ghost">阅读授权链路框架</a>
       <div class="hero-sub">Money in Motion 把支付授权链路的断裂拆成可评估的框架,服务于 AI 支付基础设施的创始人与合规团队。</div>
+    </div>
+    <div class="agent-install" id="agentInstall">
+      <div class="ai-card">
+        <div class="ai-lbl">Agent 模式 · 免费</div>
+        <h4 class="ai-h serif">让你的 Agent 自己跑支付合规评估</h4>
+        <p class="ai-p">读公开条款 → 逐维度评估 → 标出信息缺口。跑在你自己的 agent 上。</p>
+        <div class="ai-cmd">
+          <code id="aiCmd">Read and install https://raw.githubusercontent.com/aicompliance-will/ai-payment-compliance-skills-free/main/SKILL.md</code>
+          <button onclick="navigator.clipboard.writeText(document.getElementById('aiCmd').textContent);this.textContent='已复制 ✓';setTimeout(()=>this.textContent='复制',1500)">复制</button>
+        </div>
+        <p class="ai-hint">装好后说一句:<b>"评估 Skyfire 的支付合规风险"</b>。</p>
+      </div>
     </div>
   </header>
 
