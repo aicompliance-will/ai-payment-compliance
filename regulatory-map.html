@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全球监管地图 — Money in Motion</title>
+<meta name="description" content="AI 支付基础设施公司的全球牌照与合规要求速查。策展自权威公开资源，附 AI payments 视角注释。">
+<meta property="og:title" content="全球监管地图 — Money in Motion">
+<meta property="og:description" content="AI 支付基础设施的全球监管要求速查">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   MONEY IN MOTION — DESIGN TOKENS (inlined)
+   ============================================================================ */
+:root{
+  --paper:#f6f5f1;
+  --paper-2:#edebe4;
+  --paper-3:#e4e1d8;
+  --ink:#15140f;
+  --ink-soft:#3c3a33;
+  --stone:#8b8779;
+  --line:#dcdad1;
+  --line-ink:#15140f;
+
+  --navy-50:#eaeef3;
+  --navy-100:#cfd9e4;
+  --navy-300:#7d97b3;
+  --navy-500:#2f5680;
+  --navy:#1a3a5c;
+  --navy-700:#142d47;
+  --navy-900:#0c1c2e;
+  --navy-bright:#7da7d4;
+
+  --brick-50:#fbeae7;
+  --brick-100:#f4cfc8;
+  --brick-300:#d98a7e;
+  --brick-500:#b23a2a;
+  --brick:#9c2f24;
+  --brick-700:#7e261d;
+  --brick-900:#4a1610;
+  --brick-bright:#e06a56;
+
+  --s1:4px;  --s2:8px;  --s3:16px; --s4:24px;
+  --s5:32px; --s6:48px; --s7:64px; --s8:96px;
+
+  --t-cap:12px;
+  --t-body:16px;
+  --t-lead:20px;
+  --t-h3:25px;
+  --t-h2:31px;
+  --t-h1:49px;
+  --t-display:61px;
+
+  --font-display:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"JetBrains Mono","Noto Sans SC",monospace;
+
+  --maxw:1180px;
+  --gutter:24px;
+  --measure:62ch;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:var(--t-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-align:left;
+}
+p{max-width:var(--measure)}
+.display,h1,h2,h3,h4{
+  font-family:var(--font-display);
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1.05;
+}
+h1{font-size:var(--t-h1)}
+h2{font-size:var(--t-h2)}
+h3{font-size:var(--t-h3)}
+.mono{font-family:var(--font-mono)}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:var(--t-cap);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--stone);
+}
+.redline{position:relative;white-space:nowrap}
+.redline::after{
+  content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;
+  background:repeating-linear-gradient(90deg,
+    var(--brick),var(--brick) 7px,transparent 7px,transparent 12px);
+}
+.is-human{color:var(--navy)}
+.is-agent{color:var(--brick)}
+.block-human{background:var(--navy);color:var(--paper)}
+.block-agent{background:var(--brick);color:var(--paper)}
+:focus-visible{outline:2px solid var(--brick);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+<style>
+  /* ---- Page-local layout (not in tokens) ---- */
+  .page-header{
+    padding:var(--s8) var(--s4) var(--s7);
+    border-bottom:1px solid var(--line-ink);
+  }
+  .page-header .eyebrow{ margin-bottom:var(--s3); }
+  .page-header h1{ margin-bottom:var(--s3); }
+  .page-header .lead{
+    font-size:var(--t-lead);
+    color:var(--ink-soft);
+    max-width:var(--measure);
+    line-height:1.5;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 var(--s4);
+  }
+
+  /* ---- Home link ---- */
+  .home-link{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:var(--t-cap);
+    color:var(--stone);
+    text-decoration:none;
+    padding:var(--s3) 0;
+  }
+  .home-link:hover{ color:var(--ink); }
+
+  /* ---- Primary resource (Atlantic Council) ---- */
+  .primary{
+    margin-top:var(--s7);
+    padding-bottom:var(--s7);
+    border-bottom:1px solid var(--line);
+  }
+  .primary-inner{
+    display:grid;
+    grid-template-columns:var(--s7) 1fr;
+    gap:0 var(--s4);
+  }
+  .primary-num{
+    font-family:var(--font-mono);
+    font-size:var(--t-h2);
+    font-weight:600;
+    color:var(--navy);
+    line-height:1.05;
+    padding-top:var(--s1);
+  }
+  .primary h2{
+    font-size:var(--t-h2);
+    margin-bottom:var(--s2);
+  }
+  .primary .meta{
+    font-family:var(--font-mono);
+    font-size:var(--t-cap);
+    color:var(--stone);
+    margin-bottom:var(--s3);
+    letter-spacing:.05em;
+  }
+  .primary .desc{
+    color:var(--ink-soft);
+    margin-bottom:var(--s4);
+  }
+  .primary .desc strong{ color:var(--ink); font-weight:600; }
+
+  /* Insight block — navy left border = compliance/safety semantic */
+  .insight{
+    border-left:3px solid var(--navy);
+    padding:var(--s3) var(--s4);
+    margin-bottom:var(--s4);
+    background:var(--navy-50);
+  }
+  .insight .eyebrow{
+    color:var(--navy);
+    margin-bottom:var(--s2);
+  }
+  .insight p{
+    font-size:var(--t-body);
+    color:var(--ink-soft);
+  }
+  .insight strong{ color:var(--ink); font-weight:600; }
+
+  /* Risk-flavored insight — brick */
+  .insight.is-risk{
+    border-left-color:var(--brick);
+    background:var(--brick-50);
+  }
+  .insight.is-risk .eyebrow{ color:var(--brick); }
+
+  /* Map preview image */
+  .map-preview{
+    display:block;
+    margin-bottom:var(--s4);
+    border:1px solid var(--line);
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+  }
+  .map-preview img{
+    display:block;
+    width:100%;
+    height:auto;
+    transition:transform .3s;
+  }
+  .map-preview:hover img{ transform:scale(1.02); }
+  .map-preview .map-overlay{
+    position:absolute;
+    bottom:0;left:0;right:0;
+    background:linear-gradient(transparent, rgba(21,20,15,.7));
+    padding:var(--s5) var(--s4) var(--s3);
+    color:var(--paper);
+    font-family:var(--font-mono);
+    font-size:var(--t-cap);
+    letter-spacing:.1em;
+  }
+
+  /* Stat strip */
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    margin-bottom:var(--s5);
+  }
+  .stat-cell{
+    background:var(--paper);
+    padding:var(--s4) var(--s3);
+  }
+  .stat-cell .num{
+    font-family:var(--font-display);
+    font-size:var(--t-h2);
+    font-weight:800;
+    letter-spacing:-.025em;
+    line-height:1.05;
+  }
+  .stat-cell .num.is-human{ color:var(--navy); }
+  .stat-cell .num.is-agent{ color:var(--brick); }
+  .stat-cell .label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--stone);
+    margin-top:var(--s1);
+    letter-spacing:.05em;
+  }
+
+  /* CTA button — ink底 + paper字, hover转navy */
+  .cta{
+    display:inline-block;
+    background:var(--ink);
+    color:var(--paper);
+    text-decoration:none;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:var(--t-body);
+    padding:var(--s3) var(--s5);
+    border:none;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  .cta:hover{ background:var(--navy); }
+  .cta::after{ content:' ↗'; opacity:.5; }
+
+  /* ---- Section divider ---- */
+  .section-head{
+    margin-top:var(--s7);
+    margin-bottom:var(--s5);
+    display:grid;
+    grid-template-columns:var(--s7) 1fr;
+    gap:0 var(--s4);
+    align-items:baseline;
+    border-bottom:1px solid var(--line-ink);
+    padding-bottom:var(--s3);
+  }
+  .section-head .num{
+    font-family:var(--font-mono);
+    font-size:var(--t-h3);
+    font-weight:600;
+    color:var(--stone);
+  }
+  .section-head h2{
+    font-size:var(--t-h3);
+  }
+
+  /* ---- Resource cards ---- */
+  .resource{
+    padding:var(--s4) 0;
+    border-bottom:1px solid var(--line);
+  }
+  .resource:last-of-type{ border-bottom:none; }
+  .resource-inner{
+    display:grid;
+    grid-template-columns:var(--s7) 1fr;
+    gap:0 var(--s4);
+  }
+  .resource-idx{
+    font-family:var(--font-mono);
+    font-size:var(--t-cap);
+    color:var(--stone);
+    padding-top:var(--s1);
+  }
+  .resource h3{
+    font-size:var(--t-lead);
+    font-weight:700;
+    margin-bottom:var(--s1);
+  }
+  .resource h3 a{
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .resource h3 a:hover{
+    text-decoration:underline;
+    text-decoration-color:var(--brick);
+    text-underline-offset:3px;
+  }
+  .resource .meta{
+    font-family:var(--font-mono);
+    font-size:var(--t-cap);
+    color:var(--stone);
+    margin-bottom:var(--s3);
+    letter-spacing:.05em;
+  }
+  .resource .desc{
+    color:var(--ink-soft);
+    margin-bottom:var(--s3);
+  }
+  .resource .insight{
+    margin-bottom:0;
+  }
+
+  /* Tags */
+  .tags{ margin-bottom:var(--s3); display:flex; gap:var(--s2); flex-wrap:wrap; }
+  .tag{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.05em;
+    padding:var(--s1) var(--s2);
+    background:var(--paper-2);
+    color:var(--ink-soft);
+  }
+  .tag.is-human{ background:var(--navy-50); color:var(--navy); }
+  .tag.is-agent{ background:var(--brick-50); color:var(--brick); }
+
+  /* ---- Bottom CTA ---- */
+  .bottom-cta{
+    margin-top:var(--s7);
+    padding:var(--s5) var(--s4);
+    border-top:1px solid var(--line-ink);
+    border-bottom:1px solid var(--line-ink);
+  }
+  .bottom-cta p{
+    color:var(--ink-soft);
+    margin-bottom:var(--s3);
+  }
+  .bottom-cta a{
+    font-family:var(--font-display);
+    font-weight:700;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:2px solid var(--brick);
+  }
+  .bottom-cta a:hover{ color:var(--brick); }
+
+  /* ---- Footer ---- */
+  .page-footer{
+    padding:var(--s5) 0 var(--s7);
+    font-family:var(--font-mono);
+    font-size:var(--t-cap);
+    color:var(--stone);
+  }
+  .page-footer a{ color:var(--stone); }
+  .page-footer a:hover{ color:var(--ink); }
+
+  /* ---- Responsive ---- */
+  @media(max-width:640px){
+    .page-header{ padding:var(--s7) var(--s3) var(--s6); }
+    .page-header h1{ font-size:var(--t-h2); }
+    .primary-inner,
+    .section-head,
+    .resource-inner{
+      grid-template-columns:1fr;
+    }
+    .primary-num, .section-head .num, .resource-idx{
+      margin-bottom:var(--s2);
+    }
+    .stat-strip{ grid-template-columns:repeat(3,1fr); }
+    .stat-cell{ padding:var(--s3) var(--s2); }
+    .stat-cell .num{ font-size:var(--t-h3); }
+    .wrap{ padding:0 var(--s3); }
+  }
+
+  @media print{
+    .home-link, .cta{ display:none; }
+    .page-header{ border-bottom:2px solid var(--ink); }
+  }
+</style>
+<style id="mim-nav-style">
+/* === Money in Motion unified nav === */
+.mim-nav{position:sticky;top:0;z-index:1000;background:rgba(246,245,241,.93);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid #15140f;
+  font-family:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;}
+.mim-nav *{box-sizing:border-box;}
+.mim-nav-inner{position:relative;max-width:1180px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;height:62px;}
+.mim-logo{font-weight:700;font-size:18px;letter-spacing:-.01em;color:#15140f;
+  text-decoration:none;white-space:nowrap;}
+.mim-logo span{color:#9c2f24;}
+.mim-nav-links{display:flex;gap:24px;align-items:center;}
+.mim-nav-links a{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;
+  letter-spacing:.04em;color:#15140f;text-decoration:none;padding:4px 0;position:relative;
+  transition:color .2s;white-space:nowrap;}
+.mim-nav-links a:hover{color:#1a3a5c;}
+.mim-nav-links a::after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1.5px;
+  background:#9c2f24;transition:width .22s;}
+.mim-nav-links a:hover::after{width:100%;}
+.mim-nav-links a.mim-active{color:#9c2f24;}
+.mim-nav-links a.mim-active::after{width:100%;}
+.mim-nav-cta{color:#fff !important;background:#15140f;padding:8px 16px !important;
+  border:1px solid #15140f;transition:all .2s;}
+.mim-nav-cta:hover{background:#1a3a5c !important;border-color:#1a3a5c;}
+.mim-nav-cta::after{display:none !important;}
+.mim-nav-toggle{display:none;background:none;border:1px solid #15140f;color:#15140f;
+  font-size:13px;padding:6px 12px;cursor:pointer;
+  font-family:"JetBrains Mono",monospace;letter-spacing:.04em;}
+@media(max-width:860px){
+  .mim-nav-toggle{display:block;}
+  .mim-nav-links{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;
+    align-items:flex-start;gap:0;background:#f6f5f1;border-bottom:1px solid #15140f;
+    padding:8px 28px 16px;}
+  .mim-nav-links.mim-open{display:flex;}
+  .mim-nav-links a{padding:11px 0;width:100%;font-size:13px;}
+  .mim-nav-cta{margin-top:10px;text-align:center;width:100%;}
+}
+@media print{.mim-nav{display:none !important;}}
+</style>
+<style id="mim-footer-style">
+/* === Money in Motion unified footer === */
+.mim-footer{background:#f6f5f1;border-top:2px solid #15140f;
+  font-family:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;color:#15140f;}
+.mim-footer *{box-sizing:border-box;}
+.mim-footer-in{max-width:1180px;margin:0 auto;padding:48px 28px 56px;}
+.mim-foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:32px;}
+.mim-foot-brand{font-weight:700;font-size:20px;letter-spacing:-.01em;color:#15140f;}
+.mim-foot-brand span{color:#9c2f24;}
+.mim-foot-tag{font-size:13px;color:#3c3a33;max-width:34ch;margin-top:8px;line-height:1.5;}
+.mim-foot-mail{display:inline-block;margin-top:12px;font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;color:#8b8779;text-decoration:none;letter-spacing:.02em;}
+.mim-foot-mail:hover{color:#9c2f24;}
+.mim-foot-cols{display:flex;gap:56px;flex-wrap:wrap;}
+.mim-foot-col h4{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:#8b8779;margin-bottom:14px;}
+.mim-foot-col a{display:block;font-size:13.5px;color:#15140f;text-decoration:none;
+  margin-bottom:8px;transition:color .2s;}
+.mim-foot-col a:hover{color:#9c2f24;}
+.mim-foot-base{border-top:1px solid #dcdad1;padding-top:20px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;color:#8b8779;}
+@media(max-width:680px){
+  .mim-foot-cols{gap:32px;}
+  .mim-foot-base{flex-direction:column;gap:6px;}
+}
+@media print{.mim-footer{border-top:1px solid #15140f;}}
+</style>
+</head>
+<body>
+<!-- Money in Motion unified nav -->
+<nav class="mim-nav">
+  <div class="mim-nav-inner">
+    <a href="index.html" class="mim-logo">Money in Motion<span>.</span></a>
+    <button class="mim-nav-toggle" aria-label="菜单" onclick="var l=this.parentNode.querySelector('.mim-nav-links');l.classList.toggle('mim-open');">菜单 ☰</button>
+    <div class="mim-nav-links">
+      <a href="index.html#framework">框架</a>
+      <a href="ai-payment-compliance-tool.html">评估工具</a>
+      <a href="protocol-audit-framework.html">协议审计</a>
+      <a href="regulatory-map.html" class="mim-active">监管地图</a>
+      <a href="research.html">研究与资讯</a>
+      <a href="ai-payment-compliance-tool.html" class="mim-nav-cta">开始评估</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="wrap">
+
+
+  <header class="page-header">
+    <div class="eyebrow">Money in Motion</div>
+    <h1>全球监管地图</h1>
+    <p class="lead">AI 支付基础设施公司的牌照与合规要求速查。策展自权威公开资源，附 AI payments 视角注释。</p>
+  </header>
+
+  <!-- ===================== PRIMARY: Atlantic Council ===================== -->
+  <section class="primary">
+    <div class="primary-inner">
+      <div class="primary-num">01</div>
+      <div>
+        <h2>Cryptocurrency Regulation Tracker</h2>
+        <div class="meta">Atlantic Council GeoEconomics Center · 75 economies · updated Jul 2025</div>
+        <!-- Map preview -->
+        <a href="https://www.atlanticcouncil.org/programs/geoeconomics-center/cryptoregulationtracker/" target="_blank" rel="noopener" class="map-preview">
+          <img src="https://www.atlanticcouncil.org/wp-content/uploads/2025/05/Untitled-design-5.png" alt="Atlantic Council Cryptocurrency Regulation Tracker — interactive world map" loading="lazy">
+          <div class="map-overlay">点击打开交互式地图 ↗</div>
+        </a>
+
+        <!-- Key stats from the tracker -->
+        <div class="stat-strip">
+          <div class="stat-cell">
+            <div class="num is-human">45</div>
+            <div class="label">合法</div>
+          </div>
+          <div class="stat-cell">
+            <div class="num" style="color:var(--stone)">20</div>
+            <div class="label">部分禁止</div>
+          </div>
+          <div class="stat-cell">
+            <div class="num is-agent">10</div>
+            <div class="label">全面禁止</div>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag is-human">牌照</span>
+          <span class="tag is-human">AML/CFT</span>
+          <span class="tag">消费者保护</span>
+          <span class="tag">税收</span>
+        </div>
+        <p class="desc">
+          覆盖全球 75 个经济体的加密资产监管状态，按<strong>税收、AML/CFT、消费者保护、牌照</strong>四个维度分类。可点击地图，逐国查看法律状态（合法 / 部分禁止 / 全面禁止）、监管机构和具体规则。含稳定币监管专题对比（US vs. EU vs. UK vs. Japan）。
+        </p>
+        <div class="insight">
+          <div class="eyebrow">AI Payments 视角</div>
+          <p>重点关注各国 <strong>licensing</strong> 维度。如果你的 AI agent 在某个司法管辖区发起支付或持有用户资金，该国对 payment intermediary / VASP 的牌照要求直接决定你的合规架构和实体设立策略。45 个"合法"国家中，牌照门槛差异巨大 — 有牌照不代表同一套牌照。</p>
+        </div>
+        <a href="https://www.atlanticcouncil.org/programs/geoeconomics-center/cryptoregulationtracker/" target="_blank" rel="noopener" class="cta">打开交互式地图</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION: Deep-dive reports ===================== -->
+  <div class="section-head">
+    <div class="num">02</div>
+    <h2>深度报告</h2>
+  </div>
+
+  <!-- 2a: Chainalysis Regulatory Round-Up -->
+  <article class="resource">
+    <div class="resource-inner">
+      <div class="resource-idx">02-A</div>
+      <div>
+        <h3><a href="https://www.chainalysis.com/blog/2025-crypto-regulatory-round-up/" target="_blank" rel="noopener">2025 Crypto Regulatory Round-Up ↗</a></h3>
+        <div class="meta">Chainalysis · 2025</div>
+        <div class="tags">
+          <span class="tag is-human">MiCA</span>
+          <span class="tag">稳定币</span>
+          <span class="tag">全球综述</span>
+        </div>
+        <p class="desc">2025 年全球监管变化总结：EU MiCA 全面生效、US 稳定币立法推进、APAC 多国从禁令转向发牌。</p>
+        <div class="insight is-risk">
+          <div class="eyebrow">AI Payments 视角</div>
+          <p>MiCA 下 <strong>EMT</strong>（电子货币代币）与 <strong>ART</strong>（资产参考代币）分类对稳定币结算的影响，是 AI 支付公司进入欧洲市场的第一道门槛。注意 MiCA 对<span class="redline">"托管"</span>的定义可能覆盖 agent wallet 场景。</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 2b: TRM Labs -->
+  <article class="resource">
+    <div class="resource-inner">
+      <div class="resource-idx">02-B</div>
+      <div>
+        <h3><a href="https://www.trmlabs.com/reports-and-whitepapers/global-crypto-policy-review-outlook-2025-26" target="_blank" rel="noopener">Global Crypto Policy Review & Outlook 2025/26 ↗</a></h3>
+        <div class="meta">TRM Labs · 2025</div>
+        <div class="tags">
+          <span class="tag is-human">AML</span>
+          <span class="tag">稳定币</span>
+          <span class="tag">政策</span>
+        </div>
+        <p class="desc">政策导向的全球 crypto 监管分析，覆盖 UAE PTSR（支付代币服务规则）等新兴框架。</p>
+        <div class="insight is-risk">
+          <div class="eyebrow">AI Payments 视角</div>
+          <p>UAE 的 PTSR 要求只有持牌实体发行的<strong>本币稳定币</strong>可用于境内支付 — 如果你的 AI agent 使用 USDT/USDC 在 UAE 结算，这条规则直接影响<span class="redline">合规路径</span>。</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 2c: Geography Report -->
+  <article class="resource">
+    <div class="resource-inner">
+      <div class="resource-idx">02-C</div>
+      <div>
+        <h3><a href="https://www.chainalysis.com/reports/2025-geo-crypto-report/" target="_blank" rel="noopener">2025 Geography of Cryptocurrency Report ↗</a></h3>
+        <div class="meta">Chainalysis · 2025 · 151 countries</div>
+        <div class="tags">
+          <span class="tag">采用率</span>
+          <span class="tag">稳定币</span>
+          <span class="tag">数据</span>
+        </div>
+        <p class="desc">全球 crypto 采用率排名与数据分析。侧重采用率而非监管，但包含各区域稳定币使用模式和 DeFi 渗透率数据。</p>
+        <div class="insight">
+          <div class="eyebrow">AI Payments 视角</div>
+          <p>选择哪条稳定币结算轨道，取决于目标市场的<strong>采用率和监管接受度</strong>。此报告帮助你判断 agent 应优先服务哪些市场。</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 2d: CBDC Tracker -->
+  <article class="resource">
+    <div class="resource-inner">
+      <div class="resource-idx">02-D</div>
+      <div>
+        <h3><a href="https://www.atlanticcouncil.org/cbdctracker/" target="_blank" rel="noopener">Central Bank Digital Currency Tracker ↗</a></h3>
+        <div class="meta">Atlantic Council · 135+ countries · continuously updated</div>
+        <div class="tags">
+          <span class="tag">CBDC</span>
+          <span class="tag is-human">央行</span>
+        </div>
+        <p class="desc">全球央行数字货币进展追踪，覆盖 135+ 个国家的 CBDC 研发、试点与上线状态。</p>
+        <div class="insight">
+          <div class="eyebrow">AI Payments 视角</div>
+          <p>CBDC 推进会重塑 agent-to-agent 支付的结算层。如果某国推出零售 CBDC，AI agent 是否可以直接持有和转移 CBDC？这将是<strong>下一代合规问题</strong>。</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== Bottom CTA ===================== -->
+  <div class="bottom-cta">
+    <p>想知道这些监管要求具体影响你的用户协议（ToS）哪些条款？</p>
+    <a href="ai-payment-compliance-tool.html">使用 AI 支付合规评估工具 →</a>
+  </div>
+
+  <footer class="mim-footer">
+  <div class="mim-footer-in">
+    <div class="mim-foot-top">
+      <div>
+        <div class="mim-foot-brand">Money in Motion<span>.</span></div>
+        <div class="mim-foot-tag">AI 支付授权链路的合规研究与评估。</div>
+        <a class="mim-foot-mail" href="mailto:wl@kindinglaw.com">wl@kindinglaw.com</a>
+      </div>
+      <div class="mim-foot-cols">
+        <div class="mim-foot-col">
+          <h4>框架</h4>
+          <a href="index.html#framework">授权链路</a>
+          <a href="protocol-audit-framework.html">协议审计</a>
+          <a href="regulatory-map.html">监管地图</a>
+        </div>
+        <div class="mim-foot-col">
+          <h4>工具</h4>
+          <a href="ai-payment-compliance-tool.html">基础设施评估</a>
+          <a href="ai-payment-compliance-tool.html">商户评估</a>
+        </div>
+        <div class="mim-foot-col">
+          <h4>研究</h4>
+          <a href="research.html#research">合规研究</a>
+          <a href="research.html#intel">行业资讯</a>
+        </div>
+      </div>
+    </div>
+    <div class="mim-foot-base">
+      <div>MONEY IN MOTION · AI 支付合规</div>
+      <div>意图 → 授权 → 发起 → 验证 → 资金 → 结算</div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+</body>
+</html>

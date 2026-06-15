@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>协议法律审计框架 · 八维 — Money in Motion</title>
+<meta name="description" content="逐维拆解 agentic 支付协议的法律空白：八个维度判断一个协议把哪些法律问题留给了采用它的人。Money in Motion 协议法律审计框架。">
+<meta property="og:title" content="协议法律审计框架 · 八维 — Money in Motion">
+<meta property="og:description" content="八个维度判断一个 agentic 支付协议把哪些法律问题留给了你。空白不是无风险，而是把风险甩给了实现者。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f6f5f1'/%3E%3Crect width='15' height='32' fill='%231a3a5c'/%3E%3Crect x='17' width='15' height='32' fill='%239c2f24'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     生产环境可删除以下 :root + 基础排版，改用 <link href="tokens.css">
+     此处内联是为了让本页独立渲染时也忠实于设计 token。
+     ============================================================ */
+  :root{
+    --paper:#f6f5f1; --paper-2:#edebe4; --paper-3:#e4e1d8;
+    --ink:#15140f; --ink-soft:#3c3a33; --stone:#8b8779;
+    --line:#dcdad1; --line-ink:#15140f;
+    --navy-50:#eaeef3; --navy-100:#cfd9e4; --navy-300:#7d97b3;
+    --navy-500:#2f5680; --navy:#1a3a5c; --navy-700:#142d47;
+    --navy-900:#0c1c2e; --navy-bright:#7da7d4;
+    --brick-50:#fbeae7; --brick-100:#f4cfc8; --brick-300:#d98a7e;
+    --brick-500:#b23a2a; --brick:#9c2f24; --brick-700:#7e261d;
+    --brick-900:#4a1610; --brick-bright:#e06a56;
+    --s1:4px; --s2:8px; --s3:16px; --s4:24px;
+    --s5:32px; --s6:48px; --s7:64px; --s8:96px;
+    --t-cap:12px; --t-body:16px; --t-lead:20px; --t-h3:25px;
+    --t-h2:31px; --t-h1:49px; --t-display:61px;
+    --font-display:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+    --font-body:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+    --font-mono:"JetBrains Mono","Noto Sans SC",monospace;
+    --maxw:1180px; --gutter:28px; --measure:62ch;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-size:var(--t-body); line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-align:left;
+  }
+  p{max-width:var(--measure)}
+  .display,h1,h2,h3,h4{
+    font-family:var(--font-display); font-weight:800;
+    letter-spacing:-.025em; line-height:1.05;
+  }
+  h1{font-size:var(--t-h1)} h2{font-size:var(--t-h2)} h3{font-size:var(--t-h3)}
+  .mono{font-family:var(--font-mono)}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:var(--t-cap);
+    letter-spacing:.2em; text-transform:uppercase; color:var(--stone);
+  }
+  .redline{position:relative;white-space:nowrap}
+  .redline::after{
+    content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;
+    background:repeating-linear-gradient(90deg,
+      var(--brick),var(--brick) 7px,transparent 7px,transparent 12px);
+  }
+  .is-human{color:var(--navy)} .is-agent{color:var(--brick)}
+  :focus-visible{outline:2px solid var(--brick);outline-offset:2px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ============================================================
+     页面专属样式
+     ============================================================ */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+
+  /* ---- topbar ---- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,245,241,.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;
+    padding-top:var(--s3);padding-bottom:var(--s3)}
+  .home-link{
+    font-family:var(--font-mono);font-size:var(--t-cap);letter-spacing:.08em;
+    color:var(--ink-soft);text-decoration:none;
+    border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s,color .15s;
+  }
+  .home-link:hover{color:var(--brick);border-color:var(--brick)}
+  .wordmark{font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600;
+    letter-spacing:.04em;color:var(--ink)}
+  .wordmark b{color:var(--brick);font-weight:600}
+
+  /* ---- hero ---- */
+  .hero{padding-top:var(--s8);padding-bottom:var(--s7)}
+  .hero .eyebrow{display:block;margin-bottom:var(--s4)}
+  .hero h1{
+    font-size:clamp(31px,6.2vw,49px);margin-bottom:var(--s4);max-width:18ch;
+  }
+  .hero h1 .redline{color:var(--ink)}
+  .hero-thesis{font-size:var(--t-lead);color:var(--ink-soft);line-height:1.55;max-width:54ch}
+  .hero-thesis b{color:var(--ink);font-weight:700}
+
+  /* ---- color-block confrontation (门面) ---- */
+  .confront{
+    margin-top:var(--s7);
+    display:grid;grid-template-columns:1fr 1fr;
+    border:1px solid var(--line-ink);
+  }
+  .cf-block{
+    padding:var(--s6) var(--s5);min-height:200px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    color:var(--paper);position:relative;overflow:hidden;
+  }
+  .cf-human{background:var(--navy)}
+  .cf-agent{background:var(--brick);border-left:2px dashed var(--paper)}
+  .cf-block svg{width:72px;height:72px;color:var(--paper);opacity:.95}
+  .cf-tag{font-family:var(--font-mono);font-size:var(--t-cap);letter-spacing:.16em;
+    text-transform:uppercase;margin-bottom:var(--s4);opacity:.85}
+  .cf-name{font-family:var(--font-display);font-weight:800;font-size:var(--t-h3);
+    letter-spacing:-.02em;margin-top:var(--s4)}
+  .confront-cap{
+    margin-top:var(--s3);font-family:var(--font-mono);font-size:var(--t-cap);
+    color:var(--stone);letter-spacing:.02em;max-width:none;line-height:1.7;
+  }
+  .confront-cap b{color:var(--ink-soft);font-weight:600}
+
+  /* ---- chapter section ---- */
+  .chapter{border-top:1px solid var(--line-ink);
+    padding-top:var(--s7);padding-bottom:var(--s7)}
+  .ch-head{display:grid;grid-template-columns:64px 1fr;gap:var(--s4);margin-bottom:var(--s6)}
+  .ch-num{font-family:var(--font-mono);font-size:var(--t-lead);color:var(--brick);
+    font-weight:600;line-height:1.2;padding-top:4px}
+  .ch-eyebrow{display:block;margin-bottom:var(--s3)}
+  .ch-head h2{margin-bottom:var(--s3)}
+  .ch-sub{color:var(--ink-soft)}
+
+  /* ---- tiers ---- */
+  .tiers{display:grid;gap:var(--s4);grid-template-columns:1fr}
+  @media(min-width:720px){.tiers{grid-template-columns:1fr 1fr}}
+  .tier-list{display:flex;flex-direction:column;gap:0}
+  .tier-row{display:grid;grid-template-columns:88px 1fr;gap:var(--s3);
+    align-items:start;padding:var(--s3) 0}
+  .tier-row+.tier-row{border-top:1px solid var(--line)}
+  .chip{font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600;
+    letter-spacing:.04em;padding:var(--s1) var(--s2);text-align:center;color:var(--paper)}
+  .chip.clear{background:var(--navy)}
+  .chip.partial{background:var(--stone)}
+  .chip.blank{background:var(--brick)}
+  .tier-row p{font-size:var(--t-body);color:var(--ink-soft)}
+  .tier-row p b{color:var(--ink);font-weight:700}
+
+  .insight{border:1px solid var(--line-ink);padding:var(--s5);background:var(--paper)}
+  .insight .k{font-family:var(--font-mono);font-size:var(--t-cap);letter-spacing:.18em;
+    text-transform:uppercase;color:var(--stone);margin-bottom:var(--s3)}
+  .insight h3{font-size:var(--t-h3);margin-bottom:var(--s4);line-height:1.12}
+  .insight p{font-size:var(--t-body);color:var(--ink-soft);margin-bottom:var(--s3)}
+  .insight p:last-child{margin-bottom:0}
+  .insight p b{color:var(--ink);font-weight:700}
+
+  .crosslink{margin-top:var(--s4);border:1px solid var(--line);padding:var(--s4)}
+  .cl-row{display:grid;grid-template-columns:64px 1fr;gap:var(--s3);font-size:var(--t-body);
+    color:var(--ink-soft)}
+  .cl-row+.cl-row{margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--line)}
+  .cl-pair{font-family:var(--font-mono);font-weight:600;color:var(--navy)}
+  .cl-row b{color:var(--ink);font-weight:700}
+
+  /* ---- quick table ---- */
+  .qscroll{overflow-x:auto;border:1px solid var(--line-ink);margin-bottom:var(--s6)}
+  table.qt{width:100%;border-collapse:collapse;min-width:660px}
+  table.qt th,table.qt td{text-align:left;padding:var(--s3);font-size:var(--t-body);
+    vertical-align:top}
+  table.qt thead th{font-family:var(--font-mono);font-size:var(--t-cap);letter-spacing:.08em;
+    text-transform:uppercase;color:var(--stone);font-weight:600;
+    border-bottom:1px solid var(--line-ink);background:var(--paper-2)}
+  table.qt tbody tr+tr td{border-top:1px solid var(--line)}
+  table.qt .num{font-family:var(--font-mono);font-weight:600;color:var(--brick);width:40px}
+  table.qt .dim{font-weight:700;white-space:nowrap}
+  table.qt .concept{font-family:var(--font-mono);font-size:var(--t-cap);color:var(--stone)}
+
+  /* ---- dimension cards ---- */
+  .dims{display:grid;gap:var(--s4);grid-template-columns:1fr}
+  @media(min-width:820px){.dims{grid-template-columns:1fr 1fr}}
+  .dim{border:1px solid var(--line-ink);padding:var(--s5);background:var(--paper);
+    position:relative;display:flex;flex-direction:column}
+  .dim-head{display:grid;grid-template-columns:48px 1fr;gap:var(--s3);align-items:baseline}
+  .dim-num{font-family:var(--font-mono);font-size:var(--t-h2);font-weight:600;
+    color:var(--brick);line-height:1}
+  .dim-title{font-family:var(--font-display);font-weight:800;font-size:var(--t-h3);
+    letter-spacing:-.02em;line-height:1.1}
+  .dim-en{font-family:var(--font-mono);font-size:var(--t-cap);letter-spacing:.06em;
+    text-transform:uppercase;color:var(--stone);margin:var(--s1) 0 var(--s4) calc(48px + var(--s3))}
+  .dim-def{font-size:var(--t-lead);color:var(--ink);line-height:1.45;
+    margin:0 0 var(--s4) calc(48px + var(--s3))}
+  .dim-def b{color:var(--navy);font-weight:700}
+  .qlabel{font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--stone);
+    margin:0 0 var(--s3) calc(48px + var(--s3))}
+  .dim ul{list-style:none;margin:0 0 0 calc(48px + var(--s3));padding:0}
+  .dim ul li{font-size:var(--t-body);color:var(--ink-soft);
+    padding:var(--s2) 0 var(--s2) var(--s4);position:relative;line-height:1.5}
+  .dim ul li+li{border-top:1px solid var(--line)}
+  .dim ul li::before{content:"";position:absolute;left:0;top:14px;
+    width:8px;height:1px;background:var(--brick)}
+  .hint{margin:var(--s4) 0 0 calc(48px + var(--s3));background:var(--paper-2);
+    padding:var(--s3);font-size:var(--t-body);color:var(--ink-soft);line-height:1.5}
+  .hint b{color:var(--navy);font-weight:700}
+  .tag{position:absolute;top:var(--s5);right:var(--s5);
+    font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600;letter-spacing:.04em;
+    padding:var(--s1) var(--s2);border:1px solid var(--navy);color:var(--navy)}
+
+  /* ---- protocol landscape (catalog) ---- */
+  .risk-legend{display:flex;flex-wrap:wrap;gap:var(--s4);margin-bottom:var(--s6);
+    padding-bottom:var(--s4);border-bottom:1px solid var(--line)}
+  .rl-item{display:flex;align-items:center;gap:var(--s2);font-family:var(--font-mono);
+    font-size:var(--t-cap);color:var(--ink-soft)}
+  .rl-bar{width:18px;height:10px;flex-shrink:0}
+  .rl-bar.low{background:var(--navy)} .rl-bar.mid{background:var(--stone)} .rl-bar.high{background:var(--brick)}
+
+  .layer{margin-bottom:var(--s6)}
+  .layer:last-child{margin-bottom:0}
+  .layer-label{font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+    padding-bottom:var(--s2);margin-bottom:0;border-bottom:1px solid var(--line-ink)}
+  .layer-label span{color:var(--stone);text-transform:none;letter-spacing:.02em}
+
+  .prow{display:grid;grid-template-columns:1fr auto auto;gap:var(--s4);align-items:center;
+    padding:var(--s3) var(--s3) var(--s3) var(--s4);border-bottom:1px solid var(--line);
+    border-left:3px solid var(--line)}
+  .prow.low{border-left-color:var(--navy)}
+  .prow.mid{border-left-color:var(--stone)}
+  .prow.high{border-left-color:var(--brick)}
+  .pr-main{min-width:0}
+  .pr-name{font-family:var(--font-display);font-weight:800;font-size:var(--t-lead);
+    letter-spacing:-.02em;line-height:1.1}
+  .pr-op{display:block;font-family:var(--font-mono);font-size:var(--t-cap);color:var(--stone);
+    margin-top:var(--s1)}
+  .pr-dims{display:flex;gap:var(--s1);flex-shrink:0}
+  .pr-dim{font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600;
+    width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--navy);color:var(--navy)}
+  .pr-dim.union{width:auto;padding:0 var(--s2);border-color:var(--brick);color:var(--brick)}
+  .pr-status{font-family:var(--font-mono);font-size:var(--t-cap);color:var(--ink-soft);
+    text-align:right;white-space:nowrap;flex-shrink:0}
+  .pr-status b{color:var(--ink);font-weight:600}
+
+  .compose{margin-top:var(--s6);border:1px solid var(--line-ink);padding:var(--s5);background:var(--paper)}
+  .compose .k{font-family:var(--font-mono);font-size:var(--t-cap);letter-spacing:.18em;
+    text-transform:uppercase;color:var(--stone);margin-bottom:var(--s3)}
+  .compose h3{font-size:var(--t-h3);margin-bottom:var(--s3);line-height:1.12}
+  .compose p{font-size:var(--t-body);color:var(--ink-soft)}
+  .compose p b{color:var(--ink);font-weight:700}
+  .compose .eq{font-family:var(--font-mono);color:var(--brick);font-weight:600}
+
+  @media(max-width:680px){
+    .prow{grid-template-columns:1fr;gap:var(--s2);align-items:start}
+    .pr-dims{margin-top:var(--s1)}
+    .pr-status{text-align:left}
+  }
+
+  /* ---- protocol placeholder ---- */
+  .proto{border:2px dashed var(--line-ink);padding:var(--s7) var(--s5);text-align:left}
+  .proto-badge{display:inline-block;font-family:var(--font-mono);font-size:var(--t-cap);
+    font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--ink);color:var(--paper);padding:var(--s1) var(--s3);margin-bottom:var(--s4)}
+  .proto h3{font-size:var(--t-h2);margin-bottom:var(--s3)}
+  .proto>p{color:var(--ink-soft);margin-bottom:var(--s5)}
+  .proto-list{display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s6)}
+  .proto-chip{font-family:var(--font-mono);font-size:var(--t-body);
+    padding:var(--s2) var(--s3);border:1px solid var(--line-ink);color:var(--ink)}
+  .proto-chip.soon{color:var(--stone);border-style:dashed;border-color:var(--stone)}
+
+  .mp{max-width:520px;border:1px solid var(--line-ink);background:var(--paper)}
+  .mp-head{font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--stone);
+    padding:var(--s3);border-bottom:1px solid var(--line-ink);background:var(--paper-2)}
+  .mp-row{display:grid;grid-template-columns:16px 1fr auto;gap:var(--s3);align-items:center;
+    padding:var(--s3);font-size:var(--t-body)}
+  .mp-row+.mp-row{border-top:1px solid var(--line)}
+  .mp-dot{width:12px;height:12px;border-radius:50%}
+  .mp-dot.clear{background:var(--navy)}
+  .mp-dot.partial{background:var(--stone)}
+  .mp-dot.blank{background:var(--brick)}
+  .mp-dim{color:var(--ink-soft)}
+  .mp-state{font-family:var(--font-mono);font-size:var(--t-cap);font-weight:600}
+  .mp-state.clear{color:var(--navy)} .mp-state.partial{color:var(--stone)} .mp-state.blank{color:var(--brick)}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line-ink);padding-top:var(--s6);padding-bottom:var(--s7)}
+  .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s4);
+    align-items:baseline}
+  .foot-mark{font-family:var(--font-mono);font-size:var(--t-body);font-weight:600;color:var(--ink)}
+  .foot-mark b{color:var(--brick);font-weight:600}
+  .foot-meta{font-family:var(--font-mono);font-size:var(--t-cap);color:var(--stone);
+    letter-spacing:.02em;line-height:1.8}
+  .foot-meta a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--line-ink)}
+  .foot-meta a:hover{color:var(--brick);border-color:var(--brick)}
+
+  /* ---- responsive ---- */
+  @media(max-width:680px){
+    .confront{grid-template-columns:1fr}
+    .cf-agent{border-left:none;border-top:2px dashed var(--paper)}
+    .ch-head{grid-template-columns:1fr;gap:var(--s2)}
+    .ch-num{padding-top:0}
+    .dim-head{grid-template-columns:40px 1fr}
+    .dim-en,.dim-def,.qlabel,.hint{margin-left:0}
+    .dim ul{margin-left:0}
+  }
+</style>
+<style id="mim-nav-style">
+/* === Money in Motion unified nav === */
+.mim-nav{position:sticky;top:0;z-index:1000;background:rgba(246,245,241,.93);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid #15140f;
+  font-family:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;}
+.mim-nav *{box-sizing:border-box;}
+.mim-nav-inner{position:relative;max-width:1180px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;height:62px;}
+.mim-logo{font-weight:700;font-size:18px;letter-spacing:-.01em;color:#15140f;
+  text-decoration:none;white-space:nowrap;}
+.mim-logo span{color:#9c2f24;}
+.mim-nav-links{display:flex;gap:24px;align-items:center;}
+.mim-nav-links a{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;
+  letter-spacing:.04em;color:#15140f;text-decoration:none;padding:4px 0;position:relative;
+  transition:color .2s;white-space:nowrap;}
+.mim-nav-links a:hover{color:#1a3a5c;}
+.mim-nav-links a::after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1.5px;
+  background:#9c2f24;transition:width .22s;}
+.mim-nav-links a:hover::after{width:100%;}
+.mim-nav-links a.mim-active{color:#9c2f24;}
+.mim-nav-links a.mim-active::after{width:100%;}
+.mim-nav-cta{color:#fff !important;background:#15140f;padding:8px 16px !important;
+  border:1px solid #15140f;transition:all .2s;}
+.mim-nav-cta:hover{background:#1a3a5c !important;border-color:#1a3a5c;}
+.mim-nav-cta::after{display:none !important;}
+.mim-nav-toggle{display:none;background:none;border:1px solid #15140f;color:#15140f;
+  font-size:13px;padding:6px 12px;cursor:pointer;
+  font-family:"JetBrains Mono",monospace;letter-spacing:.04em;}
+@media(max-width:860px){
+  .mim-nav-toggle{display:block;}
+  .mim-nav-links{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;
+    align-items:flex-start;gap:0;background:#f6f5f1;border-bottom:1px solid #15140f;
+    padding:8px 28px 16px;}
+  .mim-nav-links.mim-open{display:flex;}
+  .mim-nav-links a{padding:11px 0;width:100%;font-size:13px;}
+  .mim-nav-cta{margin-top:10px;text-align:center;width:100%;}
+}
+@media print{.mim-nav{display:none !important;}}
+</style>
+<style id="mim-footer-style">
+/* === Money in Motion unified footer === */
+.mim-footer{background:#f6f5f1;border-top:2px solid #15140f;
+  font-family:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;color:#15140f;}
+.mim-footer *{box-sizing:border-box;}
+.mim-footer-in{max-width:1180px;margin:0 auto;padding:48px 28px 56px;}
+.mim-foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:32px;}
+.mim-foot-brand{font-weight:700;font-size:20px;letter-spacing:-.01em;color:#15140f;}
+.mim-foot-brand span{color:#9c2f24;}
+.mim-foot-tag{font-size:13px;color:#3c3a33;max-width:34ch;margin-top:8px;line-height:1.5;}
+.mim-foot-mail{display:inline-block;margin-top:12px;font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;color:#8b8779;text-decoration:none;letter-spacing:.02em;}
+.mim-foot-mail:hover{color:#9c2f24;}
+.mim-foot-cols{display:flex;gap:56px;flex-wrap:wrap;}
+.mim-foot-col h4{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:#8b8779;margin-bottom:14px;}
+.mim-foot-col a{display:block;font-size:13.5px;color:#15140f;text-decoration:none;
+  margin-bottom:8px;transition:color .2s;}
+.mim-foot-col a:hover{color:#9c2f24;}
+.mim-foot-base{border-top:1px solid #dcdad1;padding-top:20px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;color:#8b8779;}
+@media(max-width:680px){
+  .mim-foot-cols{gap:32px;}
+  .mim-foot-base{flex-direction:column;gap:6px;}
+}
+@media print{.mim-footer{border-top:1px solid #15140f;}}
+</style>
+</head>
+<body>
+
+
+<!-- Money in Motion unified nav -->
+<nav class="mim-nav">
+  <div class="mim-nav-inner">
+    <a href="index.html" class="mim-logo">Money in Motion<span>.</span></a>
+    <button class="mim-nav-toggle" aria-label="菜单" onclick="var l=this.parentNode.querySelector('.mim-nav-links');l.classList.toggle('mim-open');">菜单 ☰</button>
+    <div class="mim-nav-links">
+      <a href="index.html#framework">框架</a>
+      <a href="ai-payment-compliance-tool.html">评估工具</a>
+      <a href="protocol-audit-framework.html" class="mim-active">协议审计</a>
+      <a href="regulatory-map.html">监管地图</a>
+      <a href="research.html">研究与资讯</a>
+      <a href="ai-payment-compliance-tool.html" class="mim-nav-cta">开始评估</a>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+      <span class="eyebrow">协议法律审计 · 八维框架</span>
+      <h1>一个 agentic 支付协议，把哪些法律问题<span class="redline">留给了你</span>。</h1>
+      <p class="hero-thesis">
+        每个协议都在八个维度上做了选择——明确规定、部分触及、或<b>完全留白</b>。
+        留白不是没有风险，而是把风险甩给了采用它的人。这套框架逐维拆解，
+        告诉你协议层留下的洞，以及你要在自己的用户协议里补什么。
+      </p>
+
+      <!-- 色块对抗：审计的就是人类授权 → agent 执行 这道接缝 -->
+      <div class="confront" role="img" aria-label="人类授权（连续）与 agent 执行（断裂）之间的接缝">
+        <div class="cf-block cf-human">
+          <div class="cf-tag">连续 / Continuity</div>
+          <svg viewBox="0 0 80 80" aria-hidden="true">
+            <circle cx="40" cy="40" r="28" fill="none" stroke="currentColor" stroke-width="4"/>
+          </svg>
+          <div class="cf-name">人类授权</div>
+        </div>
+        <div class="cf-block cf-agent">
+          <div class="cf-tag">断裂 / Rupture</div>
+          <svg viewBox="0 0 80 80" aria-hidden="true">
+            <path d="M40 12 A28 28 0 1 1 20 60" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="butt"/>
+          </svg>
+          <div class="cf-name">agent 执行</div>
+        </div>
+      </div>
+      <p class="confront-cap">
+        框架审计的就是这道接缝——授权从<b>人类</b>交到 <b>agent</b> 手里去执行的那一跳。<br>
+        协议往往恰恰在此留白，断裂就发生在这里。
+      </p>
+    </header>
+
+    <!-- CH 01 · 方法论 -->
+    <section class="chapter" id="method">
+      <div class="ch-head">
+        <div class="ch-num">01</div>
+        <div>
+          <span class="eyebrow ch-eyebrow">方法论 / How to read</span>
+          <h2>判断档位测的是「明确度」，不是「风险」</h2>
+          <p class="ch-sub">每个维度对协议打三档。但明确度和风险方向相反——这是整套审计最反直觉、也最关键的一点。</p>
+        </div>
+      </div>
+
+      <div class="tiers">
+        <div class="tier-list">
+          <div class="tier-row">
+            <span class="chip clear">明确</span>
+            <p><b>协议有清晰、可执行的规定。</b>对应连续 / 合规。</p>
+          </div>
+          <div class="tier-row">
+            <span class="chip partial">部分</span>
+            <p><b>协议触及但未厘清，或只覆盖部分情形。</b>中间态。</p>
+          </div>
+          <div class="tier-row">
+            <span class="chip blank">空白</span>
+            <p><b>协议完全不涉及，留给上层实现者承担。</b>对应断裂 / 风险。</p>
+          </div>
+        </div>
+
+        <div class="insight">
+          <div class="k">核心逻辑</div>
+          <h3><span class="is-agent">空白 ≈ 高风险</span>；<span class="is-human">明确 ≠ 安全</span></h3>
+          <p><b>空白判红。</b>协议不置一词，不代表问题消失，而是被甩给实现者——风险最高、最隐蔽。「信息不足 ≠ 无风险」。</p>
+          <p><b>明确要读方向。</b>协议可能明确写「不退款、风险自负」——这是明确，但对用户极不利。明确档要继续看它朝哪个方向分配责任。</p>
+        </div>
+      </div>
+
+      <div class="crosslink">
+        <div class="cl-row">
+          <span class="cl-pair">② ↔ ⑦</span>
+          <div><b>共享代理法底层。</b>授权（②，向内对用户）与缔约（⑦，向外对交易对手）同源于 agency law，按视角拆分填写，不重复。</div>
+        </div>
+        <div class="cl-row">
+          <span class="cl-pair">⑥ ↔ ⑧</span>
+          <div><b>在数据本地化处有接口。</b>⑥ 看监管管辖叠加，⑧ 看数据主体权利与 controller / processor 定性。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 02 · 八维 -->
+    <section class="chapter" id="dimensions">
+      <div class="ch-head">
+        <div class="ch-num">02</div>
+        <div>
+          <span class="eyebrow ch-eyebrow">八维详解 / The eight dimensions</span>
+          <h2>从资金进入到数据流出</h2>
+          <p class="ch-sub">覆盖一笔 agentic 支付的完整法律生命周期。先速查定位，再逐维拆解。</p>
+        </div>
+      </div>
+
+      <div class="qscroll">
+        <table class="qt">
+          <thead><tr><th>#</th><th>维度</th><th>一句话</th><th>核心法律概念</th></tr></thead>
+          <tbody>
+            <tr><td class="num">①</td><td class="dim">资金流向</td><td>谁持有资金、多久、是托管还是过路</td><td class="concept">custody / commingling</td></tr>
+            <tr><td class="num">②</td><td class="dim">授权链条</td><td>每一跳扣款的授权依据（向内）</td><td class="concept">actual / implied authority</td></tr>
+            <tr><td class="num">③</td><td class="dim">身份与认证</td><td>持卡人 / 用户 / agent 三层身份验证</td><td class="concept">KYA / SCA / 3DS / PCI</td></tr>
+            <tr><td class="num">④</td><td class="dim">消费者保护</td><td>退款、争议、错误损失谁兜底</td><td class="concept">chargeback / 救济路径</td></tr>
+            <tr><td class="num">⑤</td><td class="dim">牌照义务归属</td><td>牌照义务落在谁头上</td><td class="concept">MTL / EMI / 软件抗辩</td></tr>
+            <tr><td class="num">⑥</td><td class="dim">跨境适用性</td><td>司法管辖假设、跨境时哪些失效</td><td class="concept">多头监管 / 数据本地化</td></tr>
+            <tr><td class="num">⑦</td><td class="dim">缔约与责任</td><td>代签合同效力、对外谁担责（向外）</td><td class="concept">apparent authority</td></tr>
+            <tr><td class="num">⑧</td><td class="dim">数据与隐私</td><td>支付数据流转、controller / processor</td><td class="concept">PIPL / GDPR</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dims">
+
+        <article class="dim">
+          <div class="dim-head"><span class="dim-num">①</span><span class="dim-title">资金流向</span></div>
+          <div class="dim-en">Fund Flow</div>
+          <p class="dim-def">资金从付款人到最终收款人的完整路径——<b>经手主体、每段持有时长、结算轨道</b>。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>是托管（custody）还是过路（pass-through）？资金是否离开用户控制？</li>
+            <li>是否存在资金池化（commingling）？</li>
+            <li>结算走什么轨道——卡轨、银行转账、链上稳定币？</li>
+            <li>持有时点是否产生孳息归属、客户资金隔离问题？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　custody 判断的事实基础，直接喂给 ⑤。链上协议这一维常「明确」——资金从不离用户钱包——反而是低风险信号。</div>
+        </article>
+
+        <article class="dim">
+          <span class="tag">关联 ⑦</span>
+          <div class="dim-head"><span class="dim-num">②</span><span class="dim-title">授权链条</span></div>
+          <div class="dim-en">Authorization Chain</div>
+          <p class="dim-def">从用户意图到最终扣款，<b>每一跳的授权依据</b>是什么。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>事前授权（pre-auth / mandate）还是事后确认？</li>
+            <li>授权范围有无金额、时间、对手方上限？</li>
+            <li>有没有哪一跳是隐含授权，缺明示法律依据？</li>
+            <li>授权可否撤销？撤销的时点和效力边界？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　视角向内——钱能不能扣、对用户是否有效。与 ⑦ 共享代理法底层。</div>
+        </article>
+
+        <article class="dim">
+          <div class="dim-head"><span class="dim-num">③</span><span class="dim-title">身份与认证</span></div>
+          <div class="dim-en">Identity &amp; Authentication</div>
+          <p class="dim-def">交易中所有需验证的身份及其机制——<b>持卡人 / 用户 / agent 三层身份</b>。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>KYA（Know Your Agent）如何实现？身份对交易对手透传还是遮蔽？</li>
+            <li>用户能否区分「是我的 agent」与「他人冒名」？</li>
+            <li>卡轨场景 SCA / 3DS 的 challenge 由谁、如何完成？</li>
+            <li>agent 身份的签发、绑定、吊销机制？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　卡产品合规（PCI DSS / 3DS / SCA / BIN）归入此维——本质是身份验证标准，仅卡轨协议触发，链上协议此部分为空。</div>
+        </article>
+
+        <article class="dim">
+          <div class="dim-head"><span class="dim-num">④</span><span class="dim-title">消费者保护</span></div>
+          <div class="dim-en">Consumer Protection</div>
+          <p class="dim-def">退款权、争议解决、<b>欺诈与错误损失的分配</b>。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>协议有无内建 chargeback / dispute？没有则用户救济路径是什么？</li>
+            <li>agent 自主决策致损（买错、买贵、重复），损失谁兜底？</li>
+            <li>错误交易可逆否？回滚由协议层提供还是依赖第三方扩展？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　卡轨协议继承成熟 chargeback 框架；链上原生协议这一维几乎必然「空白」——off-rail 最大软肋。</div>
+        </article>
+
+        <article class="dim">
+          <div class="dim-head"><span class="dim-num">⑤</span><span class="dim-title">牌照义务归属</span></div>
+          <div class="dim-en">Licensing Burden Allocation</div>
+          <p class="dim-def">协议的核心设计，把支付牌照义务（MTL / MSB / EMI / PI）<b>落在谁头上</b>。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>协议运营方是否因设计本身承担牌照义务？</li>
+            <li>还是义务被推给上层实现者？还是完全留白？</li>
+            <li>「我只是协议」的抗辩，在该设计下站得住吗？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　本维只判断「义务落点」，不列举具体哪张牌照——具体牌照随 ①（custody）、③（卡轨）、⑥（跨境）自然落位。</div>
+        </article>
+
+        <article class="dim">
+          <span class="tag">关联 ⑧</span>
+          <div class="dim-head"><span class="dim-num">⑥</span><span class="dim-title">跨境适用性</span></div>
+          <div class="dim-en">Cross-border Applicability</div>
+          <p class="dim-def">协议隐含的<b>司法管辖假设</b>，以及跨境时哪些假设会失效。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>协议是否默认所有参与方在同一法域？</li>
+            <li>是否依赖特定国家的授权框架、仲裁条款、数据本地化？</li>
+            <li>跨境触发的多头监管落在 ①⑤ 的哪些点？</li>
+            <li>稳定币结算的跨境性质如何定性？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　多头监管的「叠加」效应在此维统一处理，避免 ⑤ 重复计算同一问题。</div>
+        </article>
+
+        <article class="dim">
+          <span class="tag">关联 ②</span>
+          <div class="dim-head"><span class="dim-num">⑦</span><span class="dim-title">缔约与责任归属</span></div>
+          <div class="dim-en">Contracting &amp; Liability</div>
+          <p class="dim-def">agent 代用户缔结合同的<b>法律效力</b>，及违约 / 侵权时的责任落点。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>代签合同依据是什么——明示授权、默示代理、还是协议自定义规则？</li>
+            <li>对交易对手是否有效（apparent authority 是否成立）？</li>
+            <li>出事责任落在用户 / agent 运营方 / 协议运营方哪一方？</li>
+            <li>协议有无免责或责任转移条款？转移对用户有效吗？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　视角向外——合同对第三方是否生效、对外责任如何分配。agent 代签合同作为独立风险点在此维落地。</div>
+        </article>
+
+        <article class="dim">
+          <div class="dim-head"><span class="dim-num">⑧</span><span class="dim-title">数据与隐私</span></div>
+          <div class="dim-en">Data &amp; Privacy</div>
+          <p class="dim-def">支付数据在协议参与方之间的<b>流转及合规定性</b>。</p>
+          <div class="qlabel">核心问题</div>
+          <ul>
+            <li>交易数据（金额、对手方、记录）谁是 controller、谁是 processor？</li>
+            <li>数据是否用于非支付目的（训练、画像）？有无 opt-out？</li>
+            <li>跨境数据传输是否合规（PIPL / GDPR）？</li>
+            <li>agent 行为数据的归属与留存边界？</li>
+          </ul>
+          <div class="hint"><b>适用提示</b>　与 ⑥ 的跨境数据本地化部分有接口：⑥ 看监管管辖，⑧ 看数据主体权利与 controller / processor 定性。</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CH 03 · 协议全景 -->
+    <section class="chapter" id="landscape">
+      <div class="ch-head">
+        <div class="ch-num">03</div>
+        <div>
+          <span class="eyebrow ch-eyebrow">协议全景 / The landscape</span>
+          <h2>市面上的 agentic 支付协议</h2>
+          <p class="ch-sub">按层归类。协议不是单选题，是叠用——同一批公司横跨多个协议。每条标注法律重心维度与风险温度，点进去就是 04 的八维审计卡。</p>
+        </div>
+      </div>
+
+      <div class="risk-legend" aria-label="风险温度图例">
+        <div class="rl-item"><span class="rl-bar low"></span>低 · 继承成熟框架（卡轨）</div>
+        <div class="rl-item"><span class="rl-bar mid"></span>中 · 部分覆盖 / 不碰资金</div>
+        <div class="rl-item"><span class="rl-bar high"></span>高 · 法律空白大 / 自建结算</div>
+      </div>
+
+      <!-- 授权层 -->
+      <div class="layer">
+        <div class="layer-label">授权层 <span>/ Authorization · 谁批准这笔钱</span></div>
+        <div class="prow mid">
+          <div class="pr-main"><span class="pr-name">AP2</span><span class="pr-op">Google · 支付无关（卡 / RTP / 加密）</span></div>
+          <div class="pr-dims"><span class="pr-dim">②</span><span class="pr-dim">⑦</span></div>
+          <div class="pr-status">规范已发布<br><b>A2A x402 扩展可用</b></div>
+        </div>
+      </div>
+
+      <!-- Checkout 层 -->
+      <div class="layer">
+        <div class="layer-label">Checkout 层 <span>/ Checkout · agent↔商户成交</span></div>
+        <div class="prow mid">
+          <div class="pr-main"><span class="pr-name">ACP</span><span class="pr-op">OpenAI / Stripe · 卡轨为主</span></div>
+          <div class="pr-dims"><span class="pr-dim">⑦</span><span class="pr-dim">④</span></div>
+          <div class="pr-status">ChatGPT 已上线<br><b>开放标准</b></div>
+        </div>
+        <div class="prow mid">
+          <div class="pr-main"><span class="pr-name">UCP</span><span class="pr-op">Google / Shopify · 商务编排</span></div>
+          <div class="pr-dims"><span class="pr-dim">⑦</span><span class="pr-dim">⑧</span></div>
+          <div class="pr-status">2026.01 公布<br><b>Shopify 商户网络</b></div>
+        </div>
+      </div>
+
+      <!-- 结算层 -->
+      <div class="layer">
+        <div class="layer-label">结算层 <span>/ Settlement · 钱怎么动</span></div>
+        <div class="prow high">
+          <div class="pr-main"><span class="pr-name">x402</span><span class="pr-op">Coinbase · HTTP / 链上稳定币</span></div>
+          <div class="pr-dims"><span class="pr-dim">①</span><span class="pr-dim">④</span><span class="pr-dim">⑤</span></div>
+          <div class="pr-status">V2（2025.12）<br><b>50M+ 笔 · 唯一有规模</b></div>
+        </div>
+        <div class="prow high">
+          <div class="pr-main"><span class="pr-name">MPP</span><span class="pr-op">Stripe / Tempo · 机器间多轨结算</span></div>
+          <div class="pr-dims"><span class="pr-dim">①</span><span class="pr-dim">⑤</span><span class="pr-dim">⑥</span></div>
+          <div class="pr-status">主网 2026.03.18<br><b>100+ 接入服务</b></div>
+        </div>
+        <div class="prow high">
+          <div class="pr-main"><span class="pr-name">L402</span><span class="pr-op">Lightning · 闪电网络</span></div>
+          <div class="pr-dims"><span class="pr-dim">①</span><span class="pr-dim">④</span></div>
+          <div class="pr-status">早期</div>
+        </div>
+      </div>
+
+      <!-- 卡网络层 -->
+      <div class="layer">
+        <div class="layer-label">卡网络层 <span>/ Card network · 卡轨 + agent 身份</span></div>
+        <div class="prow low">
+          <div class="pr-main"><span class="pr-name">Visa TAP</span><span class="pr-op">Visa · 卡轨 + RFC 9421 身份</span></div>
+          <div class="pr-dims"><span class="pr-dim">③</span><span class="pr-dim">④</span></div>
+          <div class="pr-status">运行中</div>
+        </div>
+        <div class="prow low">
+          <div class="pr-main"><span class="pr-name">Mastercard Agent Pay</span><span class="pr-op">Mastercard · SD-JWT 凭证</span></div>
+          <div class="pr-dims"><span class="pr-dim">③</span><span class="pr-dim">④</span></div>
+          <div class="pr-status">运行中</div>
+        </div>
+        <div class="prow low">
+          <div class="pr-main"><span class="pr-name">Amex ACE</span><span class="pr-op">American Express · 卡轨</span></div>
+          <div class="pr-dims"><span class="pr-dim">③</span></div>
+          <div class="pr-status">运行中</div>
+        </div>
+      </div>
+
+      <!-- 桥接层 -->
+      <div class="layer">
+        <div class="layer-label">桥接层 <span>/ Bridge · 跨协议路由</span></div>
+        <div class="prow high">
+          <div class="pr-main"><span class="pr-name">Visa ICC</span><span class="pr-op">Visa · 桥接 TAP / MPP / ACP / UCP</span></div>
+          <div class="pr-dims"><span class="pr-dim union">并集</span></div>
+          <div class="pr-status">多协议桥</div>
+        </div>
+      </div>
+
+      <div class="compose">
+        <div class="k">这个全景最该记住的一句</div>
+        <h3>协议不是单选，是叠用</h3>
+        <p>一个真实产品往往同时踩好几个协议——<b>AP2 做授权、ACP 做 checkout、x402 或 MPP 做结算</b>。
+        所以一家公司的合规暴露，等于它踩的每一层协议空白的
+        <span class="eq">并集（∪）</span>。看完全景，你就知道自己的协议栈在八维上漏在哪。</p>
+      </div>
+    </section>
+
+    <!-- CH 04 · 协议审计 -->
+    <section class="chapter" id="audits">
+      <div class="ch-head">
+        <div class="ch-num">04</div>
+        <div>
+          <span class="eyebrow ch-eyebrow">协议审计 / Protocol audits</span>
+          <h2>逐个协议接入</h2>
+          <p class="ch-sub">框架是骨架，协议是挂在骨架上的内容。每个协议套用上面八维出一张审计卡。</p>
+        </div>
+      </div>
+
+      <div class="proto">
+        <span class="proto-badge">即将接入</span>
+        <h3>各支付协议的八维审计</h3>
+        <p>每个协议在八维上打档、标注风险落点，并映射出「采用它的公司需在用户协议里补什么」。</p>
+        <div class="proto-list">
+          <span class="proto-chip">x402</span>
+          <span class="proto-chip">MPP</span>
+          <span class="proto-chip">ACP</span>
+          <span class="proto-chip">AP2 / UCP</span>
+          <span class="proto-chip">Visa Intelligent Commerce</span>
+          <span class="proto-chip">Mastercard Agent Pay</span>
+          <span class="proto-chip soon">更多…</span>
+        </div>
+
+        <div class="mp" aria-label="审计卡样式预览">
+          <div class="mp-head">审计卡样式预览 · x402（示意）</div>
+          <div class="mp-row"><span class="mp-dot clear"></span><span class="mp-dim">① 资金流向</span><span class="mp-state clear">明确</span></div>
+          <div class="mp-row"><span class="mp-dot blank"></span><span class="mp-dim">② 授权链条</span><span class="mp-state blank">空白</span></div>
+          <div class="mp-row"><span class="mp-dot blank"></span><span class="mp-dim">④ 消费者保护</span><span class="mp-state blank">空白</span></div>
+          <div class="mp-row"><span class="mp-dot partial"></span><span class="mp-dim">⑥ 跨境适用性</span><span class="mp-state partial">部分</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="mim-footer">
+  <div class="mim-footer-in">
+    <div class="mim-foot-top">
+      <div>
+        <div class="mim-foot-brand">Money in Motion<span>.</span></div>
+        <div class="mim-foot-tag">AI 支付授权链路的合规研究与评估。</div>
+        <a class="mim-foot-mail" href="mailto:wl@kindinglaw.com">wl@kindinglaw.com</a>
+      </div>
+      <div class="mim-foot-cols">
+        <div class="mim-foot-col">
+          <h4>框架</h4>
+          <a href="index.html#framework">授权链路</a>
+          <a href="protocol-audit-framework.html">协议审计</a>
+          <a href="regulatory-map.html">监管地图</a>
+        </div>
+        <div class="mim-foot-col">
+          <h4>工具</h4>
+          <a href="ai-payment-compliance-tool.html">基础设施评估</a>
+          <a href="ai-payment-compliance-tool.html">商户评估</a>
+        </div>
+        <div class="mim-foot-col">
+          <h4>研究</h4>
+          <a href="research.html#research">合规研究</a>
+          <a href="research.html#intel">行业资讯</a>
+        </div>
+      </div>
+    </div>
+    <div class="mim-foot-base">
+      <div>MONEY IN MOTION · AI 支付合规</div>
+      <div>意图 → 授权 → 发起 → 验证 → 资金 → 结算</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

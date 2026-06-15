@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>研究与资讯 — Money in Motion</title>
+<meta name="description" content="AI 支付合规研究、协议分析与实时行业资讯。">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f5f1;
+  --paper-2:#edebe4;
+  --ink:#15140f;
+  --navy:#1a3a5c;
+  --brick:#9c2f24;
+  --stone:#8b8779;
+  --line:#dcdad1;
+  --line-strong:#15140f;
+  --white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"JetBrains Mono","Noto Sans SC",monospace}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,245,241,.92);
+  backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid var(--line-strong);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;height:62px;
+}
+.logo{
+  font-family:"Archivo","Noto Sans SC",sans-serif;
+  font-weight:700;font-size:18px;letter-spacing:-.01em;
+  color:var(--ink);text-decoration:none;
+}
+.logo .dot{color:var(--brick)}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;letter-spacing:.04em;
+  color:var(--ink);text-decoration:none;padding:4px 0;
+  position:relative;transition:color .2s;
+}
+.nav-links a:hover{color:var(--navy)}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-1px;
+  width:0;height:1.5px;background:var(--brick);transition:width .22s;
+}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--brick)}
+.nav-links a.active::after{width:100%}
+.nav-cta{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;letter-spacing:.04em;
+  color:var(--white);background:var(--ink);
+  padding:8px 18px;text-decoration:none;
+  border:1px solid var(--ink);transition:all .2s;
+}
+.nav-cta:hover{background:var(--navy);border-color:var(--navy)}
+
+/* ── HERO ── */
+.hero{
+  max-width:1180px;margin:0 auto;padding:80px 28px 40px;
+}
+.hero-eyebrow{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--stone);margin-bottom:16px;
+}
+.hero h1{
+  font-family:"Archivo","Noto Sans SC",sans-serif;
+  font-weight:800;font-size:clamp(32px,4.5vw,52px);
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--ink);margin-bottom:20px;
+}
+.hero-desc{
+  font-size:16px;line-height:1.7;color:var(--stone);
+  max-width:640px;
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{
+  max-width:1180px;margin:0 auto;padding:0 28px;
+}
+.section-divider-line{
+  border:none;border-top:1px solid var(--line-strong);
+  margin:0;
+}
+
+/* ── SECTION ── */
+.section{
+  max-width:1180px;margin:0 auto;
+  padding:56px 28px 48px;
+}
+.section-header{
+  display:flex;align-items:baseline;gap:16px;
+  margin-bottom:36px;
+}
+.section-label{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--stone);flex-shrink:0;
+}
+.section-title{
+  font-family:"Archivo","Noto Sans SC",sans-serif;
+  font-weight:700;font-size:22px;letter-spacing:-.01em;
+  color:var(--ink);
+}
+
+/* ── CARD GRID ── */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:20px;
+}
+.card{
+  background:var(--white);border:1px solid var(--line);
+  padding:28px;position:relative;
+  transition:border-color .2s,box-shadow .2s;
+}
+.card:hover{
+  border-color:var(--ink);
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+}
+.card-tag{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--white);background:var(--navy);
+  display:inline-block;padding:3px 8px;margin-bottom:14px;
+}
+.card-tag.brick{background:var(--brick)}
+.card-tag.stone{background:var(--stone)}
+.card-tag.coming{background:var(--paper-2);color:var(--stone);border:1px solid var(--line)}
+.card-title{
+  font-family:"Archivo","Noto Sans SC",sans-serif;
+  font-weight:700;font-size:17px;line-height:1.4;
+  color:var(--ink);margin-bottom:10px;
+}
+.card-desc{
+  font-size:14px;line-height:1.65;color:var(--stone);
+  margin-bottom:16px;
+}
+.card-meta{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:11px;color:var(--stone);letter-spacing:.02em;
+}
+.card-link{
+  display:inline-block;margin-top:14px;
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;color:var(--brick);text-decoration:none;
+  letter-spacing:.02em;
+}
+.card-link:hover{text-decoration:underline}
+
+/* ── SIGNAL CARD (featured) ── */
+.signal-card{
+  background:var(--ink);color:var(--paper);
+  border:1px solid var(--ink);padding:32px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.signal-card .card-tag{background:var(--brick)}
+.signal-card .card-title{color:var(--paper)}
+.signal-card .card-desc{color:var(--stone)}
+.signal-card .signal-source{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:11px;color:var(--stone);letter-spacing:.04em;
+  margin-top:auto;
+}
+.signal-card .card-link{color:var(--paper);border-bottom:1px solid var(--stone)}
+.signal-card .card-link:hover{border-color:var(--paper);text-decoration:none}
+
+/* ── EMPTY STATE ── */
+.empty-state{
+  border:1px dashed var(--line);
+  padding:48px 32px;text-align:center;
+}
+.empty-state p{
+  font-size:14px;color:var(--stone);line-height:1.65;
+}
+.empty-state .empty-icon{
+  font-size:28px;margin-bottom:12px;color:var(--line);
+}
+
+/* ── FOOTER ── */
+.footer{
+  max-width:1180px;margin:0 auto;
+  padding:40px 28px 48px;
+  border-top:1px solid var(--line-strong);
+  display:flex;justify-content:space-between;align-items:baseline;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-brand{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;letter-spacing:.04em;color:var(--ink);
+}
+.footer-contact{
+  font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;color:var(--stone);
+}
+.footer-contact a{color:var(--stone);text-decoration:none}
+.footer-contact a:hover{color:var(--ink)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:680px){
+  .nav-links{gap:14px}
+  .nav-links a{font-size:11px}
+  .hero{padding:56px 20px 32px}
+  .section{padding:40px 20px 36px}
+  .card-grid{grid-template-columns:1fr}
+  .footer{flex-direction:column;gap:8px}
+}
+</style>
+<style id="mim-nav-style">
+/* === Money in Motion unified nav === */
+.mim-nav{position:sticky;top:0;z-index:1000;background:rgba(246,245,241,.93);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid #15140f;
+  font-family:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;}
+.mim-nav *{box-sizing:border-box;}
+.mim-nav-inner{position:relative;max-width:1180px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;height:62px;}
+.mim-logo{font-weight:700;font-size:18px;letter-spacing:-.01em;color:#15140f;
+  text-decoration:none;white-space:nowrap;}
+.mim-logo span{color:#9c2f24;}
+.mim-nav-links{display:flex;gap:24px;align-items:center;}
+.mim-nav-links a{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;
+  letter-spacing:.04em;color:#15140f;text-decoration:none;padding:4px 0;position:relative;
+  transition:color .2s;white-space:nowrap;}
+.mim-nav-links a:hover{color:#1a3a5c;}
+.mim-nav-links a::after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1.5px;
+  background:#9c2f24;transition:width .22s;}
+.mim-nav-links a:hover::after{width:100%;}
+.mim-nav-links a.mim-active{color:#9c2f24;}
+.mim-nav-links a.mim-active::after{width:100%;}
+.mim-nav-cta{color:#fff !important;background:#15140f;padding:8px 16px !important;
+  border:1px solid #15140f;transition:all .2s;}
+.mim-nav-cta:hover{background:#1a3a5c !important;border-color:#1a3a5c;}
+.mim-nav-cta::after{display:none !important;}
+.mim-nav-toggle{display:none;background:none;border:1px solid #15140f;color:#15140f;
+  font-size:13px;padding:6px 12px;cursor:pointer;
+  font-family:"JetBrains Mono",monospace;letter-spacing:.04em;}
+@media(max-width:860px){
+  .mim-nav-toggle{display:block;}
+  .mim-nav-links{display:none;position:absolute;top:62px;left:0;right:0;flex-direction:column;
+    align-items:flex-start;gap:0;background:#f6f5f1;border-bottom:1px solid #15140f;
+    padding:8px 28px 16px;}
+  .mim-nav-links.mim-open{display:flex;}
+  .mim-nav-links a{padding:11px 0;width:100%;font-size:13px;}
+  .mim-nav-cta{margin-top:10px;text-align:center;width:100%;}
+}
+@media print{.mim-nav{display:none !important;}}
+</style>
+<style id="mim-footer-style">
+/* === Money in Motion unified footer === */
+.mim-footer{background:#f6f5f1;border-top:2px solid #15140f;
+  font-family:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif;color:#15140f;}
+.mim-footer *{box-sizing:border-box;}
+.mim-footer-in{max-width:1180px;margin:0 auto;padding:48px 28px 56px;}
+.mim-foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:32px;}
+.mim-foot-brand{font-weight:700;font-size:20px;letter-spacing:-.01em;color:#15140f;}
+.mim-foot-brand span{color:#9c2f24;}
+.mim-foot-tag{font-size:13px;color:#3c3a33;max-width:34ch;margin-top:8px;line-height:1.5;}
+.mim-foot-mail{display:inline-block;margin-top:12px;font-family:"JetBrains Mono","Noto Sans SC",monospace;
+  font-size:12px;color:#8b8779;text-decoration:none;letter-spacing:.02em;}
+.mim-foot-mail:hover{color:#9c2f24;}
+.mim-foot-cols{display:flex;gap:56px;flex-wrap:wrap;}
+.mim-foot-col h4{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:#8b8779;margin-bottom:14px;}
+.mim-foot-col a{display:block;font-size:13.5px;color:#15140f;text-decoration:none;
+  margin-bottom:8px;transition:color .2s;}
+.mim-foot-col a:hover{color:#9c2f24;}
+.mim-foot-base{border-top:1px solid #dcdad1;padding-top:20px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;color:#8b8779;}
+@media(max-width:680px){
+  .mim-foot-cols{gap:32px;}
+  .mim-foot-base{flex-direction:column;gap:6px;}
+}
+@media print{.mim-footer{border-top:1px solid #15140f;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+
+<!-- Money in Motion unified nav -->
+<nav class="mim-nav">
+  <div class="mim-nav-inner">
+    <a href="index.html" class="mim-logo">Money in Motion<span>.</span></a>
+    <button class="mim-nav-toggle" aria-label="菜单" onclick="var l=this.parentNode.querySelector('.mim-nav-links');l.classList.toggle('mim-open');">菜单 ☰</button>
+    <div class="mim-nav-links">
+      <a href="index.html#framework">框架</a>
+      <a href="ai-payment-compliance-tool.html">评估工具</a>
+      <a href="protocol-audit-framework.html">协议审计</a>
+      <a href="regulatory-map.html">监管地图</a>
+      <a href="research.html" class="mim-active">研究与资讯</a>
+      <a href="ai-payment-compliance-tool.html" class="mim-nav-cta">开始评估</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow mono">Research & Intelligence</div>
+  <h1>研究与资讯</h1>
+  <p class="hero-desc">
+    合规框架解读、协议对比分析、行业信号追踪。<br>
+    判断在前，信息在后。
+  </p>
+</div>
+
+<!-- ═══ SECTION 1: 研究 ═══ -->
+<div class="section-divider"><hr class="section-divider-line"></div>
+<div class="section" id="research">
+  <div class="section-header">
+    <span class="section-label mono">Research</span>
+    <span class="section-title">研究</span>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- Placeholder card 1 -->
+    <div class="card">
+      <span class="card-tag coming">即将发布</span>
+      <div class="card-title">AI 支付协议合规全景：x402 · ACP · MPP · AP2</div>
+      <div class="card-desc">
+        六大 agent payment 协议的合规姿态对比——哪些协议天然适合监管友好架构，哪些需要额外合规层。
+      </div>
+      <div class="card-meta mono">协议分析 · 预计 2026 Q3</div>
+    </div>
+
+    <!-- Placeholder card 2 -->
+    <div class="card">
+      <span class="card-tag coming">即将发布</span>
+      <div class="card-title">托管是承重墙：AI 支付平台的实体架构选择</div>
+      <div class="card-desc">
+        为什么资金托管问题决定了实体边界划分，而不是反过来。从 regulated ops 和 non-custodial protocol 的矛盾说起。
+      </div>
+      <div class="card-meta mono">框架研究 · 预计 2026 Q3</div>
+    </div>
+
+    <!-- Placeholder card 3 -->
+    <div class="card">
+      <span class="card-tag coming">即将发布</span>
+      <div class="card-title">用户协议里的七个风险维度</div>
+      <div class="card-desc">
+        AI 支付基础设施公司的 ToS 应该覆盖什么——资金定性、授权机制、争议解决、数据合规、第三方责任传导。
+      </div>
+      <div class="card-meta mono">合规指南 · 预计 2026 Q3</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ SECTION 2: 资讯 ═══ -->
+<div class="section-divider"><hr class="section-divider-line"></div>
+<div class="section" id="intel">
+  <div class="section-header">
+    <span class="section-label mono">Intelligence</span>
+    <span class="section-title">资讯</span>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- Stablehunter Signal Card -->
+    <div class="signal-card">
+      <span class="card-tag">实时信号</span>
+      <div class="card-title">Agentic Payment Signal</div>
+      <div class="card-desc">
+        每日精选 AI 支付基础设施动态：支付 API、稳定币轨道、钱包、身份验证、风控、合规和 agent commerce 工作流。
+      </div>
+      <a class="card-link" href="https://stablehunter.ai/agentic-payment-signal.html#daily-signals" target="_blank" rel="noopener">
+        查看每日报告 ↗
+      </a>
+      <div class="signal-source">Powered by Stablehunter AI · 67+ 信息源 · 每日更新</div>
+    </div>
+
+    <!-- Future signal placeholder -->
+    <div class="card">
+      <span class="card-tag stone">规划中</span>
+      <div class="card-title">监管政策更新追踪</div>
+      <div class="card-desc">
+        各主要市场（HK · SG · EU · US）的支付牌照、稳定币法规、AI 治理政策变动信号。
+      </div>
+      <div class="card-meta mono">计划接入更多垂直信号源</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: 投稿 / CTA ═══ -->
+<div class="section-divider"><hr class="section-divider-line"></div>
+<div class="section">
+  <div class="empty-state">
+    <div class="empty-icon">✦</div>
+    <p>
+      如果你在做 AI 支付合规相关的研究、有值得追踪的信号源，或想合作发布分析报告<br>
+      联系 <a href="mailto:wl@kindinglaw.com" style="color:var(--brick);text-decoration:none;border-bottom:1px solid var(--brick)">wl@kindinglaw.com</a>
+    </p>
+  </div>
+</div>
+
+<footer class="mim-footer">
+  <div class="mim-footer-in">
+    <div class="mim-foot-top">
+      <div>
+        <div class="mim-foot-brand">Money in Motion<span>.</span></div>
+        <div class="mim-foot-tag">AI 支付授权链路的合规研究与评估。</div>
+        <a class="mim-foot-mail" href="mailto:wl@kindinglaw.com">wl@kindinglaw.com</a>
+      </div>
+      <div class="mim-foot-cols">
+        <div class="mim-foot-col">
+          <h4>框架</h4>
+          <a href="index.html#framework">授权链路</a>
+          <a href="protocol-audit-framework.html">协议审计</a>
+          <a href="regulatory-map.html">监管地图</a>
+        </div>
+        <div class="mim-foot-col">
+          <h4>工具</h4>
+          <a href="ai-payment-compliance-tool.html">基础设施评估</a>
+          <a href="ai-payment-compliance-tool.html">商户评估</a>
+        </div>
+        <div class="mim-foot-col">
+          <h4>研究</h4>
+          <a href="research.html#research">合规研究</a>
+          <a href="research.html#intel">行业资讯</a>
+        </div>
+      </div>
+    </div>
+    <div class="mim-foot-base">
+      <div>MONEY IN MOTION · AI 支付合规</div>
+      <div>意图 → 授权 → 发起 → 验证 → 资金 → 结算</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
