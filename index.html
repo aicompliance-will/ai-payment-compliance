@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Money in Motion — 色块对抗版</title>
+<title>Money in Motion — AI 支付授权链路的合规框架与评估</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -60,7 +60,7 @@
   .hero-title .wrap2{max-width:var(--maxw);margin:0 auto}
   .hero-title h1{font-weight:800;font-size:clamp(32px,5.2vw,64px);line-height:1.02;letter-spacing:-.035em;max-width:20ch}
   .hero-title h1 .b{color:var(--navy)}
-  .hero-title h1 .r{color:var(--brick)}
+  .hero-title h1 .r{color:var(--brick);white-space:nowrap}
   .hero-cta{max-width:var(--maxw);margin:0 auto;padding:var(--s5) 28px;display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;border-top:1px solid var(--line)}
   .btn{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:14px 26px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:10px}
   .btn-primary{background:var(--ink);color:var(--paper)}
@@ -83,6 +83,45 @@
   .ai-hint{margin-top:12px;font-size:13px;color:var(--ink-soft)}
   .ai-hint b{color:var(--ink)}
 
+  /* ===== HERO 定位文案 ===== */
+  .hero-eyebrow{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:var(--s3)}
+  .hero-lede{margin-top:var(--s4);max-width:64ch;font-size:16.5px;line-height:1.62;color:var(--ink-soft)}
+  .hero-lede b{color:var(--ink);font-weight:700}
+  .hero-cta2{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;margin-top:var(--s5)}
+  .hero-kicker{display:inline-block;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:16px;font-weight:700;letter-spacing:.06em;color:var(--paper);background:var(--brick);padding:9px 18px;margin-bottom:var(--s4);text-transform:uppercase}
+  .hero-choices{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:var(--s5);align-items:stretch}
+  .hero-choices .ai-card{max-width:none;display:flex;flex-direction:column}
+  .hero-choices .ai-card .ai-p{flex:1 0 auto}
+  .hero-choices .choice-manual{border-left-color:var(--navy)}
+  .hero-choices .choice-manual .ai-lbl{color:var(--navy)}
+  .hero-choices .choice-manual .btn-primary{align-self:flex-start;margin-top:auto}
+  .hero-readmore{margin-top:var(--s4)}
+  @media(max-width:760px){.hero-choices{grid-template-columns:1fr}}
+
+  /* ===== ROUTER 三路分流 ===== */
+  .router{max-width:var(--maxw);margin:0 auto;padding:var(--s6) 28px var(--s7)}
+  .router-lead{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:var(--s4)}
+  .router-grid{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--ink)}
+  .rcard{display:flex;flex-direction:column;padding:var(--s4) var(--s4) var(--s5);border-right:1px solid var(--ink);border-left:6px solid var(--ink);background:var(--paper)}
+  .rcard:last-child{border-right:none}
+  .rcard.r-eval{border-left-color:var(--navy)}
+  .rcard.r-read{border-left-color:var(--brick)}
+  .rcard.r-agent{border-left-color:var(--ink)}
+  .rcard .rk{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:10px}
+  .rcard h3{font-weight:800;font-size:19px;letter-spacing:-.02em;line-height:1.2;margin-bottom:8px}
+  .rcard>p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:var(--s4)}
+  .rcard .rlink{margin-top:auto;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12.5px;color:var(--brick);text-decoration:none;border-bottom:1px solid var(--brick);align-self:flex-start;padding-bottom:1px}
+  .rcard .rlink:hover{color:var(--brick-700)}
+  .rcard .ai-cmd{flex-direction:column;margin-bottom:10px}
+  .rcard .ai-cmd code{font-size:11.5px;padding:10px 12px;border-bottom:1px solid var(--ink)}
+  .rcard .ai-cmd button{padding:10px;width:100%}
+  .rcard .rnote{margin-top:auto;font-size:12px;color:var(--stone);line-height:1.5}
+  @media(max-width:860px){
+    .router-grid{grid-template-columns:1fr}
+    .rcard{border-right:none;border-bottom:1px solid var(--ink)}
+    .rcard:last-child{border-bottom:none}
+  }
+
   /* ===== SECTION ===== */
   section{padding:var(--s8) 0;border-bottom:1px solid var(--ink)}
   .sec-head{display:grid;grid-template-columns:64px 1fr;gap:var(--s4);align-items:baseline;margin-bottom:var(--s3)}
@@ -92,12 +131,12 @@
 
   /* ===== COMPARISON TABLE — now with FULL COLUMN COLOR BLOCKS ===== */
   .cmp{border:2px solid var(--ink)}
-  .cmp-head{display:grid;grid-template-columns:1fr 1.05fr 1fr;border-bottom:2px solid var(--ink)}
+  .cmp-head{display:grid;grid-template-columns:1fr 1.15fr 1fr;border-bottom:2px solid var(--ink)}
   .cmp-head>div{padding:14px 20px;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--paper)}
   .ch-human{background:var(--navy)}
   .ch-break{background:var(--paper);color:var(--ink)!important;text-align:center}
   .ch-agent{background:var(--brick);text-align:right}
-  .cmp-row{display:grid;grid-template-columns:1fr 1.05fr 1fr;border-bottom:1px solid var(--ink)}
+  .cmp-row{display:grid;grid-template-columns:1fr 1.15fr 1fr;border-bottom:1px solid var(--ink)}
   .cmp-row:last-child{border-bottom:none}
   .cell{padding:var(--s4) 20px;display:flex;flex-direction:column;justify-content:center}
   .cell .stage{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;letter-spacing:.1em;margin-bottom:var(--s2);opacity:.8}
@@ -110,9 +149,12 @@
   .cell.agent .stage{color:#f4cfc8}
   .cell.brk{background:var(--paper);align-items:center;text-align:center;border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
   .cell.brk.empty{background:repeating-linear-gradient(45deg,var(--paper-2),var(--paper-2) 6px,#e4e1d8 6px,#e4e1d8 7px)}
-  .cell.brk .bnum{width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:13px;font-weight:600;margin-bottom:var(--s2)}
-  .cell.brk .bttl{font-weight:800;font-size:16px;color:var(--ink);line-height:1.15;letter-spacing:-.02em}
-  .cell.brk .seam2{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:10px;color:var(--stone);letter-spacing:.06em;margin-top:6px}
+  .cell.brk .bstage{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-weight:600;font-size:15px;letter-spacing:.02em;color:var(--ink);padding-bottom:8px;margin-bottom:9px;border-bottom:1px solid var(--line);min-width:88px}
+  .cell.brk .brisk{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
+  .cell.brk .bnum{flex:none;width:20px;height:20px;border-radius:50%;background:var(--brick);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:11px;font-weight:600}
+  .cell.brk .bttl{font-weight:700;font-size:14px;color:var(--brick);line-height:1.2;letter-spacing:-.01em}
+  .cell.brk .bttl-ok{color:var(--stone);font-weight:600;margin-bottom:2px}
+  .cell.brk .seam2{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:10px;color:var(--stone);letter-spacing:.06em;margin-top:4px}
 
   /* ===== CLOSING — big color block ===== */
   .closing{position:relative;border-bottom:none;padding:0}
@@ -149,6 +191,8 @@
     .cmp-row{grid-template-columns:1fr;border-bottom:3px solid var(--ink)}
     .cell{border-bottom:1px solid rgba(255,255,255,.2)}
     .cell.agent{text-align:left;align-items:flex-start}
+    .cell.brk{order:-1;align-items:flex-start;text-align:left;border-left:none;border-right:none}
+    .cell.brk .bstage{min-width:0}
     .cell.human::before{content:"人类支付";font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:10px;letter-spacing:.1em;color:#cfd9e4;margin-bottom:6px}
     .cell.agent::before{content:"AGENT 支付";font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:10px;letter-spacing:.1em;color:#f4cfc8;margin-bottom:6px}
     .closing-grid{grid-template-columns:1fr}
@@ -168,7 +212,7 @@
 .mim-logo{font-weight:700;font-size:18px;letter-spacing:-.01em;color:#15140f;
   text-decoration:none;white-space:nowrap;}
 .mim-logo span{color:#9c2f24;}
-.mim-nav-links{display:flex;gap:24px;align-items:center;}
+.mim-nav-links{display:flex;gap:22px;align-items:center;}
 .mim-nav-links a{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;
   letter-spacing:.04em;color:#15140f;text-decoration:none;padding:4px 0;position:relative;
   transition:color .2s;white-space:nowrap;}
@@ -232,8 +276,8 @@
       <button class="mim-nav-toggle" aria-label="菜单" onclick="var l=this.parentNode.querySelector('.mim-nav-links');l.classList.toggle('mim-open');">菜单 ☰</button>
       <div class="mim-nav-links">
         <a href="#framework" class="mim-active">框架</a>
-        <a href="ai-payment-compliance-tool.html">评估工具</a>
-        <a href="protocol-audit-framework.html">协议审计</a>
+        <a href="ai-payment-compliance-tool.html">支付链路评估</a>
+        <a href="protocol-audit-framework.html">支付协议审计</a>
         <a href="regulatory-map.html">监管地图</a>
         <a href="research.html">研究与资讯</a>
         <a href="ai-payment-compliance-tool.html" class="mim-nav-cta">开始评估</a>
@@ -245,6 +289,37 @@
 
   <!-- ===== HERO: COLOR-BLOCK CONFRONTATION ===== -->
   <header class="hero">
+    <!-- 1. 钩子标题 + 评估入口(懂的当场点) -->
+    <div class="hero-title">
+      <div class="wrap2">
+        <div class="hero-kicker">AI Agent 支付 · 全球合规指南</div>
+        <h1 class="serif">当人退场,Agent 支付的法律框架在六个环节上<span class="r">断裂</span>。</h1>
+        <p class="hero-lede">你让 Agent 替你付了钱,出了问题谁来负责?</p>
+        <p class="hero-lede">发起支付的一旦不是人,成熟的卡轨法律框架就会在<b>意图、授权、验证、托管、争议</b>各环上逐一失效。</p>
+        <div class="hero-choices">
+          <div class="ai-card choice-manual">
+            <div class="ai-lbl">手动评估 · 问卷</div>
+            <h4 class="ai-h serif">问卷评估你的支付链路</h4>
+            <p class="ai-p">跟着问卷逐题走,按六个环节定位你链路上的合规缺口,标出该在用户协议里补什么。</p>
+            <a href="ai-payment-compliance-tool.html" class="btn btn-primary">开始评估 <span class="ar">→</span></a>
+          </div>
+          <div class="ai-card choice-agent">
+            <div class="ai-lbl">Agent 模式 · 免费</div>
+            <h4 class="ai-h serif">让你的 agent 自己跑这套评估</h4>
+            <p class="ai-p">装上免费 SKILL:读公开条款 → 逐维评估 → 标出信息缺口。跑在你自己的 agent 上。</p>
+            <div class="ai-cmd">
+              <code id="aiCmd">Read and install https://raw.githubusercontent.com/aicompliance-will/ai-payment-compliance-skills-free/main/SKILL.md</code>
+              <button onclick="navigator.clipboard.writeText(document.getElementById('aiCmd').textContent);this.textContent='已复制 ✓';setTimeout(()=>this.textContent='复制',1500)">复制</button>
+            </div>
+            <p class="ai-hint">装好后说一句:<b>"评估 Skyfire 的支付合规风险"</b>。</p>
+          </div>
+        </div>
+        <div class="hero-readmore">
+          <a href="#framework" class="btn btn-ghost">看人 vs Agent 在哪断的 ↓</a>
+        </div>
+      </div>
+    </div>
+    <!-- 2. 色块对抗:一眼看见"断在哪" -->
     <div class="hero-grid">
       <div class="hero-left">
         <div class="hero-inner">
@@ -264,28 +339,6 @@
       </div>
       <div class="seam"></div>
     </div>
-    <div class="hero-title">
-      <div class="wrap2">
-        <h1 class="serif">当人退场,支付的法律框架在六个环节上<span class="r">断裂</span>。</h1>
-      </div>
-    </div>
-    <div class="hero-cta">
-      <a href="ai-payment-compliance-tool.html" class="btn btn-primary">评估你的链路 <span class="ar">→</span></a>
-      <a href="#framework" class="btn btn-ghost">阅读授权链路框架</a>
-      <div class="hero-sub">Money in Motion 把支付授权链路的断裂拆成可评估的框架,服务于 AI 支付基础设施的创始人与合规团队。</div>
-    </div>
-    <div class="agent-install" id="agentInstall">
-      <div class="ai-card">
-        <div class="ai-lbl">Agent 模式 · 免费</div>
-        <h4 class="ai-h serif">让你的 Agent 自己跑支付合规评估</h4>
-        <p class="ai-p">读公开条款 → 逐维度评估 → 标出信息缺口。跑在你自己的 agent 上。</p>
-        <div class="ai-cmd">
-          <code id="aiCmd">Read and install https://raw.githubusercontent.com/aicompliance-will/ai-payment-compliance-skills-free/main/SKILL.md</code>
-          <button onclick="navigator.clipboard.writeText(document.getElementById('aiCmd').textContent);this.textContent='已复制 ✓';setTimeout(()=>this.textContent='复制',1500)">复制</button>
-        </div>
-        <p class="ai-hint">装好后说一句:<b>"评估 Skyfire 的支付合规风险"</b>。</p>
-      </div>
-    </div>
   </header>
 
   <div class="wrap">
@@ -294,42 +347,66 @@
         <div class="sec-num">01</div>
         <div class="sec-title serif">同一条链 / 人类 → 断裂 → Agent</div>
       </div>
-      <p class="sec-desc">同一条支付链路,一条走人,一条走 agent。蓝色是人类侧(连续),砖红是 agent 侧(断裂),中间是风险所在。</p>
+      <p class="sec-desc">同一条支付链路,左边是人的动作,右边是 agent 的动作。中间一列是六个环节本身——以及人退场后,每个环节上裂开的口子。</p>
       <div class="cmp">
         <div class="cmp-head">
           <div class="ch-human">人类支付</div>
-          <div class="ch-break">断裂 — 风险所在</div>
+          <div class="ch-break">环节 / 断裂点</div>
           <div class="ch-agent">Agent 支付</div>
         </div>
         <div class="cmp-row">
-          <div class="cell human"><div class="stage">① 意图</div><div class="v">人想买</div><div class="d">人脑中形成购买决定</div></div>
-          <div class="cell brk empty"><div class="bttl">身份与意图合一</div><div class="seam2">人在场即授权 · 无断裂</div></div>
-          <div class="cell agent"><div class="stage">① 意图</div><div class="v">人给指令</div><div class="d">"帮我订最便宜的机票"</div></div>
+          <div class="cell human"><div class="v">人想买</div><div class="d">人脑中形成购买决定</div></div>
+          <div class="cell brk empty">
+            <div class="bstage">① 意图</div>
+            <div class="bttl bttl-ok">身份与意图合一</div>
+            <div class="seam2">人在场即授权 · 无断裂</div>
+          </div>
+          <div class="cell agent"><div class="v">人给指令</div><div class="d">"帮我订最便宜的机票"</div></div>
         </div>
         <div class="cmp-row">
-          <div class="cell human"><div class="stage">② 授权</div><div class="v">输卡号 · 点确认</div><div class="d">当场一次一笔授权</div></div>
-          <div class="cell brk"><div class="bnum">1</div><div class="bttl">授权范围 ≠ 真实意图</div><div class="seam2">意图 → 授权 之间</div></div>
-          <div class="cell agent"><div class="stage">② 授权</div><div class="v">颁发 mandate/token</div><div class="d">提前签发 · 可复用</div></div>
+          <div class="cell human"><div class="v">输卡号 · 点确认</div><div class="d">当场一次一笔授权</div></div>
+          <div class="cell brk">
+            <div class="bstage">② 授权</div>
+            <div class="brisk"><span class="bttl">授权范围 ≠ 真实意图</span></div>
+            <div class="seam2">意图 → 授权 之间</div>
+          </div>
+          <div class="cell agent"><div class="v">颁发 mandate/token</div><div class="d">提前签发 · 可复用</div></div>
         </div>
         <div class="cmp-row">
-          <div class="cell human"><div class="stage">③ 发起</div><div class="v">人亲自提交</div><div class="d">本人按下提交按钮</div></div>
-          <div class="cell brk"><div class="bnum">2</div><div class="bttl">发起方从人变成代码</div><div class="seam2">与欺诈在功能上难区分</div></div>
-          <div class="cell agent"><div class="stage">③ 发起</div><div class="v">agent 自主执行</div><div class="d">机器决定何时/向谁/多少</div></div>
+          <div class="cell human"><div class="v">人亲自提交</div><div class="d">本人按下提交按钮</div></div>
+          <div class="cell brk">
+            <div class="bstage">③ 发起</div>
+            <div class="brisk"><span class="bttl">发起方从人变成代码</span></div>
+            <div class="seam2">与欺诈在功能上难区分</div>
+          </div>
+          <div class="cell agent"><div class="v">agent 自主执行</div><div class="d">机器决定何时/向谁/多少</div></div>
         </div>
         <div class="cmp-row">
-          <div class="cell human"><div class="stage">④ 验证</div><div class="v">3DS · 密码</div><div class="d">验证"持卡人本人在场"</div></div>
-          <div class="cell brk"><div class="bnum">3</div><div class="bttl">验证对象变了</div><div class="seam2">多了 agent 身份 + 意图</div></div>
-          <div class="cell agent"><div class="stage">④ 验证</div><div class="v">验 agent 身份 + 意图</div><div class="d">多数协议只解决了前者</div></div>
+          <div class="cell human"><div class="v">3DS · 密码</div><div class="d">验证"持卡人本人在场"</div></div>
+          <div class="cell brk">
+            <div class="bstage">④ 验证</div>
+            <div class="brisk"><span class="bttl">验证对象变了</span></div>
+            <div class="seam2">多了 agent 身份 + 意图</div>
+          </div>
+          <div class="cell agent"><div class="v">验 agent 身份 + 意图</div><div class="d">多数协议只解决了前者</div></div>
         </div>
         <div class="cmp-row">
-          <div class="cell human"><div class="stage">⑤ 资金</div><div class="v">卡轨清算</div><div class="d">成熟路径,无新托管方</div></div>
-          <div class="cell brk"><div class="bnum">4</div><div class="bttl">新增托管 / 过路</div><div class="seam2">触发 MSB·MTL·PI·EMI</div></div>
-          <div class="cell agent"><div class="stage">⑤ 资金</div><div class="v">托管 / 过路 / 链上</div><div class="d">可能新增资金持有环节</div></div>
+          <div class="cell human"><div class="v">卡轨清算</div><div class="d">成熟路径,无新托管方</div></div>
+          <div class="cell brk">
+            <div class="bstage">⑤ 资金</div>
+            <div class="brisk"><span class="bttl">新增托管 / 过路</span></div>
+            <div class="seam2">触发 MSB·MTL·PI·EMI</div>
+          </div>
+          <div class="cell agent"><div class="v">托管 / 过路 / 链上</div><div class="d">可能新增资金持有环节</div></div>
         </div>
         <div class="cmp-row">
-          <div class="cell human"><div class="stage">⑥ 结算/争议</div><div class="v">可 chargeback</div><div class="d">零责任 · 争议权清晰</div></div>
-          <div class="cell brk"><div class="bnum">5</div><div class="bttl">保护框架缺位</div><div class="seam2">责任在多方间无法切分</div></div>
-          <div class="cell agent"><div class="stage">⑥ 结算/争议</div><div class="v">终局 / 无追索</div><div class="d">代签合同效力不明</div></div>
+          <div class="cell human"><div class="v">可 chargeback</div><div class="d">零责任 · 争议权清晰</div></div>
+          <div class="cell brk">
+            <div class="bstage">⑥ 结算/争议</div>
+            <div class="brisk"><span class="bttl">保护框架缺位</span></div>
+            <div class="seam2">责任在多方间无法切分</div>
+          </div>
+          <div class="cell agent"><div class="v">终局 / 无追索</div><div class="d">代签合同效力不明</div></div>
         </div>
       </div>
     </section>
@@ -339,16 +416,17 @@
         <div class="sec-num">02</div>
         <div class="sec-title serif">协议法律审计 / x402、MPP 这些标准把风险留给了谁</div>
       </div>
-      <p class="sec-desc">x402、MPP 这类大厂在推的 agent 支付标准,各自只解决了授权链路里的一部分——验了 agent 身份,却常常没厘清授权范围、资金托管和争议追索。留白不是"没风险",而是把风险甩给采用它的你。这套八维框架逐维拆解,把每个协议在哪一环留了洞、你又得在自己的用户协议里补什么,一次说清。已审:Visa TAP、Mastercard Agent Pay、x402。</p>
+      <p class="sec-desc" style="margin-bottom:14px">x402、MPP 这类大厂在推的 agent 支付标准,各自只解决了授权链路里的一部分——验了 agent 身份,却常常没厘清授权范围、资金托管和争议追索。</p>
+      <p class="sec-desc">留白不是"没风险",而是把风险甩给采用它的你。这套八维框架逐维拆解,把每个协议在哪一环留了洞、你又得在自己的用户协议里补什么,一次说清。已审:Visa TAP、Mastercard Agent Pay、x402。</p>
       <p style="margin-top:14px"><a href="protocol-audit-framework.html" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--brick);text-decoration:none;border-bottom:1px solid var(--brick)">查看协议审计框架 →</a></p>
     </section>
 
     <section id="regmap-intro">
       <div class="sec-head">
         <div class="sec-num">03</div>
-        <div class="sec-title serif">监管地图 / 跨市场牌照与稳定币法规</div>
+        <div class="sec-title serif">监管地图 / 一张管 AI Agent,一张管资金流转</div>
       </div>
-      <p class="sec-desc">HK、SG、EU、US 等主要市场的支付牌照、稳定币法规与加密监管动向,汇成一张可查的地图;并附 TRM、Chainalysis 等深度报告的 AI 支付视角解读——帮你判断 agent 该优先服务哪些市场、选哪条稳定币结算轨道。</p>
+      <p class="sec-desc">这块分两层看:一层是 AI Agent 侧的监管(代理身份、授权边界、责任归属在各市场怎么落地),一层是资金流转侧的牌照与法规——HK、SG、EU、US 的支付牌照、稳定币法规与加密监管动向。两张图叠起来,帮你判断 agent 该优先服务哪些市场、选哪条稳定币结算轨道;并附 TRM、Chainalysis 等报告的 AI 支付视角解读。</p>
       <p style="margin-top:14px"><a href="regulatory-map.html" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--brick);text-decoration:none;border-bottom:1px solid var(--brick)">打开监管地图 →</a></p>
     </section>
 
@@ -387,7 +465,6 @@
     <div class="mim-foot-top">
       <div>
         <div class="mim-foot-brand">Money in Motion<span>.</span></div>
-        <div class="mim-foot-tag">AI 支付授权链路的合规研究与评估。</div>
         <a class="mim-foot-mail" href="mailto:wl@kindinglaw.com">wl@kindinglaw.com</a>
       </div>
       <div class="mim-foot-cols">
@@ -399,7 +476,7 @@
         </div>
         <div class="mim-foot-col">
           <h4>工具</h4>
-          <a href="ai-payment-compliance-tool.html">AI 支付基础设施评估</a>
+          <a href="ai-payment-compliance-tool.html">支付链路评估</a>
         </div>
         <div class="mim-foot-col">
           <h4>研究</h4>

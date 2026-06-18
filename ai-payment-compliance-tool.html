@@ -912,7 +912,7 @@ body {
 .mim-logo{font-weight:700;font-size:18px;letter-spacing:-.01em;color:#15140f;
   text-decoration:none;white-space:nowrap;}
 .mim-logo span{color:#9c2f24;}
-.mim-nav-links{display:flex;gap:24px;align-items:center;}
+.mim-nav-links{display:flex;gap:22px;align-items:center;}
 .mim-nav-links a{font-family:"JetBrains Mono","Noto Sans SC",monospace;font-size:12px;
   letter-spacing:.04em;color:#15140f;text-decoration:none;padding:4px 0;position:relative;
   transition:color .2s;white-space:nowrap;}
@@ -949,8 +949,8 @@ body {
     <button class="mim-nav-toggle" aria-label="菜单" onclick="var l=this.parentNode.querySelector('.mim-nav-links');l.classList.toggle('mim-open');">菜单 ☰</button>
     <div class="mim-nav-links">
       <a href="index.html#framework">框架</a>
-      <a href="ai-payment-compliance-tool.html" class="mim-active">评估工具</a>
-      <a href="protocol-audit-framework.html">协议审计</a>
+      <a href="ai-payment-compliance-tool.html" class="mim-active">支付链路评估</a>
+      <a href="protocol-audit-framework.html">支付协议审计</a>
       <a href="regulatory-map.html">监管地图</a>
       <a href="research.html">研究与资讯</a>
       <a href="ai-payment-compliance-tool.html" class="mim-nav-cta">开始评估</a>
@@ -1857,16 +1857,16 @@ body {
     <div style="margin-bottom:24px">
       <div class="step-question">第三方服务商披露</div>
       <div class="step-hint">用户协议有没有告知用户平台依赖哪些第三方服务（AI 模型、支付处理商等）</div>
-      <div class="option-list" id="q10-list">
-        <div class="option-item" data-val="full" onclick="selectSingle('q10',this)">
+      <div class="option-list" id="q17-list">
+        <div class="option-item" data-val="full" onclick="selectSingle('q17',this)">
           <div class="option-check"></div>
           <div class="option-text"><div class="option-label">完整披露，包含第三方类别和影响说明</div></div>
         </div>
-        <div class="option-item" data-val="partial" onclick="selectSingle('q10',this)">
+        <div class="option-item" data-val="partial" onclick="selectSingle('q17',this)">
           <div class="option-check"></div>
           <div class="option-text"><div class="option-label">有提及但不完整</div></div>
         </div>
-        <div class="option-item" data-val="none" onclick="selectSingle('q10',this)">
+        <div class="option-item" data-val="none" onclick="selectSingle('q17',this)">
           <div class="option-check"></div>
           <div class="option-text"><div class="option-label">没有披露</div></div>
         </div>
